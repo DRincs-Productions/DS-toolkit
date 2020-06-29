@@ -32,7 +32,13 @@ label start:
 
 label loop:
     menu:
-        "end":  # This ends the game.
+        "Ads":
+            menu:
+                "Coming soon test":
+                    call coming_soon
+                "Back":
+                    jump loop
+        "End":  # This ends the game.
             call temporary_end_game
             return
     jump loop

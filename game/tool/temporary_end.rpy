@@ -22,6 +22,6 @@ label temporary_end_game:
 
 # Coming soon text
 label coming_soon:
-    "(coming soon)"
+    "(Coming soon)"
     "Support me on {a=https://www.patreon.com/}Patreon"
     return
