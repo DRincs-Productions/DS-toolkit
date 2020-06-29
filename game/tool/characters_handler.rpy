@@ -1,4 +1,9 @@
 init python:
+    # Multi Game Persistent Character Names
+    # Recommended: male_fname, male_sname, female_fname, female_sname, futa_fname, futa_sname, other_fname or other_sname (or any, or all of these).
+    # Other recommendations: bigsis_fname, lilsis_fname, bigbro_fname, lilbro_fname, mom_fname, dad_fname, malebff_fname or femalebff_fname. (Again, use any or use none).
+    mp_ndata = MultiPersistent("namedata.f95zone.to")
+
     class Relationships():
         def __init__(self):
             self.unknown = 0
@@ -21,9 +26,11 @@ init python:
     # "she has always been before class. as a child they made fun of her because she had the appliance. ...")
     # default boyI = Information("Unknown Boy", "Unknown", job.unknown, relationships.unknown, "Unknown", "Unknown")
     class Information():
-        def __init__(self, name, age, active, job, relationship_status, relationship_partner, story):
+        def __init__(self, name, sname, age, active, job, relationship_status, relationship_partner, story):
             self.name_default = name
             self.name = name
+            self.sname_default = sname
+            self.sname = sname
             self.age_default = age
             self.age = age
             self.active = active
@@ -32,17 +39,14 @@ init python:
             self.relationship_partner = relationship_partner
             self.story = story
         def changeName(self):
-            val = ""
-            val = renpy.input("(Default: " + self.name_default + ")")
-            val = val.strip()
-            if val != "":
-                self.name = val
+            self.name = renpy.input("{i}(Default: " + self.name_default + "){/i}")
+            self.name = self.name.strip() or self.name_default
+        def changeSurname(self):
+            self.sname = renpy.input("{i}(Default: " + self.sname_default + "){/i}")
+            self.sname = self.sname.strip() or self.sname_default
         def changeAge(self):
-            val = ""
-            val = renpy.input("(Default: " + str(self.age_default) + ")")
-            val = val.strip()
-            if val != "":
-                self.age = val
+            self.age = renpy.input("{i}(Default: " + str(self.age_default) + "){/i}")
+            self.age = self.age.strip() or self.age_default
         def is_engaged(self):
             return (relationship_status == relationships.engaged or relationship_status == relationships.married)
         def setActive(self, amt):
@@ -60,17 +64,11 @@ init python:
             self.MClabel = MClabel
             self.active = active
         def changeNPClabel(self):
-            val = ""
-            val = renpy.input("(Default: " + self.NPClabel_default + ")")
-            val = val.strip()
-            if val != "":
-                self.NPClabel = val
+            self.NPClabel = renpy.input("{i}(Default: " + self.NPClabel_default + "){/i}")
+            self.NPClabel = self.NPClabel.strip() or self.NPClabel_default
         def changeMClabel(self):
-            val = ""
-            val = renpy.input("(Default: " + self.MClabel_default + ")")
-            val = val.strip()
-            if val != "":
-                self.MClabel = val
+            self.MClabel = renpy.input("{i}(Default: " + self.MClabel_default + "){/i}")
+            self.MClabel = self.MClabel.strip() or self.MClabel_default
         def setActive(self, amt):
             self.active = amt
 
@@ -78,6 +76,22 @@ define relationships = Relationships()
 define job = Job()
 
 label renaming_mc:
+    # allow default name(s) to be saved across multiple games
+    if renpy.variant("pc"):
+        if mp_ndata.male_fname != None:
+            $ mcI.name_default = mp_ndata.male_fname
+        if mp_ndata.male_sname != None:
+            $ mcI.sname_default = mp_ndata.male_sname
+
     "Player" "My name is:"
     $ mcI.changeName()
+    "Player" "My surname is:"
+    $ mcI.changeSurname()
+
+    if renpy.variant("pc"):
+        if mcI.name != mcI.name_default:
+            $ mp_ndata.male_fname = mcI.name
+        if mcI.sname != mcI.sname_default:
+            $ mp_ndata.male_sname = mcI.sname
+        $ mp_ndata.save()
     return
