@@ -123,7 +123,7 @@ init python:
             elif self.lesbo > 100:
                 self.lesbo = 100
         def is_lesbian(self):
-            return self.friendship > 80
+            return self.lesbo > 80
         def changeAddiction(self, amt):
             self.addiction += amt
             if amt > 0:
