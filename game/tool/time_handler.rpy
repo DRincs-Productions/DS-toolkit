@@ -4,13 +4,13 @@ init python:
                    (14, _("Afternoon")),
                    (20, _("Evening")),
                  )
-    weekday_names = ( _("Monday"),
-                      _("Tuesday"),
-                      _("Wednesday"),
-                      _("Thursday"),
-                      _("Friday"),
-                      _("Saturday"),
-                      _("Sunday")
+    weekday_names = ( _("{#weekday}Monday"),
+                      _("{#weekday}Tuesday"),
+                      _("{#weekday}Wednesday"),
+                      _("{#weekday}Thursday"),
+                      _("{#weekday}Friday"),
+                      _("{#weekday}Saturday"),
+                      _("{#weekday}Sunday")
                     )
     # month_names = ( ( _("November"), range(1,31)),
     #                 ( _("December"), range(1,32))
