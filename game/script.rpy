@@ -3,16 +3,16 @@
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 
-default mcI = Information("Liam", 20, "Unknown", relationships.engaged, girl, "Unknown")
+default mcI = Information("Liam", 20, True, job.programmer, relationships.engaged, girl, "Unknown")
 define mc = Character("{b}[mcI.name]{/b}", who_color="#37b3f3")
 
-default friendI = Information("Nick", 26, "Unknown", relationships.unknown, "Unknown", "Unknown")
+default friendI = Information("Nick", 26, True, job.unknown, relationships.unknown, "Unknown", "Unknown")
 define friend = Character("{b}[friendI.name]{/b}", who_color="#37c68f")
 default friendR = Relationship("friend", "friend", True)
 default friendS = FriendStats(10)
 image friend normal = "/friend.webp"
 
-default girlI = Information("Eileen", 18, "university student", relationships.engaged, mc, "she has always been before class.")
+default girlI = Information("Eileen", 18, True, job.university_student, relationships.engaged, mc, "she has always been before class.")
 define girl = Character("{b}[girlI.name]{/b}", who_color="#f337ba")
 default girlR = Relationship("girlfriend", "boyfriend", True)
 default girlS = PartnerStats(10, 0, 0, 0)
