@@ -13,7 +13,7 @@ image friend normal = "/friend.webp"
 
 default girlR = Relationship("Eileen", "girlfriend", "boyfriend", True)
 define girl = Character("{b}[girlR.name]{/b}", who_color="#f337ba")
-default girlS = GirlStats(10, 0, 0, 0, 0, 0, 0, 0)
+default girlS = GirlStats(10, 0, 0, 0)
 image girl normal = Composite( (gui.width, gui.height),
     (0, 0), "/girl.webp",
     (0, 0), "check:[girl_dress]/girl.webp")
