@@ -6,13 +6,13 @@
 define mc_name = "Unknown"
 define mc = Character("{b}[mc_name]{/b}", who_color="#37b3f3")
 
-default friendRT = RelationshipType("Nick", "friend", "friend")
-define friend = Character("{b}[friendRT.name]{/b}", who_color="#37c68f")
-default friendR = Friendship(10)
+default friendR = Relationship("Nick", "friend", "friend", True)
+define friend = Character("{b}[friendR.name]{/b}", who_color="#37c68f")
+default friendS = FriendStats(10)
 
-default girlRT = RelationshipType("Eileen", "girlfriend", "boyfriend")
-define girl = Character("{b}[girlRT.name]{/b}", who_color="#f337ba")
-default girlR = Relationship(10, 0, 0, 0, 0, 0, 0, 0)
+default girlR = Relationship("Eileen", "girlfriend", "boyfriend", True)
+define girl = Character("{b}[girlR.name]{/b}", who_color="#f337ba")
+default girlS = GirlStats(10, 0, 0, 0, 0, 0, 0, 0)
 
 # The game starts here.
 
@@ -46,46 +46,46 @@ label character:
         "Girl":
             menu:
                 "Change labels":
-                        "Her name is:"
-                        $ girlRT.changeName()
-                        "She is my:"
-                        $ girlRT.changeNPClabel()
-                        "I'm [girl]'s:"
-                        $ girlRT.changeMClabel()
-                        girl "Hi my [girlRT.MClabel]"
-                        mc "Hi my [girlRT.NPClabel]"
+                    "Her name is:"
+                    $ girlR.changeName()
+                    "She is my:"
+                    $ girlR.changeNPClabel()
+                    "I'm [girl]'s:"
+                    $ girlR.changeMClabel()
+                    girl "Hi my [girlR.MClabel]"
+                    mc "Hi my [girlR.NPClabel]"
                 "I love you":
-                    $ girlR.changeLove(10)
-                    "Love: [girlR.love]"
+                    $ girlS.changeLove(10)
+                    "Love: [girlS.love]"
                 "Fuck you":
-                    $ girlR.changeLove(-10)
-                    "Love: [girlR.love]"
+                    $ girlS.changeLove(-10)
+                    "Love: [girlS.love]"
                 "Speaks":
-                    girl "Hi my [girlRT.MClabel]"
-                    mc "Hi my [girlRT.NPClabel]"
+                    girl "Hi my [girlR.MClabel]"
+                    mc "Hi my [girlR.NPClabel]"
                 "Back":
                     jump character
         "Friend":
             menu:
                 "Change label":
-                        "His name is:"
-                        $ friendRT.changeName()
-                        "He is my:"
-                        $ friendRT.changeNPClabel()
-                        "I'm [friend]'s:"
-                        $ friendRT.changeMClabel()
-                        friend "Hi my [friendRT.MClabel]"
-                        mc "Hi my [friendRT.NPClabel]"
+                    "His name is:"
+                    $ friendR.changeName()
+                    "He is my:"
+                    $ friendR.changeNPClabel()
+                    "I'm [friend]'s:"
+                    $ friendR.changeMClabel()
+                    friend "Hi my [friendR.MClabel]"
+                    mc "Hi my [friendR.NPClabel]"
                 "Give me five":
-                    $ friendR.changeFriendship(10)
-                    "Friendship: [friendR.friendship]"
+                    $ friendS.change(10)
+                    "Friendship: [friendS.friendship]"
                 "Fuck you":
-                    $ friendR.changeFriendship(-10)
-                    "Friendship: [friendR.friendship]"
+                    $ friendS.change(-10)
+                    "Friendship: [friendS.friendship]"
                 "Speaks":
-                    friend "Hi my [friendRT.MClabel]"
-                    mc "Hi my [friendRT.NPClabel]"
-                    if (friendR.is_friend()):
+                    friend "Hi my [friendR.MClabel]"
+                    mc "Hi my [friendR.NPClabel]"
+                    if (friendS.is_friend()):
                         friend "We are friends"
                     else:
                         friend "We are not friends"

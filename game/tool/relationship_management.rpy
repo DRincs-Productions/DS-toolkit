@@ -1,6 +1,6 @@
 init python:
-    ## Relationship
-    class Relationship():
+    ## GirlStats
+    class GirlStats():
         def __init__(self, love, lust, corruption, submission, anger, limbo, lesbo, drunk):
             self.love = love
             self.lust = lust
@@ -73,11 +73,11 @@ init python:
             elif self.drunk > 100:
                 self.drunk = 100
 
-    ## Friendship
-    class Friendship():
+    ## FriendStats
+    class FriendStats():
         def __init__(self, friendship):
             self.friendship = friendship
-        def changeFriendship(self, amt):
+        def change(self, amt):
             self.friendship += amt
             if amt > 0:
                 notify(increase_friendship_notify)
