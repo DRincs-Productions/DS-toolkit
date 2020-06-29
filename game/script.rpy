@@ -45,6 +45,19 @@ label loop:
             call character
         "Time":
             call time_test
+        "Timed menu":
+            "Train boxing."
+            show screen countdown(timer_range=5, timer_call='menu_slow')
+            menu:
+                "Attacks":
+                    hide screen countdown
+                    "You punched."
+                "Defend":
+                    hide screen countdown
+                    "You defended yourself."
+                "Do nothing":
+                    hide screen countdown
+                    "You didn't do anything."
         "End":  # This ends the game.
             call temporary_end_game
             return
