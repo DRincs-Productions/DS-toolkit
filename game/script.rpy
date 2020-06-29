@@ -27,6 +27,7 @@ label start:
     call renaming_mc
     "Hi [mc]"
     mc "Hi"
+    show sky
     show friend normal
     show girl normal
 
@@ -42,6 +43,8 @@ label loop:
                     jump loop
         "Character":
             call character
+        "Time":
+            call time_test
         "End":  # This ends the game.
             call temporary_end_game
             return
@@ -104,3 +107,17 @@ label character:
         "Back":
             jump loop
     jump character
+
+label time_test:
+    menu:
+        "Rest":
+            call new_hour
+            $ test = time_handler.get_hour_name()
+            "[test]"
+        "Sleep":
+            call new_day
+            $ test = time_handler.get_weekday_name()
+            "[test]"
+        "Back":
+            jump loop
+    jump time_test
