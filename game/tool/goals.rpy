@@ -12,38 +12,64 @@ init python:
             self.oraljob = 0
             self.vaginal_sex = 0
             self.anal_sex = 0
-        def tongue_kiss(self):
+        def add_tongue_kiss(self):
             self.tongue_kiss = True
-        def tits_see(self):
+        def add_tits_see(self):
             self.tits_see = True
-        def tits_touch(self):
+        def add_tits_touch(self):
             self.tits_touch = True
-        def pussy_see(self):
+        def add_pussy_see(self):
             self.pussy_see = True
-        def pussy_touch(self):
+        def add_pussy_touch(self):
             self.pussy_touch = True
-        def handjob(self):
+        def add_handjob(self):
             self.handjob += 1
-        def titjob(self):
+        def add_titjob(self):
             self.titjob += 1
-        def oraljob(self):
+        def add_oraljob(self):
             self.oraljob += 1
-        def vaginal_sex(self):
+        def add_vaginal_sex(self):
             self.vaginal_sex += 1
-        def anal_sex(self):
+        def add_anal_sex(self):
             self.anal_sex += 1
+        def have_tongue_kiss(self):
+            return self.tongue_kiss
+        def have_tits_see(self):
+            return self.tits_see
+        def have_tits_touch(self):
+            return self.tits_touch
+        def have_pussy_see(self):
+            return self.pussy_see
+        def have_pussy_touch(self):
+            return self.pussy_touch
+        def have_handjob(self):
+            return self.handjob > 0
+        def have_titjob(self):
+            return self.titjob > 0
+        def have_oraljob(self):
+            return self.oraljob > 0
+        def have_vaginal_sex(self):
+            return self.vaginal_sex > 0
+        def have_anal_sex(self):
+            return self.anal_sex > 0
     ## Pregnant Goals
     class PregnantGoals():
         def __init__(self):
             self.creampie_pussy = 0
             self.pregnant = 0
             self.sons = 0
-        def creampie_pussy(self):
+        def add_creampie_pussy(self):
             self.creampie_pussy += 1
-        def pregnant(self):
+        def add_pregnant(self):
             self.pregnant += 1
-        def sons(self):
+        def add_sons(self):
             self.sons += 1
+        def have_creampie_pussy(self):
+            return self.creampie_pussy > 0
+        def have_pregnant(self):
+            return self.pregnant > 0
+        def have_sons(self):
+            return self.sons > 0
     ## Group sex goals
     class GroupSexGoals():
         def __init__(self):
@@ -52,13 +78,23 @@ init python:
             self.NTR = 0
             self.FMM = 0
             self.Group = 0
-        def lesbo(self):
+        def add_lesbo(self):
             self.lesbo += 1
-        def FFM(self):
+        def add_FFM(self):
             self.FFM += 1
-        def NTR(self):
+        def add_NTR(self):
             self.NTR += 1
-        def FMM(self):
+        def add_FMM(self):
             self.FMM += 1
-        def Group(self):
+        def add_Group(self):
             self.Group += 1
+        def lesbo(self):
+            return self.lesbo > 0
+        def FFM(self):
+            return self.FFM > 0
+        def NTR(self):
+            return self.NTR > 0
+        def FMM(self):
+            return self.FMM > 0
+        def Group(self):
+            return self.Group > 0
