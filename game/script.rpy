@@ -16,6 +16,15 @@ default girlI = Information("Eileen", 18, True, job.university_student, relation
 define girl = Character("{b}[girlI.name]{/b}", who_color="#f337ba")
 default girlR = Relationship("girlfriend", "boyfriend", True)
 default girlS = PartnerStats(10, 0, 0, 0)
+
+# Clothes
+default girl_dress = "homesuit"
+label set_girl_homesuit:
+    $ girl_dress = "homesuit"
+    return
+label set_girl_null:
+    $ girl_dress = ""
+    return
 image girl normal = Composite( (gui.width, gui.height),
     (0, 0), "/girl.webp",
     (0, 0), "check:[girl_dress]/girl.webp")
