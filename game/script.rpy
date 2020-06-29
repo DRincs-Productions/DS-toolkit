@@ -9,6 +9,8 @@ define e = Character("Eileen")
 # The game starts here.
 
 label start:
+    stop music fadeout 1.0
+    "Welcome to [config.name]"
 
     # Show a background. This uses a placeholder by default, but you can
     # add a file (named either "bg room.png" or "bg room.jpg") to the
@@ -28,6 +30,9 @@ label start:
 
     e "Once you add a story, pictures, and music, you can release it to the world!"
 
-    # This ends the game.
-
-    return
+label loop:
+    menu:
+        "end":  # This ends the game.
+            call temporary_end_game
+            return
+    jump loop
