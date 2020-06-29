@@ -18,6 +18,7 @@ default girlR = Relationship(10, 0, 0, 0, 0, 0, 0, 0)
 
 label start:
     stop music fadeout 1.0
+    call check_age
     "Welcome to [config.name]"
     call renaming_mc
     "Hi [mc]"
