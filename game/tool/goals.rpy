@@ -1,12 +1,13 @@
 init python:
     ## Sexual goals
     class SexualGoals():
-        def __init__(self):
+        def __init__(self, virgin):
             self.tongue_kiss = False
             self.tits_see = False
             self.tits_touch = False
             self.pussy_see = False
             self.pussy_touch = False
+            self.virgin = virgin
             self.handjob = 0
             self.titjob = 0
             self.oraljob = 0
@@ -52,6 +53,8 @@ init python:
             return self.vaginal_sex > 0
         def have_anal_sex(self):
             return self.anal_sex > 0
+        def is_vaginal_virgin(self):
+            return (self.virgin == 0 or virgin == True)
     ## Pregnant Goals
     class PregnantGoals():
         def __init__(self):
