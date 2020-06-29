@@ -1,3 +1,24 @@
+# Relations
+default increase_favor_notify = NotifyEx(msg="{color=#00ff00}{b}+{/b} Favor", img="/images_tool/icon/notification/relations-favor.webp")
+default decrease_favor_notify = NotifyEx(msg="{color=#f00} {b}-{/b} Favor", img="/images_tool/icon/notification/relations-favor.webp")
+default increase_love_notify = NotifyEx(msg="{color=#00ff00}{b}+{/b} Love", img="/images_tool/icon/notification/relations-love.webp")
+default decrease_love_notify = NotifyEx(msg="{color=#f00} {b}-{/b} Love", img="/images_tool/icon/notification/relations-love.webp")
+default increase_lust_notify = NotifyEx(msg="{color=#00ff00}{b}+{/b} Lust", img="/images_tool/icon/notification/relations-lust.webp")
+default decrease_lust_notify = NotifyEx(msg="{color=#f00} {b}-{/b} Lust", img="/images_tool/icon/notification/relations-lust.webp")
+default increase_corruption_notify = NotifyEx(msg="{color=#00ff00}{b}+{/b} Corruption", img="/images_tool/icon/notification/relations-corruption.webp")
+default decrease_corruption_notify = NotifyEx(msg="{color=#f00} {b}-{/b} Corruption", img="/images_tool/icon/notification/relations-corruption.webp")
+default increase_submission_notify = NotifyEx(msg="{color=#00ff00}{b}+{/b} Submission", img="/images_tool/icon/notification/relations-submission.webp")
+default decrease_submission_notify = NotifyEx(msg="{color=#f00} {b}-{/b} Submission", img="/images_tool/icon/notification/relations-submission.webp")
+default increase_anger_notify = NotifyEx(msg="{color=#f00}{b}+{/b} Anger", img="/images_tool/icon/notification/relations-anger.webp")
+default decrease_anger_notify = NotifyEx(msg="{color=#00ff00} {b}-{/b} Anger", img="/images_tool/icon/notification/relations-anger.webp")
+default increase_lesbo_notify = NotifyEx(msg="{color=#00ff00}{b}+{/b} Lesbo", img="/images_tool/icon/notification/relations-lesbo.webp")
+default decrease_lesbo_notify = NotifyEx(msg="{color=#f00} {b}-{/b} Lesbo", img="/images_tool/icon/notification/relations-lesbo.webp")
+default increase_addiction_notify = NotifyEx(msg="{color=#00ff00}{b}+{/b} Addictions", img="/images_tool/icon/notification/relations-addiction.webp")
+default decrease_addiction_notify = NotifyEx(msg="{color=#f00} {b}-{/b} Addictions", img="/images_tool/icon/notification/relations-addiction.webp")
+# Friendship
+default increase_friendship_notify = NotifyEx(msg="{color=#00ff00}{b}+{/b} Friendship", img="/images_tool/icon/notification/relations-relationship.webp")
+default decrease_friendship_notify = NotifyEx(msg="{color=#f00} {b}-{/b} Friendship", img="/images_tool/icon/notification/relations-relationship.webp")
+
 init python:
     ## Notifications
     # to use: default ... = NotifyEx(msg="...", img="...")

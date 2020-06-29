@@ -8,11 +8,11 @@ define mc = Character("{b}[mc_name]{/b}", who_color="#37b3f3")
 
 default friendRT = RelationshipType("Nick", "friend", "friend")
 define friend = Character("{b}[friendRT.name]{/b}", who_color="#37c68f")
-
+default friendR = Friendship(10)
 
 default girlRT = RelationshipType("Eileen", "girlfriend", "boyfriend")
 define girl = Character("{b}[girlRT.name]{/b}", who_color="#f337ba")
-
+default girlR = Relationship(10, 0, 0, 0, 0, 0, 0, 0)
 
 # The game starts here.
 
@@ -53,6 +53,12 @@ label character:
                         $ girlRT.changeMClabel()
                         girl "Hi my [girlRT.MClabel]"
                         mc "Hi my [girlRT.NPClabel]"
+                "I love you":
+                    $ girlR.changeLove(10)
+                    "Love: [girlR.love]"
+                "Fuck you":
+                    $ girlR.changeLove(-10)
+                    "Love: [girlR.love]"
                 "Speaks":
                     girl "Hi my [girlRT.MClabel]"
                     mc "Hi my [girlRT.NPClabel]"
@@ -69,9 +75,19 @@ label character:
                         $ friendRT.changeMClabel()
                         friend "Hi my [friendRT.MClabel]"
                         mc "Hi my [friendRT.NPClabel]"
+                "Give me five":
+                    $ friendR.changeFriendship(10)
+                    "Friendship: [friendR.friendship]"
+                "Fuck you":
+                    $ friendR.changeFriendship(-10)
+                    "Friendship: [friendR.friendship]"
                 "Speaks":
                     friend "Hi my [friendRT.MClabel]"
                     mc "Hi my [friendRT.NPClabel]"
+                    if (friendR.is_friend()):
+                        friend "We are friends"
+                    else:
+                        friend "We are not friends"
                 "Back":
                     jump character
         "Back":
