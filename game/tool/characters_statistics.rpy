@@ -1,6 +1,6 @@
 init python:
-    ## GirlStats
-    class GirlStats():
+    ## PartnerStats
+    class PartnerStats():
         def __init__(self, love, lust, corruption, submission):
             self.favor = 0
             self.love = love
@@ -107,8 +107,8 @@ init python:
                 self.anger = 0
             elif self.anger > 100:
                 self.anger = 100
-    ## Girl Tendencies
-    class GirlTendencies():
+    ## Tendencies
+    class Tendencies():
         def __init__(self, lesbo, addiction):
             self.lesbo = lesbo
             self.addiction = addiction
