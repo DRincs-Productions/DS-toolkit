@@ -34,6 +34,8 @@ label loop:
     menu:
         "Ads":
             menu:
+                "Notifications Test":
+                    $ notifyEx(msg="Hello")
                 "Coming soon test":
                     call coming_soon
                 "Back":
