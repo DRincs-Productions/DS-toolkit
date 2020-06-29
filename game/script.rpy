@@ -9,10 +9,14 @@ define mc = Character("{b}[mc_name]{/b}", who_color="#37b3f3")
 default friendR = Relationship("Nick", "friend", "friend", True)
 define friend = Character("{b}[friendR.name]{/b}", who_color="#37c68f")
 default friendS = FriendStats(10)
+image friend normal = "/friend.webp"
 
 default girlR = Relationship("Eileen", "girlfriend", "boyfriend", True)
 define girl = Character("{b}[girlR.name]{/b}", who_color="#f337ba")
 default girlS = GirlStats(10, 0, 0, 0, 0, 0, 0, 0)
+image girl normal = Composite( (gui.width, gui.height),
+    (0, 0), "/girl.webp",
+    (0, 0), "check:[girl_dress]/girl.webp")
 
 # The game starts here.
 
@@ -23,6 +27,8 @@ label start:
     call renaming_mc
     "Hi [mc]"
     mc "Hi"
+    show friend normal
+    show girl normal
 
 label loop:
     menu:
@@ -63,6 +69,10 @@ label character:
                 "Speaks":
                     girl "Hi my [girlR.MClabel]"
                     mc "Hi my [girlR.NPClabel]"
+                "Get dressed" if (girl_dress == ""):
+                    call set_girl_homesuit
+                "Take off your clothes" if (girl_dress == "homesuit"):
+                    call set_girl_null
                 "Back":
                     jump character
         "Friend":
