@@ -76,13 +76,13 @@ init python:
     ## Group sex goals
     class GroupSexGoals():
         def __init__(self):
-            self.lesbo = 0
+            self.lesbo_sex = 0
             self.FFM = 0
             self.NTR = 0
             self.FMM = 0
             self.Group = 0
-        def add_lesbo(self):
-            self.lesbo += 1
+        def add_lesbo_sex(self):
+            self.lesbo_sex += 1
         def add_FFM(self):
             self.FFM += 1
         def add_NTR(self):
@@ -91,13 +91,13 @@ init python:
             self.FMM += 1
         def add_Group(self):
             self.Group += 1
-        def lesbo(self):
-            return self.lesbo > 0
-        def FFM(self):
+        def have_lesbo_sex(self):
+            return self.lesbo_sex > 0
+        def have_FFM(self):
             return self.FFM > 0
-        def NTR(self):
+        def have_NTR(self):
             return self.NTR > 0
-        def FMM(self):
+        def have_FMM(self):
             return self.FMM > 0
-        def Group(self):
+        def have_Group(self):
             return self.Group > 0
