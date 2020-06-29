@@ -3,16 +3,18 @@
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 
-define mc_name = "Unknown"
-define mc = Character("{b}[mc_name]{/b}", who_color="#37b3f3")
+default mcI = Information("Liam", 20, "Unknown", relationships.engaged, girl, "Unknown")
+define mc = Character("{b}[mcI.name]{/b}", who_color="#37b3f3")
 
-default friendR = Relationship("Nick", "friend", "friend", True)
-define friend = Character("{b}[friendR.name]{/b}", who_color="#37c68f")
+default friendI = Information("Nick", 26, "Unknown", relationships.unknown, "Unknown", "Unknown")
+define friend = Character("{b}[friendI.name]{/b}", who_color="#37c68f")
+default friendR = Relationship("friend", "friend", True)
 default friendS = FriendStats(10)
 image friend normal = "/friend.webp"
 
-default girlR = Relationship("Eileen", "girlfriend", "boyfriend", True)
-define girl = Character("{b}[girlR.name]{/b}", who_color="#f337ba")
+default girlI = Information("Eileen", 18, "university student", relationships.engaged, mc, "she has always been before class.")
+define girl = Character("{b}[girlI.name]{/b}", who_color="#f337ba")
+default girlR = Relationship("girlfriend", "boyfriend", True)
 default girlS = GirlStats(10, 0, 0, 0)
 image girl normal = Composite( (gui.width, gui.height),
     (0, 0), "/girl.webp",
@@ -25,7 +27,9 @@ label start:
     call check_age
     "Welcome to [config.name]"
     call renaming_mc
-    "Hi [mc]"
+    mc "I am ... years old"
+    $ mcI.changeAge()
+    "Hi [mc] ([mcI.age])"
     mc "Hi"
     show sky
     show friend normal
@@ -69,7 +73,7 @@ label character:
             menu:
                 "Change labels":
                     "Her name is:"
-                    $ girlR.changeName()
+                    $ girlI.changeName()
                     "She is my:"
                     $ girlR.changeNPClabel()
                     "I'm [girl]'s:"
@@ -95,7 +99,7 @@ label character:
             menu:
                 "Change label":
                     "His name is:"
-                    $ friendR.changeName()
+                    $ friendI.changeName()
                     "He is my:"
                     $ friendR.changeNPClabel()
                     "I'm [friend]'s:"
