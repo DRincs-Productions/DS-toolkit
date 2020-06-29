@@ -52,7 +52,7 @@ label loop:
 
 label character:
     menu:
-        "Girl":
+        "[girl]":
             menu:
                 "Change labels":
                     "Her name is:"
@@ -66,19 +66,19 @@ label character:
                 "I love you":
                     $ girlS.changeLove(10)
                     "Love: [girlS.love]"
-                "Fuck you":
+                "Fuck you!":
                     $ girlS.changeLove(-10)
                     "Love: [girlS.love]"
                 "Speaks":
                     girl "Hi my [girlR.MClabel]"
                     mc "Hi my [girlR.NPClabel]"
-                "Get dressed" if (girl_dress == ""):
+                "Get dressed" if (girl_dress != "homesuit"):
                     call set_girl_homesuit
-                "Take off your clothes" if (girl_dress == "homesuit"):
+                "Take off your clothes" if (girl_dress != ""):
                     call set_girl_null
                 "Back":
                     jump character
-        "Friend":
+        "[friend]":
             menu:
                 "Change label":
                     "His name is:"
@@ -92,7 +92,7 @@ label character:
                 "Give me five":
                     $ friendS.change(10)
                     "Friendship: [friendS.friendship]"
-                "Fuck you":
+                "Fuck you!":
                     $ friendS.change(-10)
                     "Friendship: [friendS.friendship]"
                 "Speaks":
