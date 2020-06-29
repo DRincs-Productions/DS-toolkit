@@ -9,6 +9,14 @@ init python:
             self.submission = submission
             self.anger = 0
         def changeFavor(self, amt):
+            if (self.anger > 0 and amt > 0):
+                self.changeAnger(-2)
+                return
+            elif (self.favor == 0 and amt < 0):
+                self.changeAnger(10)
+                return
+            elif (self.favor == 100 and amt > 0):
+                return
             self.favor += amt
             if amt > 0:
                 notify(increase_favor_notify)
@@ -16,10 +24,19 @@ init python:
                 notify(decrease_favor_notify)
             if self.favor < 0:
                 self.favor = 0
-                self.changeAnger(10)
             elif self.favor > 100:
                 self.favor = 100
         def changeLove(self, amt):
+            if (self.anger > 0 and amt > 0):
+                self.changeAnger(-10)
+                return
+            elif (self.love == -50 and amt < 0):
+                self.changeAnger(40)
+                return
+            elif (self.love < 0 and amt < 0):
+                self.changeAnger(20)
+            elif (self.love == 100 and amt > 0):
+                return
             self.love += amt
             if amt > 0:
                 notify(increase_love_notify)
@@ -27,12 +44,14 @@ init python:
                 notify(decrease_love_notify)
             if self.love < -50:
                 self.love = -50
-                self.changeAnger(20)
             elif self.love > 100:
                 self.love = 100
-                if (self.anger > 0):
-                    self.changeAnger(-10)
         def changeCorruption(self, amt):
+            if (self.corruption == -50 and amt < 0):
+                self.changeAnger(-5)
+                return
+            elif (self.corruption == 100 and amt > 0):
+                return
             self.corruption += amt
             if amt > 0:
                 notify(increase_corruption_notify)
@@ -40,10 +59,15 @@ init python:
                 notify(decrease_corruption_notify)
             if self.corruption < -50:
                 self.corruption = -50
-                self.changeAnger(20)
             elif self.corruption > 100:
                 self.corruption = 100
         def changeLust(self, amt):
+            if (self.lust == -100 and amt < 0):
+                self.changeLove(-20)
+                self.changeAnger(10)
+                return
+            elif (self.lust == 1000 and amt > 0):
+                return
             self.lust += amt
             if amt > 0:
                 notify(increase_lust_notify)
@@ -51,10 +75,15 @@ init python:
                 notify(decrease_lust_notify)
             if self.lust < -100:
                 self.lust = -100
-                self.changeLove(-20)
             elif self.lust > 1000:
                 self.lust = 1000
         def changeSubmission(self, amt):
+            if (self.submission == -100 and amt < 0):
+                self.changeCorruption(-20)
+                self.changeAnger(10)
+                return
+            elif (self.submission == 1000 and amt > 0):
+                return
             self.submission += amt
             if amt > 0:
                 notify(increase_submission_notify)
@@ -62,10 +91,13 @@ init python:
                 notify(decrease_submission_notify)
             if self.submission < -100:
                 self.submission = -100
-                self.changeCorruption(-20)
             elif self.submission > 1000:
                 self.submission = 1000
         def changeAnger(self, amt):
+            if (self.anger == 0 and amt < 0):
+                return
+            elif (self.anger == 100 and amt > 0):
+                return
             self.anger += amt
             if amt > 0:
                 notify(increase_anger_notify)
