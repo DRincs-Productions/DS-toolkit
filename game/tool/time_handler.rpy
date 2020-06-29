@@ -84,8 +84,7 @@ init python:
 
         # def skip_weekend(self):
 
-    time_handler = TimeHandler()
-
+default time_handler = TimeHandler()
 define event_duration = 6
 default sky_time = 0
 image sky = "check:images_tool/sky-[sky_time].webp"

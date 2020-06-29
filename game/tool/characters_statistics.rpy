@@ -30,6 +30,8 @@ init python:
                 self.changeAnger(20)
             elif self.love > 100:
                 self.love = 100
+                if (self.anger > 0):
+                    self.changeAnger(-10)
         def changeCorruption(self, amt):
             self.corruption += amt
             if amt > 0:
