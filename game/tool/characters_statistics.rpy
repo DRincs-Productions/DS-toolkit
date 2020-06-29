@@ -1,7 +1,7 @@
 init python:
     ## GirlStats
     class GirlStats():
-        def __init__(self, love, lust, corruption, submission, anger, limbo, lesbo, drunk):
+        def __init__(self, love, lust, corruption, submission, anger, limbo, lesbo, addiction):
             self.love = love
             self.lust = lust
             self.corruption = corruption
@@ -9,7 +9,7 @@ init python:
             self.anger = anger
             self.limbo = limbo
             self.lesbo = lesbo
-            self.drunk = drunk
+            self.addiction = addiction
         def changeLove(self, amt):
             self.love += amt
             if amt > 0:
@@ -62,16 +62,16 @@ init python:
                 self.lesbo = 0
             elif self.lesbo > 100:
                 self.lesbo = 100
-        def changeDrunk(self, amt):
-            self.drunk += amt
+        def changeAddiction(self, amt):
+            self.addiction += amt
             if amt > 0:
-                notify(increase_drunk_notify)
+                notify(increase_addiction_notify)
             else:
-                notify(decrease_drunk_notify)
-            if self.drunk < 0:
-                self.drunk = 0
-            elif self.drunk > 100:
-                self.drunk = 100
+                notify(decrease_addiction_notify)
+            if self.addiction < 0:
+                self.addiction = 0
+            elif self.addiction > 100:
+                self.addiction = 100
 
     ## FriendStats
     class FriendStats():
