@@ -12,13 +12,6 @@ init python:
             self.married = 3
             self.divorced = 4
             self.widow = 5
-    class Job():
-        def __init__(self):
-            self.unknown = 0
-            self.unemployed = 1
-            self.programmer = 2
-            self.university_student = 3
-            # here you can add your favorite works
     ## Information about a character
     # to use: default ... = Information("NPC name", age)
     # exemple:
@@ -26,7 +19,7 @@ init python:
     # "she has always been before class. as a child they made fun of her because she had the appliance. ...")
     # default boyI = Information("Unknown Boy", "Unknown", job.unknown, relationships.unknown, "Unknown", "Unknown")
     class Information():
-        def __init__(self, name, sname, age, active, job, relationship_status, relationship_partner, story):
+        def __init__(self, name, sname, age, active, relationship_status, relationship_partner, story):
             self.name_default = name
             self.name = name
             self.sname_default = sname
@@ -34,7 +27,6 @@ init python:
             self.age_default = age
             self.age = age
             self.active = active
-            self.job = job
             self.relationship_status = relationship_status
             self.relationship_partner = relationship_partner
             self.story = story
@@ -73,7 +65,6 @@ init python:
             self.active = amt
 
 define relationships = Relationships()
-define job = Job()
 
 label renaming_mc:
     # allow default name(s) to be saved across multiple games

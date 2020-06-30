@@ -3,16 +3,16 @@
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 
-default mcI = Information("Liam", "Johnson", 20, True, job.programmer, relationships.engaged, girl, "Unknown")
+default mcI = Information("Liam", "Johnson", 20, True, relationships.engaged, girl, "Unknown")
 define mc = Character("{b}[mcI.name]{/b}", color="#37b3f3", who_outlines=[(2,"#000000")], what_prefix="\"", what_suffix="\"", what_outlines=[(2,"#000000")])
 
-default friendI = Information("Nick", "Valentine", 26, True, job.unknown, relationships.unknown, "Unknown", "Unknown")
+default friendI = Information("Nick", "Valentine", 26, True, relationships.unknown, "Unknown", "Unknown")
 define friend = Character("{b}[friendI.name]{/b}", color="#37c68f", who_outlines=[(2,"#000000")], what_prefix="\"", what_suffix="\"", what_outlines=[(2,"#000000")])
 default friendR = Relationship("friend", "friend", True)
 default friendS = FriendStats(10)
 image friend normal = "/friend.webp"
 
-default girlI = Information("Eileen", "Fisher", 18, True, job.university_student, relationships.engaged, mc, "she has always been before class.")
+default girlI = Information("Eileen", "Fisher", 18, True, relationships.engaged, mc, "she has always been before class.")
 define girl = Character("{b}[girlI.name]{/b}", color="#f337ba", who_outlines=[(2,"#000000")], what_prefix="\"", what_suffix="\"", what_outlines=[(2,"#000000")])
 default girlR = Relationship("girlfriend", "boyfriend", True)
 default girlS = PartnerStats(10, 0, 0, 0)
