@@ -33,7 +33,7 @@ image girl normal = Composite( (gui.width, gui.height),
 
 label start:
     stop music fadeout 1.0
-    call check_age
+    call screen check_age
     "Welcome to [config.name]"
     call renaming_mc
     mc "I am ... years old"
