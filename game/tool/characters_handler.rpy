@@ -15,11 +15,11 @@ init python:
     ## Information about a character
     # to use: default ... = Information("NPC name", age)
     # exemple:
-    # default girlI = Information("Eileen", 18, "university student" [or job.university_student if it is a registered job], Relationships.engaged, mc,
+    # default girlI = Information("Eileen", 18, "university student" [or job.university_student if it is a registered job], rel.engaged, mc,
     # "she has always been before class. as a child they made fun of her because she had the appliance. ...")
-    # default boyI = Information("Unknown Boy", "Unknown", job.unknown, relationships.unknown, "Unknown", "Unknown")
+    # default boyI = Information("Unknown Boy", "Unknown", job.unknown, rel.unknown, "Unknown", "Unknown")
     class Information():
-        def __init__(self, name, sname, age, active, relationship_status, relationship_partner, story):
+        def __init__(self, name, sname, age, active, rel_status, rel_partner, story):
             self.name_default = name
             self.name = name
             self.sname_default = sname
@@ -27,8 +27,8 @@ init python:
             self.age_default = age
             self.age = age
             self.active = active
-            self.relationship_status = relationship_status
-            self.relationship_partner = relationship_partner
+            self.rel_status = rel_status
+            self.rel_partner = rel_partner
             self.story = story
         def changeName(self):
             self.name = renpy.input("{i}(Default: " + self.name_default + "){/i}")
@@ -40,7 +40,7 @@ init python:
             self.age = renpy.input("{i}(Default: " + str(self.age_default) + "){/i}")
             self.age = self.age.strip() or self.age_default
         def is_engaged(self):
-            return (relationship_status == relationships.engaged or relationship_status == relationships.married)
+            return (rel_status == rel.engaged or rel_status == rel.married)
         def setActive(self, amt):
             self.active = amt
     ## Type of relationship
@@ -64,7 +64,7 @@ init python:
         def setActive(self, amt):
             self.active = amt
 
-define relationships = Relationships()
+define rel = Relationships()
 
 label renaming_mc:
     # allow default name(s) to be saved across multiple games
