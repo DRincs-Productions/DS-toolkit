@@ -4,14 +4,6 @@ init python:
     # Other recommendations: bigsis_fname, lilsis_fname, bigbro_fname, lilbro_fname, mom_fname, dad_fname, malebff_fname or femalebff_fname. (Again, use any or use none).
     mp_ndata = MultiPersistent("namedata.f95zone.to")
 
-    class Relationships():
-        def __init__(self):
-            self.unknown = 0
-            self.single = 1
-            self.engaged = 2
-            self.married = 3
-            self.divorced = 4
-            self.widow = 5
     class Information():
         """Information about a character
         to use: default ... = Information("NPC name", age)
@@ -65,7 +57,7 @@ init python:
         def setActive(self, amt):
             self.active = amt
 
-define rel = Relationships()
+define rel = enum('unknown', 'single', 'engaged', 'married', 'divorced', 'widow')
 
 label renaming_mc:
     # allow default name(s) to be saved across multiple games
