@@ -1,7 +1,7 @@
 init python:
-    ## PartnerStats
     class PartnerStats():
-        def __init__(self, friendship, love, virgin, bisexual, polyamorous, against, addiction):
+        """Manages the relationship of possible patners, I suggest to customize this function."""
+        def __init__(self, friendship=0, favour=0, love=0, virgin=False, bisexual=False, polyamorous=False, against=False, addiction=False):
             self.friendship = friendship
             self.virgin = virgin
             self.bisexual = bisexual
@@ -11,7 +11,7 @@ init python:
             self.energy = 100
             self.willpower = 100
             self.inhibition = 100
-            self.favour = 0
+            self.favour = favour
             self.love = love
             self.lust = 0
             self.anger = 0
