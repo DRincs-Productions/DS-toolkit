@@ -3,16 +3,16 @@
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 
-default mcI = Information(name = "Liam", sname = "Johnson", age = 20, active = True, rel_status = rel.engaged, rel_partner = girl, story = "Unknown")
+default mcI = Information(name = "Liam", sname = "Johnson", age = 20, active = True, rel_status = rel.engaged, rel_partner = girl)
 define mc = Character("{b}[mcI.name]{/b}", color="#37b3f3", who_outlines=[(2,"#000000")], what_prefix="\"", what_suffix="\"", what_outlines=[(2,"#000000")])
 
-default friendI = Information(name = "Nick", sname = "Valentine", age = 26, active = True, rel_status = rel.unknown, rel_partner = "Unknown", story = "Unknown")
+default friendI = Information(name = "Nick", sname = "Valentine", age = 26, active = True, rel_status = rel.unknown, rel_partner = __("Unknown"))
 define friend = Character("{b}[friendI.name]{/b}", color="#37c68f", who_outlines=[(2,"#000000")], what_prefix="\"", what_suffix="\"", what_outlines=[(2,"#000000")])
 default friendR = Relationship("friend", "friend", active = True)
 default friendS = PartnerStats(friendship = 80, love = 0, virgin = False, bisexual = False, polyamorous = False, against = 20, addiction = 0)
 image friend normal = "/friend.webp"
 
-default girlI = Information(name = "Eileen", sname = "Fisher", age = 18, active = True, rel_status = rel.engaged, rel_partner = mc, story = "she has always been before class.")
+default girlI = Information(name = "Eileen", sname = "Fisher", age = 18, active = True, rel_status = rel.engaged, rel_partner = mc, story = __("She has always been before class."))
 define girl = Character("{b}[girlI.name]{/b}", color="#f337ba", who_outlines=[(2,"#000000")], what_prefix="\"", what_suffix="\"", what_outlines=[(2,"#000000")])
 default girlR = Relationship("girlfriend", "boyfriend", active = True)
 default girlS = PartnerStats(friendship = 40, love = 80, virgin = True, bisexual = False, polyamorous = False, against = False, addiction = 0)

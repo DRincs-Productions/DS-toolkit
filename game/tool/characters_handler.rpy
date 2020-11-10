@@ -12,14 +12,14 @@ init python:
             self.married = 3
             self.divorced = 4
             self.widow = 5
-    ## Information about a character
-    # to use: default ... = Information("NPC name", age)
-    # exemple:
-    # default girlI = Information("Eileen", 18, "university student" [or job.university_student if it is a registered job], rel.engaged, mc,
-    # "she has always been before class. as a child they made fun of her because she had the appliance. ...")
-    # default boyI = Information("Unknown Boy", "Unknown", job.unknown, rel.unknown, "Unknown", "Unknown")
     class Information():
-        def __init__(self, name, sname, age, active, rel_status, rel_partner, story):
+        """Information about a character
+        to use: default ... = Information("NPC name", age)
+        exemple:
+        default girlI = Information("Eileen", 18, "university student" [or job.university_student if it is a registered job], rel.engaged, mc,
+        "she has always been before class. as a child they made fun of her because she had the appliance. ...")
+        default boyI = Information("Unknown Boy", "Unknown", rel.unknown, "Unknown", "Unknown")"""
+        def __init__(self, name, sname='', age='', active=True, rel_status=0, rel_partner='', story=''):
             self.name_default = name
             self.name = name
             self.sname_default = sname
@@ -43,13 +43,14 @@ init python:
             return (rel_status == rel.engaged or rel_status == rel.married)
         def setActive(self, amt):
             self.active = amt
-    ## Type of relationship
-    # to use: default ... = Relationship("type of relationship that NCP has with MC", 
-    # "type of relationship that MC has with NCP", boolean (if this relationship is active))
-    # exemple:
-    # default girlR = Relationship("girlfriend", "boyfriend", True)
+
     class Relationship():
-        def __init__(self, NPClabel, MClabel, active):
+        """Type fi relationship between you (MClabel) and NPC NPClabel
+        to use: default ... = Relationship("type of relationship that NCP has with MC", 
+        "type of relationship that MC has with NCP", boolean (if this relationship is active))
+        exemple:
+        default girlR = Relationship("girlfriend", "boyfriend", True)"""
+        def __init__(self, NPClabel, MClabel, active=True):
             self.NPClabel_default = NPClabel
             self.NPClabel = NPClabel
             self.MClabel_default = MClabel
