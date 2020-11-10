@@ -1,5 +1,7 @@
 ﻿# The script of the game goes in this file.
 
+image bg blue = "#b1e3ff"
+
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 
@@ -39,7 +41,7 @@ label start:
     $ mcI.changeAge()
     "Hi [mc] ([mcI.age])"
     mc "Hi"
-    show sky
+    scene bg blue with fade
     show friend normal
     show girl normal
 
@@ -57,8 +59,6 @@ label loop:
             call character
         "Clothes":
             call clothes
-        "Time":
-            call time_test
         "Timed menu":
             "Train boxing."
             show screen countdown(timer_range=5, timer_call='menu_slow')
@@ -313,17 +313,3 @@ label emblem2:
         "Back":
             return
     jump emblem2
-
-label time_test:
-    menu:
-        "Rest":
-            call new_hour
-            $ test = time_handler.get_hour_name()
-            "[test]"
-        "Sleep":
-            call new_day
-            $ test = time_handler.get_weekday_name()
-            "[test]"
-        "Back":
-            jump loop
-    jump time_test
