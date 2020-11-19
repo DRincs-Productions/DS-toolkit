@@ -1,5 +1,5 @@
 init python:
-    class PartnerStats():
+    class Statistics():
         """Manages the relationship of possible patners. Using the dictionaries has in memory only the variables to use, I recommend changing the slo values with set(), change(), get()I suggest to customize this function."""
         def __init__(self,
             gender = "F",
