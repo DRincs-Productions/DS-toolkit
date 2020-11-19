@@ -132,9 +132,9 @@ label relaction1:
     $ flov = stats["friend"].get("love")
     menu:
         "+ Friendship [friend]. Friendship: [ffr]":
-            $ stats["friend"].changefriendship(10)
+            $ stats["friend"].changeFriendship(10)
         "- Friendship [friend]. Friendship: [ffr]":
-            $ stats["friend"].changefriendship(-10)
+            $ stats["friend"].changeFriendship(-10)
         "+ Love [friend]. Love: [flov]":
             $ stats["friend"].changeLove(10)
         "- Love [friend]. Love: [flov]":
