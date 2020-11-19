@@ -1,5 +1,5 @@
 # Dating sim toolkit for Ren'py
-This repo is meant to have Visual Novel/Game developers who have little experience with Ren'py.
+This repo is a set of basic tools for Visual Novel / Game developers who are planning to create a Dating sim.
 
 ## Instructions to insert GUI in your repo 
 I recommend the following ways to include it in your project:
