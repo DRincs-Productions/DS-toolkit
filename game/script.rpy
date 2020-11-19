@@ -70,6 +70,8 @@ label loop:
                 "Do nothing":
                     hide screen countdown
                     "You didn't do anything."
+        "Ability":
+            call ability
         "End":  # This ends the game.
             call temporary_end_game
             return
@@ -323,3 +325,27 @@ label emblem2:
         "Back":
             return
     jump emblem2
+
+label ability:
+    $ MCint = stats["mc"].get("intelligence")
+    $ MCstr = stats["mc"].get("strength")
+    $ FRint = stats["friend"].get("intelligence")
+    $ FRstr = stats["friend"].get("strength")
+    menu:
+        "Train":
+            $ stats["mc"].improve_ability("strength")
+        "Study":
+            $ stats["mc"].improve_ability("intelligence")
+        "Popeye: [mc]([MCstr]) vs [friend]([FRstr])":
+            if MCstr > FRstr:
+                "You have won"
+            else:
+                "You lost"
+        "Quiz: [mc]([MCint]) vs [friend]([FRint])":
+            if MCint > FRint:
+                "You have won"
+            else:
+                "You lost"
+        "Back":
+            return
+    jump ability

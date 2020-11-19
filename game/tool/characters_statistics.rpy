@@ -147,6 +147,8 @@ init python:
                 elif (amt < 0):
                     notify(decrease_fear_notify)
         # Additional functions:
+        def improve_ability(self, text, amt=1):
+            self.change(text, amt, max=10, min=0)
         # Emblems
         def is_virgin(self):
             val = self.get("virgin")
