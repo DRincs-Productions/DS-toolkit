@@ -30,6 +30,11 @@ define config.version = "1.0"
 ## triple-quotes, and leave a blank line between paragraphs.
 
 define gui.about = _p("""
+This project is a set of tools, especially designed for Dating sim.\n
+ATTENTION: inside there can be sexual references, it is a project for adulty only.\n
+Instruction to instert it in their repo: {a=https://github.com/DonRP/DS-toolkit/blob/master/README.md}ReadMe{/a}\n
+SUPPORT ME: {a=https://www.buymeacoffee.com/DRincs}Buy me a coffee{/a}\n
+Other repo Repo: {a=https://github.com/DonRP}GitHub{/a}\n
 """)
 
 
