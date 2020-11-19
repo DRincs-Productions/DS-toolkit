@@ -33,7 +33,6 @@ init python:
             self.memory["inhibition"] = 100
             if (addiction != None):
                 self.memory["addiction"] = addiction
-            self.memory["lust"] = 0
             # Relaction
             if (friendship != None):
                 self.memory["friendship"] = friendship
@@ -43,8 +42,6 @@ init python:
                 self.memory["love"] = love
             if (corruption != None):
                 self.memory["corruption"] = corruption
-            self.memory["anger"] = 0
-            self.memory["fear"] = 0
             # Emblems
             if (virgin != None):
                 self.memory["virgin"] = virgin
