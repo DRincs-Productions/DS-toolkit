@@ -11,13 +11,13 @@ define mc = Character("{b}[mcI.name]{/b}", color="#37b3f3", who_outlines=[(2,"#0
 default friendI = Information(name = "Nick", sname = "Valentine", age = 26, active = True, rel_status = rel.unknown, rel_partner = __("Unknown"))
 define friend = Character("{b}[friendI.name]{/b}", color="#37c68f", who_outlines=[(2,"#000000")], what_prefix="\"", what_suffix="\"", what_outlines=[(2,"#000000")])
 default friendR = Relationship("friend", "friend", active = True)
-default friendS = PartnerStats(friendship = 80, love = 0, virgin = False, bisexual = False, polyamorous = False, against = 20, addiction = 0)
+default friendS = PartnerStats(gender = "M", virgin = False, bisexual = False, polyamorous = False, against = 20)
 image friend normal = "/friend.webp"
 
 default girlI = Information(name = "Eileen", sname = "Fisher", age = 18, active = True, rel_status = rel.engaged, rel_partner = mc, story = __("She has always been before class."))
 define girl = Character("{b}[girlI.name]{/b}", color="#f337ba", who_outlines=[(2,"#000000")], what_prefix="\"", what_suffix="\"", what_outlines=[(2,"#000000")])
 default girlR = Relationship("girlfriend", "boyfriend", active = True)
-default girlS = PartnerStats(friendship = 40, love = 80, virgin = True, bisexual = False, polyamorous = False, against = False, addiction = 0)
+default girlS = PartnerStats(gender = "F", virgin = True, bisexual = False, polyamorous = False, against = False)
 
 # Clothes
 default girl_dress = "homesuit"
@@ -128,14 +128,16 @@ label clothes:
     jump clothes
 
 label relaction1:
+    $ ffr = friendS.get("friendship")
+    $ flov = friendS.get("love")
     menu:
-        "+ Friendship [friend]. Friendship: [friendS.friendship]":
+        "+ Friendship [friend]. Friendship: [ffr]":
             $ friendS.changeFriendship(10)
-        "- Friendship [friend]. Friendship: [friendS.friendship]":
+        "- Friendship [friend]. Friendship: [ffr]":
             $ friendS.changeFriendship(-10)
-        "+ Love [friend]. Love: [friendS.love]":
+        "+ Love [friend]. Love: [flov]":
             $ friendS.changeLove(10)
-        "- Love [friend]. Love: [friendS.love]":
+        "- Love [friend]. Love: [flov]":
             $ friendS.changeLove(-10)
         "Pag2":
             jump relaction2
@@ -143,16 +145,18 @@ label relaction1:
             return
     jump relaction1
 label relaction2:
+    $ gfr = girlS.get("favour")
+    $ glov = girlS.get("love")
     menu:
         "Pag1":
             jump relaction1
-        "+ Favour [girl]. Favour: [girlS.favour]":
+        "+ Favour [girl]. Favour: [gfr]":
             $ girlS.changeFavour(10)
-        "- Favour [girl]. Favour: [girlS.favour]":
+        "- Favour [girl]. Favour: [gfr]":
             $ girlS.changeFavour(-10)
-        "+ Love [girl]. Love: [girlS.love]":
+        "+ Love [girl]. Love: [glov]":
             $ girlS.changeLove(10)
-        "- Love [girl]. Love: [girlS.love]":
+        "- Love [girl]. Love: [glov]":
             $ girlS.changeLove(-10)
         "Pag3":
             jump relaction3
@@ -160,38 +164,44 @@ label relaction2:
             return
     jump relaction2
 label relaction3:
+    $ gcor = girlS.get("corruption")
+    $ gfe = girlS.get("fear")
+    $ gan = girlS.get("anger")
     menu:
         "Pag2":
             jump relaction2
-        "+ Corruption [girl]. Corruption: [girlS.corruption]":
+        "+ Corruption [girl]. Corruption: [gcor]":
             $ girlS.changeCorruption(10)
-        "- Corruption [girl]. Corruption: [girlS.corruption]":
+        "- Corruption [girl]. Corruption: [gcor]":
             $ girlS.changeCorruption(-10)
-        "+ Fear [girl]. Fear: [girlS.fear]":
+        "+ Fear [girl]. Fear: [gfe]":
             $ girlS.changeFear(10)
-        "- Fear [girl]. Fear: [girlS.fear]":
+        "- Fear [girl]. Fear: [gfe]":
             $ girlS.changeFear(-10)
-        "+ Anger [girl]. Anger: [girlS.anger]":
+        "+ Anger [girl]. Anger: [gan]":
             $ girlS.changeAnger(10)
-        "- Anger [girl]. Anger: [girlS.anger]":
+        "- Anger [girl]. Anger: [gan]":
             $ girlS.changeAnger(-10)
         "Back":
             return
     jump relaction3
 
 label character1:
+    $ gen = girlS.get("energy")
+    $ gwi = girlS.get("willpower")
+    $ ginh = girlS.get("inhibition")
     menu:
-        "+ Energy [girl]. Energy: [girlS.energy]":
+        "+ Energy [girl]. Energy: [gen]":
             $ girlS.changeEnergy(10)
-        "- Energy [girl]. Energy: [girlS.energy]":
+        "- Energy [girl]. Energy: [gen]":
             $ girlS.changeEnergy(-10)
-        "+ Willpower [girl]. Willpower: [girlS.willpower]":
+        "+ Willpower [girl]. Willpower: [gwi]":
             $ girlS.changeWillpower(10)
-        "- Willpower [girl]. Willpower: [girlS.willpower]":
+        "- Willpower [girl]. Willpower: [gwi]":
             $ girlS.changeWillpower(-10)
-        "+ Inhibition [girl]. Inhibition: [girlS.inhibition]":
+        "+ Inhibition [girl]. Inhibition: [ginh]":
             $ girlS.changeInhibition(10)
-        "- Inhibition [girl]. Inhibition: [girlS.inhibition]":
+        "- Inhibition [girl]. Inhibition: [ginh]":
             $ girlS.changeInhibition(-10)
         "Pag2":
             jump character2
@@ -199,16 +209,18 @@ label character1:
             return
     jump character1
 label character2:
+    $ gad = girlS.get("addiction")
+    $ glu = girlS.get("lust")
     menu:
         "Pag1":
             jump character1
-        "+ Addiction [girl]. Addiction: [girlS.addiction]":
+        "+ Addiction [girl]. Addiction: [gad]":
             $ girlS.changeAddiction(10)
-        "- Addiction [girl]. Addiction: [girlS.addiction]":
+        "- Addiction [girl]. Addiction: [gad]":
             $ girlS.changeAddiction(-10)
-        "+ Lust [girl]. Lust: [girlS.lust]":
+        "+ Lust [girl]. Lust: [glu]":
             $ girlS.changeLust(10)
-        "- Lust [girl]. Lust: [girlS.lust]":
+        "- Lust [girl]. Lust: [glu]":
             $ girlS.changeLust(-10)
         "Back":
             return
@@ -217,23 +229,23 @@ label character2:
 label emblem1:
     menu:
         "Set not Virgin [girl]. Virgin: True" if (girlS.is_virgin()):
-            $ girlS.virgin = False
+            $ girlS.set("virgin", False)
         "Set Virgin [girl]. Virgin: False" if (girlS.is_virgin() == False):
-            $ girlS.virgin = True
+            $ girlS.set("virgin", True)
         "Set not Bisexual [girl]. Bisexual: True" if (girlS.is_bisexual()):
-            $ girlS.bisexual = False
+            $ girlS.set("bisexual", False)
         "Set Bisexual [girl]. Bisexual: False" if (girlS.is_bisexual() == False):
-            $ girlS.bisexual = True
+            $ girlS.set("bisexual", True)
         "Set not Polyamorous [girl]. Polyamorous: True" if (girlS.is_polyamorous()):
-            $ girlS.polyamorous = False
+            $ girlS.set("polyamorous", False)
         "Set Polyamorous [girl]. Polyamorous: False" if (girlS.is_polyamorous() == False):
-            $ girlS.polyamorous = True
+            $ girlS.set("polyamorous", True)
         "Set Against false [girl]. Against: True" if (girlS.is_against()):
-            $ girlS.against = 20
+            $ girlS.set("against", 20)
         "Set Against=0 [girl]. Against: True" if (girlS.is_against()):
-            $ girlS.against = 0
+            $ girlS.set("against", 0)
         "Set Against [girl]. Against: False" if (girlS.is_against() == False):
-            $ girlS.against = True
+            $ girlS.set("against", True)
         "Set not Healthy [girl]. Healthy: True" if (girlS.is_healthy()):
             $ girlS.changeEnergy(-100)
             $ girlS.changeWillpower(-100)
