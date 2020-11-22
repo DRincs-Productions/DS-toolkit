@@ -6,7 +6,7 @@
 <a href="https://discord.gg/5UFPjP9" title="Discord"><img src="https://img.shields.io/discord/688162156151439536" alt="Discord" /></a>
 </span>
 <span class="badge-buymeacoffee">
-<a href="https://www.buymeacoffee.com/p/59760" title="Donate to this project using Buy Me A Coffee"><img src="https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg" alt="Buy Me A Coffee donate button" /></a>
+<a href="https://www.buymeacoffee.com/p/59759" title="Donate to this project using Buy Me A Coffee"><img src="https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg" alt="Buy Me A Coffee donate button" /></a>
 </span>
 
 This repo is a set of basic tools for Visual Novel / Game developers who are planning to create a Dating sim.
