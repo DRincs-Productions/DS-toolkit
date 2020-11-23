@@ -11,13 +11,13 @@
 
 This repo is a set of basic tools for Visual Novel / Game developers who are planning to create a Dating sim.
 
-## Instructions to insert GUI in your repo 
+## Instructions to insert Toolkit in your repo 
 I recommend the following ways to include it in your project:
 - [**Pull branch**](https://github.com/DonRP/DS-toolkit#pull-branch) (to **insert** it into your game and **update** it easily)
-- **Fork** (to improve the repo or create a GUI based on mine)
+- **Fork** (to improve the repo or create a Toolkit based on mine)
 
 ### Pull branch
-To **insert** or **update** the GUI in your repo with Pull branch I recommend the following procedure:
+To **insert** or **update** the Toolkit in your repo with Pull branch I recommend the following procedure:
 
 (only if you want to insert the repo) Create a new empty branch, in the example I'll use **DS-toolkit**
 
