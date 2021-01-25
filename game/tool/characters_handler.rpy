@@ -8,33 +8,67 @@ init python:
         """Information about a character
         to use: default ... = Information("NPC name", age)
         exemple:
-        default girlI = Information("Eileen", 18, "university student" [or job.university_student if it is a registered job], rel.engaged, mc,
+        default girlI = Information("Eileen", 18, "university student" [or job.university_student if it is a registered job], rel.get('engaged'), mc,
         "she has always been before class. as a child they made fun of her because she had the appliance. ...")
-        default boyI = Information("Unknown Boy", "Unknown", rel.unknown, "Unknown", "Unknown")"""
-        def __init__(self, name, sname='', age='', active=True, rel_status=0, rel_partner='', story=''):
-            self.name_default = name
-            self.name = name
-            self.sname_default = sname
-            self.sname = sname
-            self.age_default = age
-            self.age = age
+        default boyI = Information("Unknown Boy")"""
+        def __init__(self,
+            name,
+            sname = None,
+            age = None,
+            active = True,
+            rel_status = None,
+            rel_partner = None,
+            story = None,
+            other_values = {}):
+            self.memory = {}
+            self.memory.update(other_values)
             self.active = active
-            self.rel_status = rel_status
-            self.rel_partner = rel_partner
-            self.story = story
+            self.name = name
+            self.sname = sname
+            self.age = age
+            self.set("name_default", name)
+            self.set("sname_default", sname)
+            self.set("age_default", age)
+            self.set("rel_status", rel_status)
+            self.set("rel_partner", rel_partner)
+            self.set("story", story)
+
         def changeName(self):
-            self.name = renpy.input("{i}(Default: " + self.name_default + "){/i}")
-            self.name = self.name.strip() or self.name_default
+            self.name = renpy.input("{i}(Default: " + self.get("name_default") + "){/i}")
+            self.name = self.name.strip() or self.get("name_default")
+            if (self.get("name_default") == "Unknown"):
+                self.set("name_default", self.name)
         def changeSurname(self):
-            self.sname = renpy.input("{i}(Default: " + self.sname_default + "){/i}")
-            self.sname = self.sname.strip() or self.sname_default
+            self.sname = renpy.input("{i}(Default: " + self.get("sname_default") + "){/i}")
+            self.sname = self.sname.strip() or self.get("sname_default")
+            if (self.get("sname_default") == "Unknown"):
+                self.set("sname_default", self.sname)
         def changeAge(self):
-            self.age = renpy.input("{i}(Default: " + str(self.age_default) + "){/i}")
-            self.age = self.age.strip() or self.age_default
-        def is_engaged(self):
-            return (rel_status == rel.engaged or rel_status == rel.married)
+            self.age = renpy.input("{i}(Default: " + str(self.get("age_default")) + "){/i}")
+            self.age = self.age.strip() or self.get("age_default")
+            if (self.get("age_default") == "Unknown"):
+                self.set("age_default", self.age)
+        def get(self, text):
+            """Returns the value "text", in case it does not exist returns \"Unknown\""""
+            if text in self.memory:
+                return self.memory[text]
+            else:
+                return "Unknown"
+        def set(self, text, value):
+            """Function to set or add a new value"""
+            if (text != None and text != ""):
+                self.memory[text] = value
+            else:
+                remove(text)
+        def remove(self, text):
+            """Delete the text value"""
+            del memory[text]
         def setActive(self, amt):
             self.active = amt
+        def getRelStatus(self, amt):
+        def getRelPartner(self, amt):
+        def is_engaged(self):
+            return (rel_status == rel.get('engaged') or rel_status == rel.get('married'))
 
     class Relationship():
         """Type fi relationship between you (MClabel) and NPC NPClabel
@@ -42,30 +76,61 @@ init python:
         "type of relationship that MC has with NCP", boolean (if this relationship is active))
         exemple:
         default girlR = Relationship("girlfriend", "boyfriend", True)"""
-        def __init__(self, NPClabel, MClabel, active=True):
-            self.NPClabel_default = NPClabel
+        def __init__(self,
+            NPClabel = None,
+            MClabel = None,
+            active = True):
+
+            self.memory = {}
             self.NPClabel = NPClabel
-            self.MClabel_default = MClabel
             self.MClabel = MClabel
+            self.set("NPClabel_default", NPClabel)
+            self.set("MClabel_default", MClabel)
             self.active = active
         def changeNPClabel(self):
-            self.NPClabel = renpy.input("{i}(Default: " + self.NPClabel_default + "){/i}")
-            self.NPClabel = self.NPClabel.strip() or self.NPClabel_default
+            self.NPClabel = renpy.input("{i}(Default: " + self.get("NPClabel_default") + "){/i}")
+            self.NPClabel = self.NPClabel.strip() or self.get("NPClabel_default")
+            if (self.get("NPClabel_default") == "Unknown"):
+                self.set("NPClabel_default", self.NPClabel)
         def changeMClabel(self):
-            self.MClabel = renpy.input("{i}(Default: " + self.MClabel_default + "){/i}")
-            self.MClabel = self.MClabel.strip() or self.MClabel_default
+            self.MClabel = renpy.input("{i}(Default: " + self.get("MClabel_default") + "){/i}")
+            self.MClabel = self.MClabel.strip() or self.get("MClabel_default")
+            if (self.get("MClabel_default") == "Unknown"):
+                self.set("MClabel_default", self.MClabel)
+        def get(self, text):
+            """Returns the value "text", in case it does not exist returns \"Unknown\""""
+            if text in self.memory:
+                return self.memory[text]
+            else:
+                return "Unknown"
+        def set(self, text, value):
+            """Function to set or add a new value"""
+            if (text != None and text != ""):
+                self.memory[text] = value
+            else:
+                remove(text)
+        def remove(self, text):
+            """Delete the text value"""
+            del memory[text]
         def setActive(self, amt):
             self.active = amt
 
-define rel = enum('unknown', 'single', 'engaged', 'married', 'divorced', 'widow')
+define rel = {
+        'rel_single'    :   0,
+        'rel_engaged'   :   1,
+        'rel_married'   :   2,
+        'rel_divorced'  :   3,
+        'rel_widow'     :   4,
+    }
+
 
 label renaming_mc:
     # allow default name(s) to be saved across multiple games
     if renpy.variant("pc"):
         if mp_ndata.male_fname != None:
-            $ mcI.name_default = mp_ndata.male_fname
+            $ mcI.set("name_default", mp_ndata.male_fname)
         if mp_ndata.male_sname != None:
-            $ mcI.sname_default = mp_ndata.male_sname
+            $ mcI.set("sname_default", mp_ndata.male_sname)
 
     "Player" "My name is:"
     $ mcI.changeName()
@@ -73,9 +138,9 @@ label renaming_mc:
     $ mcI.changeSurname()
 
     if renpy.variant("pc"):
-        if mcI.name != mcI.name_default:
+        if mcI.name != mcI.get("name_default"):
             $ mp_ndata.male_fname = mcI.name
-        if mcI.sname != mcI.sname_default:
+        if mcI.sname != mcI.get("sname_default"):
             $ mp_ndata.male_sname = mcI.sname
         $ mp_ndata.save()
     return
