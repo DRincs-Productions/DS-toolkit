@@ -25,7 +25,7 @@ label set_girl_homesuit:
 label set_girl_null:
     $ girl_dress = ""
     return
-image girl normal = Composite( (gui.width, gui.height),
+image girl normal = Composite( (1280, 720),
     (0, 0), "/girl.webp",
     (0, 0), "check:[girl_dress]/girl.webp")
 
