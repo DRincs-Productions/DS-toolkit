@@ -18,16 +18,14 @@ define girl = Character("{b}[girlI.name]{/b}", color="#f337ba", who_outlines=[(2
 default girlR = Relationship("girlfriend", "boyfriend", active = True)
 
 # Clothes
-default girl_dress = "homesuit"
+default girl_dress = "-homesuit"
 label set_girl_homesuit:
-    $ girl_dress = "homesuit"
+    $ girl_dress = "-homesuit"
     return
 label set_girl_null:
     $ girl_dress = ""
     return
-image girl normal = Composite( (1280, 720),
-    (0, 0), "/girl.webp",
-    (0, 0), "check:[girl_dress]/girl.webp")
+image girl normal = "check:girl[girl_dress].webp"
 
 # The game starts here.
 label start:
@@ -40,8 +38,8 @@ label start:
     "Hi [mc] ([mcI.age])"
     mc "Hi"
     scene bg blue with fade
-    show friend normal
-    show girl normal
+    show friend normal at left
+    show girl normal at right
 
 label loop:
     menu:
@@ -119,7 +117,7 @@ label character:
 
 label clothes:
     menu:
-        "Get dressed [girl]" if (girl_dress != "homesuit"):
+        "Get dressed [girl]" if (girl_dress != "-homesuit"):
             call set_girl_homesuit
         "Take off your clothes [girl]" if (girl_dress != ""):
             call set_girl_null
