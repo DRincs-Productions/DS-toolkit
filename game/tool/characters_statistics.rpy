@@ -58,7 +58,10 @@ init python:
                 self.set("gender_attracted", "F")
         def set(self, text, value):
             """Function to set or add a new value"""
-            self.memory[text] = value
+            if (text != None and text != ""):
+                self.memory[text] = value
+            else:
+                remove(text)
         def remove(self, text):
             """Delete the text value"""
             del memory[text]
