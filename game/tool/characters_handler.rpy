@@ -20,30 +20,38 @@ init python:
             rel_partner = None,
             story = None,
             other_values = {}):
+            # I use a dictionary because it is the best solution for compatibility and not to create variables that may not be used.
             self.memory = {}
             self.memory.update(other_values)
+            # Great for reporting that a character has not yet been discovered
             self.active = active
+
             self.name = name
             self.sname = sname
             self.age = age
+            # default values
             self.set("name_default", name)
             self.set("sname_default", sname)
             self.set("age_default", age)
+            # default values
             self.set("rel_status", rel_status)
             self.set("rel_partner", rel_partner)
             self.set("story", story)
 
         def changeName(self):
+            """Rename character name"""
             self.name = renpy.input("{i}(Default: " + self.get("name_default") + "){/i}")
             self.name = self.name.strip() or self.get("name_default")
             if (self.get("name_default") == "Unknown"):
                 self.set("name_default", self.name)
         def changeSurname(self):
+            """Rename the character's last name"""
             self.sname = renpy.input("{i}(Default: " + self.get("sname_default") + "){/i}")
             self.sname = self.sname.strip() or self.get("sname_default")
             if (self.get("sname_default") == "Unknown"):
                 self.set("sname_default", self.sname)
         def changeAge(self):
+            """Age changes"""
             self.age = renpy.input("{i}(Default: " + str(self.get("age_default")) + "){/i}")
             self.age = self.age.strip() or self.get("age_default")
             if (self.get("age_default") == "Unknown"):
@@ -64,10 +72,16 @@ init python:
             """Delete the text value"""
             del memory[text]
         def setActive(self, amt):
+            """Cabia the active value according to the parameter (Tip: True/False)"""
             self.active = amt
         def getRelStatus(self, amt):
+            """Returns the state of the character relationship (I recommend using rel values)"""
+            return self.get("rel_status")
         def getRelPartner(self, amt):
+            """It recalls the name of the character with whom it has a relationship"""
+            return self.get("rel_partner")
         def is_engaged(self):
+            """Return True if the character is currently in a romantic relationship with someone"""
             return (rel_status == rel.get('engaged') or rel_status == rel.get('married'))
 
     class Relationship():
@@ -82,17 +96,23 @@ init python:
             active = True):
 
             self.memory = {}
+            # nickname by which MC calls NCP
             self.NPClabel = NPClabel
+            # nickname by which NCP calls MC
             self.MClabel = MClabel
+            # default values
             self.set("NPClabel_default", NPClabel)
             self.set("MClabel_default", MClabel)
+
             self.active = active
         def changeNPClabel(self):
+            """Change the nickname of the PCN"""
             self.NPClabel = renpy.input("{i}(Default: " + self.get("NPClabel_default") + "){/i}")
             self.NPClabel = self.NPClabel.strip() or self.get("NPClabel_default")
             if (self.get("NPClabel_default") == "Unknown"):
                 self.set("NPClabel_default", self.NPClabel)
         def changeMClabel(self):
+            """Edit the nickname of the MC"""
             self.MClabel = renpy.input("{i}(Default: " + self.get("MClabel_default") + "){/i}")
             self.MClabel = self.MClabel.strip() or self.get("MClabel_default")
             if (self.get("MClabel_default") == "Unknown"):
@@ -113,6 +133,7 @@ init python:
             """Delete the text value"""
             del memory[text]
         def setActive(self, amt):
+            """Cabia the active value according to the parameter (Tip: True/False)"""
             self.active = amt
 
 define rel = {
