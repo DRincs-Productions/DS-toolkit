@@ -133,7 +133,7 @@ init python:
             """Delete the text value"""
             del memory[text]
         def setActive(self, amt):
-            """Cabia the active value according to the parameter (Tip: True/False)"""
+            """Change the active value according to the parameter (Tip: True/False)"""
             self.active = amt
 
 define rel = {
