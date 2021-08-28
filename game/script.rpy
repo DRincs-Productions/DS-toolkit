@@ -41,14 +41,8 @@ label start:
 
 label loop:
     menu:
-        "Ads":
-            menu:
-                "Notifications Test":
-                    $ notifyEx(msg="Hello")
-                "Coming soon test":
-                    call coming_soon
-                "Back":
-                    jump loop
+        "Notifications Test":
+            $ notifyEx(msg="Hello")
         "Character":
             call character
         "Clothes":
@@ -69,7 +63,6 @@ label loop:
         "Ability":
             call ability
         "End":  # This ends the game.
-            call temporary_end_game
             return
     jump loop
 
