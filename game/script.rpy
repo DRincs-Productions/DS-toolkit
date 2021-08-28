@@ -29,8 +29,6 @@ image girl normal = "check:girl[girl_dress].webp"
 
 # The game starts here.
 label start:
-    stop music fadeout 1.0
-    call screen check_age
     "Welcome to [config.name]"
     call renaming_mc
     mc "I am ... years old"
