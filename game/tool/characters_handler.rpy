@@ -111,6 +111,7 @@ init python:
                 self.relationships[character] = relation
             return
 
+# https://github.com/DRincs-Productions/DS-toolkit/wiki/Information#renaming_mc
 label renaming_mc:
     # allow default name(s) to be saved across multiple games
     if renpy.variant("pc"):
