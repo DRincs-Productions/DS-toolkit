@@ -1,4 +1,4 @@
-# Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Relaction
+# Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Relaction#relactions-dict
 define relactions = {
     "mom": __("Mom"),
     "dad": __("Dad"),
@@ -23,20 +23,14 @@ init python:
     from typing import Optional
 
     class CharacterInfo():
-        """CharacterInfo about a character
-        to use: default ... = CharacterInfo("NPC name", age)
-        exemple:
-        default girlI = CharacterInfo("Eileen", 18, "university student" [or job.university_student if it is a registered job], rel.get('engaged'), mc,
-        "she has always been before class. as a child they made fun of her because she had the appliance. ...")
-        default boyI = CharacterInfo("Unknown Boy")"""
+        """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Information """
 
         def __init__(self,
-                    name,
-                    sname=None,
-                    age=None,
-                    story=None,
-                    relationships=None,
-                    other_values={}):
+                    name: str,
+                    sname:Optional[str]=None,
+                    age:Optional[int]=None,
+                    relationships:dict[Character, str]=None,
+                    other_values:dict[Character, str]=None,):
             # I use a dictionary because it is the best solution for compatibility and not to create variables that may not be used.
             self.memory = {}
             self.memory.update(other_values)
@@ -50,54 +44,55 @@ init python:
             self.set("sname_default", sname)
             self.set("age_default", age)
             # default values
-            self.relationships = relationships
-            self.set("story", story)
+            self.relationships = relationships if relationships else {}
+            self.other_values = other_values if other_values else {}
 
-        def changeName(self):
-            """Rename character name"""
+        def changeName(self) -> None:
+            """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Information#change-name """
             self.name = renpy.input(
                 "{i}(Default: " + self.get("name_default") + "){/i}")
             self.name = self.name.strip() or self.get("name_default")
             if (self.get("name_default") == "Unknown"):
                 self.set("name_default", self.name)
+            return
 
-        def changeSurname(self):
-            """Rename the character's last name"""
+        def changeSurname(self) -> None:
+            """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Information#change-surname """
             self.sname = renpy.input(
                 "{i}(Default: " + self.get("sname_default") + "){/i}")
             self.sname = self.sname.strip() or self.get("sname_default")
             if (self.get("sname_default") == "Unknown"):
                 self.set("sname_default", self.sname)
+            return
 
-        def changeAge(self):
-            """Age changes"""
+        def changeAge(self) -> None:
+            """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Information#change-age """
             self.age = renpy.input(
                 "{i}(Default: " + str(self.get("age_default")) + "){/i}")
             self.age = self.age.strip() or self.get("age_default")
             if (self.get("age_default") == "Unknown"):
                 self.set("age_default", self.age)
+            return
 
-        def get(self, text):
+        def get(self, text) -> str:
             """Returns the value "text", in case it does not exist returns \"Unknown\""""
             if text in self.memory:
                 return self.memory[text]
             else:
                 return "Unknown"
 
-        def set(self, text, value):
+        def set(self, text, value) -> None:
             """Function to set or add a new value"""
             if (text != None and text != ""):
                 self.memory[text] = value
             else:
                 self.remove(text)
+            return
 
-        def remove(self, text):
+        def remove(self, text) -> None:
             """Delete the text value"""
             del self.memory[text]
-
-        def setActive(self, amt):
-            """Cabia the active value according to the parameter (Tip: True/False)"""
-            self.active = amt
+            return
 
         def getRelationNameByCharacter(self, character: Character) -> Optional[str]:
             """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Relaction#get-relation-name-by-character """
