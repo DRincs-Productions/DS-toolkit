@@ -22,13 +22,13 @@ init python:
 
     from typing import Optional
 
-    class Information():
-        """Information about a character
-        to use: default ... = Information("NPC name", age)
+    class CharacterInfo():
+        """CharacterInfo about a character
+        to use: default ... = CharacterInfo("NPC name", age)
         exemple:
-        default girlI = Information("Eileen", 18, "university student" [or job.university_student if it is a registered job], rel.get('engaged'), mc,
+        default girlI = CharacterInfo("Eileen", 18, "university student" [or job.university_student if it is a registered job], rel.get('engaged'), mc,
         "she has always been before class. as a child they made fun of her because she had the appliance. ...")
-        default boyI = Information("Unknown Boy")"""
+        default boyI = CharacterInfo("Unknown Boy")"""
 
         def __init__(self,
                     name,
@@ -99,7 +99,7 @@ init python:
             """Cabia the active value according to the parameter (Tip: True/False)"""
             self.active = amt
 
-        def getRelationNameByCharacter(self, character: str) -> Optional[str]:
+        def getRelationNameByCharacter(self, character: Character) -> Optional[str]:
             """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Relaction#get-relation-name-by-character """
             if character in self.relationships:
                 return self.relationships[character]

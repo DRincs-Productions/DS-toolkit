@@ -1,0 +1,20 @@
+{
+    "DRincs Get Relation Name By Character": {
+        "scope": "renpy",
+        "prefix": "DR_RelationGet",
+        "body": [
+            "$ {1:relaction} = {2:mc}I.getRelationNameByCharacter({3:friend})",
+            "",
+        ],
+        "description": "Get Relation Name By Character"
+    },
+    "DRincs Set Relation Name By Character": {
+        "scope": "renpy",
+        "prefix": "DR_RelationSetOrAdd",
+        "body": [
+            "$ {1:mc}I.setRelationNameByCharacter(character= {2:friend})",
+            "",
+        ],
+        "description": "Set Relation Name By Character"
+    },
+}

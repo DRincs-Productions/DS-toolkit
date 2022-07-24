@@ -538,7 +538,7 @@ style return_button:
 
 ## About screen ################################################################
 ##
-## This screen gives credit and copyright information about the game and Ren'Py.
+## This screen gives credit and copyright CharacterInfo about the game and Ren'Py.
 ##
 ## There's nothing special about this screen, and hence it also serves as an
 ## example of how to make a custom screen.
@@ -966,7 +966,7 @@ style history_label_text:
 
 ## Help screen #################################################################
 ##
-## A screen that gives information about key and mouse bindings. It uses other
+## A screen that gives CharacterInfo about key and mouse bindings. It uses other
 ## screens (keyboard_help, mouse_help, and gamepad_help) to display the actual
 ## help.
 
