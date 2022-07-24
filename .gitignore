@@ -127,6 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+.DS_Store
 errors.txt
 log.txt
 traceback.txt
@@ -135,3 +136,6 @@ traceback.txt
 game/saves
 game/cache
 *.bak
+
+# Templete files
+.renpy-sdk
