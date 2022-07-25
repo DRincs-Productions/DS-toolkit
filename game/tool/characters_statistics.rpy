@@ -217,10 +217,12 @@ init 10 python:
         def isVirgin(self):
             val = self.get("virgin")
             if val == None:
-                return False
-            if (val == True or val == False):
+                return True
+            if val is bool (val == True or val == False):
                 return val
-            return val > 0
+            elif val is int:
+                return val > 0
+            return True
 
         def isBisexual(self):
             val = self.get("bisexual")
