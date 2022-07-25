@@ -17,4 +17,50 @@
         ],
         "description": "Set Relation Name By Character"
     },
+    "DRincs Add Character": {
+        "scope": "renpy",
+        "prefix": "DR_CharacterAdd",
+        "body": [
+            "default ${1:mc}I = CharacterInfo(name = \"${2:Name}\", sname = \"${3:Surname}\", age = ${4:18}, ",
+            "other_values ={",
+            "    ${5:story: __(\"Story.\")}",
+            "}, ",
+            "relationships = {",
+            "    ${6:girl : relactions[\"girlfriend\"],}",
+            "})",
+            "define ${1} = Character(\"{b}[${1}I.name]{/b}\", color=\"#0702ff\", who_outlines=[(2,\"#000000\")], what_prefix=\"\\\"\", what_suffix=\"\\\"\", what_outlines=[(2,\"#000000\")])",
+            "",
+        ],
+        "description": "Add Character"
+    },
+    "DRincs Change Name": {
+        "scope": "renpy",
+        "prefix": "DR_CharacterInfo_ChangeName",
+        "body": [
+            "${1:mc} \"${2:My name is:}\"",
+            "$ ${1}I.changeName()",
+            "",
+        ],
+        "description": "Change Name"
+    },
+    "DRincs Change Surname": {
+        "scope": "renpy",
+        "prefix": "DR_CharacterInfo_ChangeSurname",
+        "body": [
+            "${1:mc} \"${2:My surname is:}\"",
+            "$ ${1}I.changeSurname()",
+            "",
+        ],
+        "description": "Change Surname"
+    },
+    "DRincs Change Age": {
+        "scope": "renpy",
+        "prefix": "DR_CharacterInfo_ChangeAge",
+        "body": [
+            "${1:mc} \"${2:I am ... years old}\"",
+            "$ ${1}I.changeAge()",
+            "",
+        ],
+        "description": "Change Age"
+    },
 }
