@@ -27,6 +27,7 @@ init python:
 
         def __init__(self,
                     name: str,
+                    gender: str,#["F", "M"],
                     sname:Optional[str]=None,
                     age:Optional[int]=None,
                     relationships:dict[Character, str]=None,

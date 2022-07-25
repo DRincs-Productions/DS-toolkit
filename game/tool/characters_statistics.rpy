@@ -1,54 +1,177 @@
 init python:
-    class Statistics():
+    class Statistic():
         """Manages the relationship of possible patners. Using the dictionaries has in memory only the variables to use, I recommend changing the slo values with set(), change(), get()I suggest to customize this function."""
-        def __init__(self,
-            gender = "F",
-            gender_attracted = None,
-            friendship = None,
-            favour = None,
-            love = None,
-            corruption = None,
-            virgin = None,
-            bisexual = None,
-            polyamorous = None,
-            against = None,
-            addiction = None,
-            other_values = {}):
+
+        def __init__(
+            self,
+            values={},
+            notify_increase_dict={},
+            notify_decrease_dict={},
+            notify_dict={},
+        ):
 
             self.memory = {}
-            self.memory.update(other_values)
+            self.memory.update(values)
+            self.notify_increase_dict = notify_dict
+            self.notify_decrease_dict = notify_dict
+            self.notify_dict = notify_dict
+
+        def set(self, name, value):
+            """Function to set or add a new value"""
+            if (name != None and name != ""):
+                self.memory[name] = value
+            else:
+                self.remove(name)
+
+        def remove(self, name:str):
+            """Delete the name value"""
+            del self.memory[name]
+
+        def change(self, name:str, amt:int, max:int=100, min:int=0, show_notify: bool = True):
+            """Changes a value, if it does not exist adds it"""
+            if (self.get(name) != None):
+                if (amt > 0 and self.memory[name] >= max):
+                    return
+                elif (amt < 0 and self.memory[name] <= min):
+                    return
+                self.memory[name] += amt
+                if self.memory[name] < min:
+                    self.memory[name] = min
+                elif self.memory[name] > max:
+                    self.memory[name] = max 
+            else:
+                if (amt is int and amt >= max):
+                    self.set(name, max)
+                    return
+                elif (amt is int and amt <= min):
+                    self.set(name, min)
+                    return
+                self.set(name, amt)
+            if show_notify:
+                self.notify(name, amt)
+            return
+
+        def get(self, name):
+            """Returns the value "name", in case it does not exist returns None"""
+            if name in self.memory:
+                return self.memory[name]
+            else:
+                return None
+
+        def notify(self, name: str, amt: int):
+            """To customize"""
+            return
+
+        # Additional functions:
+
+        def improve_ability(self, name, amt=1):
+            self.change(name, amt, max=10, min=0)
+
+init python:
+    against_notify = NotifyEx(msg=__("Is against a love affair with you"), img="/images_tool/icon/notification/emblems-against.webp")
+    fear_against_notify = NotifyEx(msg=__("Has too much fear of you for a love affair"), img="/images_tool/icon/notification/relations-fear.webp")
+    # Characteristics
+    increase_energy_notify = NotifyEx(msg=__("{color=#00ff00}{b}+{/b} Energy{/color}"), img="/images_tool/icon/notification/characteristics-energy.webp")
+    decrease_energy_notify = NotifyEx(msg=__("{color=#f00} {b}-{/b} Energy{/color}"), img="/images_tool/icon/notification/characteristics-energy.webp")
+    increase_willpower_notify = NotifyEx(msg=__("{color=#00ff00}{b}+{/b} Willpower{/color}"), img="/images_tool/icon/notification/characteristics-willpower.webp")
+    decrease_willpower_notify = NotifyEx(msg=__("{color=#f00} {b}-{/b} Willpower{/color}"), img="/images_tool/icon/notification/characteristics-willpower.webp")
+    increase_inhibition_notify = NotifyEx(msg=__("{color=#f00}{b}+{/b} Inhibition{/color}"), img="/images_tool/icon/notification/characteristics-inhibition.webp")
+    decrease_inhibition_notify = NotifyEx(msg=__("{color=#00ff00} {b}-{/b} Inhibition{/color}"), img="/images_tool/icon/notification/characteristics-inhibition.webp")
+    increase_addiction_notify = NotifyEx(msg=__("{color=#00ff00}{b}+{/b} Addictions{/color}"), img="/images_tool/icon/notification/characteristics-addiction.webp")
+    decrease_addiction_notify = NotifyEx(msg=__("{color=#f00} {b}-{/b} Addictions{/color}"), img="/images_tool/icon/notification/characteristics-addiction.webp")
+    increase_lust_notify = NotifyEx(msg=__("{color=#00ff00}{b}+{/b} Lust{/color}"), img="/images_tool/icon/notification/characteristics-lust.webp")
+    decrease_lust_notify = NotifyEx(msg=__("{color=#f00} {b}-{/b} Lust{/color}"), img="/images_tool/icon/notification/characteristics-lust.webp")
+    # Relations
+    increase_friendship_notify = NotifyEx(msg=__("{color=#00ff00}{b}+{/b} Friendship{/color}"), img="/images_tool/icon/notification/relations-friendship.webp")
+    decrease_friendship_notify = NotifyEx(msg=__("{color=#f00} {b}-{/b} Friendship{/color}"), img="/images_tool/icon/notification/relations-friendship.webp")
+    increase_favour_notify = NotifyEx(msg=__("{color=#00ff00}{b}+{/b} Favour{/color}"), img="/images_tool/icon/notification/relations-favour.webp")
+    decrease_favour_notify = NotifyEx(msg=__("{color=#f00} {b}-{/b} Favour{/color}"), img="/images_tool/icon/notification/relations-favour.webp")
+    increase_love_notify = NotifyEx(msg=__("{color=#00ff00}{b}+{/b} Love{/color}"), img="/images_tool/icon/notification/relations-love.webp")
+    decrease_love_notify = NotifyEx(msg=__("{color=#f00} {b}-{/b} Love{/color}"), img="/images_tool/icon/notification/relations-love.webp")
+    increase_corruption_notify = NotifyEx(msg=__("{color=#00ff00}{b}+{/b} Corruption{/color}"), img="/images_tool/icon/notification/relations-corruption.webp")
+    decrease_corruption_notify = NotifyEx(msg=__("{color=#f00} {b}-{/b} Corruption{/color}"), img="/images_tool/icon/notification/relations-corruption.webp")
+    increase_anger_notify = NotifyEx(msg=__("{color=#f00}{b}+{/b} Anger{/color}"), img="/images_tool/icon/notification/relations-anger.webp")
+    decrease_anger_notify = NotifyEx(msg=__("{color=#00ff00} {b}-{/b} Anger{/color}"), img="/images_tool/icon/notification/relations-anger.webp")
+    increase_fear_notify = NotifyEx(msg=__("{color=#f00}{b}+{/b} Fear{/color}"), img="/images_tool/icon/notification/relations-fear.webp")
+    decrease_fear_notify = NotifyEx(msg=__("{color=#00ff00} {b}-{/b} Fear{/color}"), img="/images_tool/icon/notification/relations-fear.webp")
+
+
+    class SentimentalStatistic(Statistic):
+        """Manages the relationship of possible patners. Using the dictionaries has in memory only the variables to use, I recommend changing the slo values with set(), change(), get()I suggest to customize this function."""
+
+        def __init__(
+            self,
+            gender_attracted: str,#["F", "M"],
+            friendship=None,
+            favour=None,
+            love=None,
+            corruption=None,
+            virgin=None,
+            bisexual=None,
+            polyamorous=None,
+            against=None,
+            addiction=None
+        ):
+        
+            self.memory = {}
             # Characteristics
-            if (gender != None):
-                self.memory["gender"] = gender
             if (gender_attracted != None):
-                self.memory["gender_attracted"] = gender_attracted
+                self.change(name = "gender_attracted",  amt = gender_attracted, show_notify = False)
             else:
                 self.setHeterosexual()
             # is a contradiction to a romantic relationship
             if (against != None):
-                self.memory["against"] = against
+                self.change(name = "against",  amt = against, show_notify = False)
             # Characteristics
-            self.memory["energy"] = 100
-            self.memory["willpower"] = 100
-            self.memory["inhibition"] = 100
+            self.change(name = "energy",  amt = 0, show_notify = False)
+            self.change(name = "willpower",  amt = 0, show_notify = False)
+            self.change(name = "inhibition",  amt = 0, show_notify = False)
             if (addiction != None):
-                self.memory["addiction"] = addiction
+                self.change(name = "addiction",  amt = addiction, show_notify = False)
             # Relaction
             if (friendship != None):
-                self.memory["friendship"] = friendship
+                self.change(name = "friendship",  amt = friendship, show_notify = False)
             if (favour != None):
-                self.memory["favour"] = favour
+                self.change(name = "favour",  amt = favour, show_notify = False)
             if (love != None):
-                self.memory["love"] = love
+                self.change(name = "love",  amt = love, show_notify = False)
             if (corruption != None):
-                self.memory["corruption"] = corruption
+                self.change(name = "corruption",  amt = corruption, show_notify = False)
             # Emblems
             if (virgin != None):
-                self.memory["virgin"] = virgin
+                self.change(name = "virgin",  amt = virgin, show_notify = False)
             if (bisexual != None):
-                self.memory["bisexual"] = bisexual
+                self.change(name = "bisexual",  amt = bisexual, show_notify = False)
             if (polyamorous != None):
-                self.memory["polyamorous"] = polyamorous
+                self.change(name = "polyamorous",  amt = polyamorous, show_notify = False)
+            
+            self.notify_increase_dict = {
+                "energy": increase_energy_notify,
+                "willpower": increase_willpower_notify,
+                "inhibition": increase_inhibition_notify,
+                "addiction": increase_addiction_notify,
+                "lust": increase_lust_notify,
+                "friendship": increase_friendship_notify,
+                "favour": increase_favour_notify,
+                "love": increase_love_notify,
+                "corruption": increase_corruption_notify,
+                "anger": increase_anger_notify,
+                "fear": increase_fear_notify,
+            }
+            self.notify_decrease_dict = {
+                "energy": decrease_energy_notify,
+                "willpower": decrease_willpower_notify,
+                "inhibition": decrease_inhibition_notify,
+                "addiction": decrease_addiction_notify,
+                "lust": decrease_lust_notify,
+                "friendship": decrease_friendship_notify,
+                "favour": decrease_favour_notify,
+                "love": decrease_love_notify,
+                "corruption": decrease_corruption_notify,
+                "anger": decrease_anger_notify,
+                "fear": decrease_fear_notify,
+            }
+            self.notify = {}
 
         def setHeterosexual(self):
             """Knowing the denere of the gender_attracted sect character hetero"""
@@ -56,103 +179,9 @@ init python:
                 self.set("gender_attracted", "M")
             else:
                 self.set("gender_attracted", "F")
-        def set(self, text, value):
-            """Function to set or add a new value"""
-            if (text != None and text != ""):
-                self.memory[text] = value
-            else:
-                remove(text)
-        def remove(self, text):
-            """Delete the text value"""
-            del memory[text]
-        def change(self, text, amt, max=100, min=0):
-            """Changes a value, if it does not exist adds it"""
-            if (self.get(text) != None):
-                if (amt > 0 and self.memory[text] >= max):
-                    return
-                elif (amt < 0 and self.memory[text] <= min):
-                    return
-                self.memory[text] += amt
-                if self.memory[text] < min:
-                    self.memory[text] = min
-                elif self.memory[text] > max:
-                    self.memory[text] = max
-            else:
-                if (amt >= max):
-                    self.set(text, max)
-                    return
-                elif (amt <= min):
-                    self.set(text, min)
-                    return
-                self.set(text, amt)
-            self.notify(text, amt)
-        def get(self, text):
-            """Returns the value "text", in case it does not exist returns None"""
-            if text in self.memory:
-                return self.memory[text]
-            else:
-                return None
-        def notify(self, text, amt):
-            """To customize"""
-            if (text == "energy"):
-                if (amt > 0):
-                    notify(increase_energy_notify)
-                elif (amt < 0):
-                    notify(decrease_energy_notify)
-            elif (text == "willpower"):
-                if (amt > 0):
-                    notify(increase_willpower_notify)
-                elif (amt < 0):
-                    notify(decrease_willpower_notify)
-            elif (text == "inhibition"):
-                if (amt > 0):
-                    notify(increase_inhibition_notify)
-                elif (amt < 0):
-                    notify(decrease_inhibition_notify)
-            elif (text == "addiction"):
-                if (amt > 0):
-                    notify(increase_addiction_notify)
-                elif (amt < 0):
-                    notify(decrease_addiction_notify)
-            elif (text == "lust"):
-                if (amt > 0):
-                    notify(increase_lust_notify)
-                elif (amt < 0):
-                    notify(decrease_lust_notify)
-            elif (text == "friendship"):
-                if (amt > 0):
-                    notify(increase_friendship_notify)
-                elif (amt < 0):
-                    notify(decrease_friendship_notify)
-            elif (text == "favour"):
-                if (amt > 0):
-                    notify(increase_favour_notify)
-                elif (amt < 0):
-                    notify(decrease_favour_notify)
-            elif (text == "love"):
-                if (amt > 0):
-                    notify(increase_love_notify)
-                elif (amt < 0):
-                    notify(decrease_love_notify)
-            elif (text == "corruption"):
-                if (amt > 0):
-                    notify(increase_corruption_notify)
-                elif (amt < 0):
-                    notify(decrease_corruption_notify)
-            elif (text == "anger"):
-                if (amt > 0):
-                    notify(increase_anger_notify)
-                elif (amt < 0):
-                    notify(decrease_anger_notify)
-            elif (text == "fear"):
-                if (amt > 0):
-                    notify(increase_fear_notify)
-                elif (amt < 0):
-                    notify(decrease_fear_notify)
-        # Additional functions:
-        def improve_ability(self, text, amt=1):
-            self.change(text, amt, max=10, min=0)
+
         # Emblems
+
         def is_virgin(self):
             val = self.get("virgin")
             if val == None:
@@ -160,6 +189,7 @@ init python:
             if (val == True or val == False):
                 return val
             return val > 0
+
         def is_bisexual(self):
             val = self.get("bisexual")
             if val == None:
@@ -167,6 +197,7 @@ init python:
             if (val == True or val == False):
                 return val
             return val > 10
+
         def is_polyamorous(self):
             val = self.get("polyamorous")
             if val == None:
@@ -174,6 +205,7 @@ init python:
             if (val == True or val == False):
                 return val
             return val > 10
+
         def is_against(self):
             val = self.get("against")
             if val == None:
@@ -181,25 +213,33 @@ init python:
             if (val == True or val == False):
                 return val
             return val <= 0
+
         def is_healthy(self):
-            if (self.get("against") != True and self.get("against") != False and self.get("against") > 0): # TODO: TO CHANGE
+            if (self.get("against") != True and self.get("against") != False and self.get("against") > 0):  # TODO: TO CHANGE
                 return False
             if (self.is_slut() or self.is_submissive() or self.is_nymphomaniac() or self.is_celebrolesis() or self.is_free_use()):
                 return False
             return (self.get("energy") == 100 and self.get("willpower") == 100 and self.get("inhibition") == 100 and self.get("corruption") == 0 and self.get("addiction") == 0)
+
         def is_unfaithful(self):
             return (self.get("willpower") > 45 and self.get("lust") > 60 and self.get("anger") > 50 and (self.get("lust") + self.get("anger")) > 130)
+
         def is_slut(self):
             return (self.get("lust") > 50 and (self.get("corruption") > 80 or self.get("addiction") > 60) and (self.get("lust") + self.get("corruption") + self.get("addiction")) > 160)
+
         def is_nymphomaniac(self):
             return (self.get("lust") > 90 and self.get("corruption") > 10 and self.get("inhibition") < 40)
+
         def is_submissive(self):
             return (self.get("willpower") < 20 and self.get("fear") > 80 and (self.get("fear") - self.get("willpower")) > 80)
+
         def is_celebrolesis(self):
             return (self.get("inhibition") < 20 and (self.get("willpower") < 80 or self.get("addiction") > 20) and (self.get("addiction") - self.get("inhibition") - self.get("willpower") > 40))
+
         def is_free_use(self):
             return ((self.is_slut() and self.is_submissive()) or (self.is_slut() and self.is_celebrolesis()))
         # Relaction
+
         def is_friend(self):
             val = self.get("friendship")
             if val == None:
@@ -207,11 +247,13 @@ init python:
             if (val == True or val == False):
                 return val
             return val > 0
+
         def changeFriendship(self, amt):
             if (self.get("anger") > 0 and amt > 0):
                 self.changeAnger(-5)
                 return
             self.change("friendship", amt, max=100, min=-100)
+
         def changeFavour(self, amt):
             if (self.get("anger") > 0 and amt > 0):
                 self.changeAnger(-1)
@@ -221,6 +263,7 @@ init python:
             if self.get("favour") != None and (self.get("favour") + amt) < 0:
                 self.changeAnger(10)
             self.change("favour", amt, max=100, min=0)
+
         def changeLove(self, amt):
             if (self.get("anger") > 0 and amt > 0):
                 self.changeAnger(-5)
@@ -236,27 +279,35 @@ init python:
             if self.get("love") != None and (self.get("love") + amt) >= 110:
                 self.changeLust(1)
             self.change("love", amt, max=100, min=0)
+
         def changeCorruption(self, amt):
             if self.get("corruption") != None and (self.get("corruption") + amt) >= 105:
                 self.changeWillpower(-5)
             self.change("corruption", amt, max=100, min=0)
+
         def changeFear(self, amt):
             self.change("fear", amt, max=100, min=0)
+
         def changeAnger(self, amt):
             self.change("anger", amt, max=100, min=0)
         # Characteristics
+
         def changeEnergy(self, amt):
             self.change("energy", amt, max=100, min=0)
+
         def changeWillpower(self, amt):
             if self.get("willpower") != None and (self.get("willpower") + amt) < 0:
                 self.changeEnergy(-15)
             self.change("willpower", amt, max=100, min=0)
+
         def changeInhibition(self, amt):
             self.change("inhibition", amt, max=100, min=0)
+
         def changeAddiction(self, amt):
             if self.get("addiction") != None and (self.get("addiction") + amt) >= 105:
                 self.changeInhibition(-3)
             self.change("addiction", amt, max=100, min=0)
+
         def changeLust(self, amt):
             if self.get("lust") != None and (self.get("lust") + amt) >= 120:
                 self.changeInhibition(-5)

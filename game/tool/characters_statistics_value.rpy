@@ -1,7 +1,7 @@
 default stats = {
-    "mc"        :   Statistics(gender = "M"),
-    "girl"      :   Statistics(gender = "F", virgin = True, bisexual = False, polyamorous = False, against = False),
-    "friend"    :   Statistics(gender = "M", virgin = False, bisexual = False, polyamorous = False, against = 20,
+    "mc"        :   Statistic(),
+    "girl"      :   SentimentalStatistic(gender_attracted = "M", virgin = True, bisexual = False, polyamorous = False, against = False),
+    "friend"    :   Statistic(
     other_values= {
         "strength"      :   7,
         "intelligence"  :   7,
