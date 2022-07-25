@@ -20,7 +20,7 @@ image friend normal = "/friend.webp"
 
 default girlI = CharacterInfo(name = "Eileen", sname = "Fisher", age = 18, 
 other_values ={
-    story: __("She has always been before class.")
+    "story": __("She has always been before class.")
 }, 
 relationships = {
     mc : relactions["boyfriend"],

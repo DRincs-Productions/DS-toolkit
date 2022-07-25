@@ -33,7 +33,7 @@ init python:
                     other_values:dict[Character, str]=None,):
             # I use a dictionary because it is the best solution for compatibility and not to create variables that may not be used.
             self.memory = {}
-            self.memory.update(other_values)
+            self.memory.update(other_values if other_values else {})
             # Great for reporting that a character has not yet been discovered
             self.name = name
             self.sname = sname
@@ -44,7 +44,6 @@ init python:
             self.set("age_default", age)
             # default values
             self.relationships = relationships if relationships else {}
-            self.other_values = other_values if other_values else {}
 
         def changeName(self) -> None:
             """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Information#change-name """
@@ -74,23 +73,23 @@ init python:
             return
 
         def get(self, name: str) -> str:
-            """Returns the value "text", in case it does not exist returns \"Unknown\""""
-            if text in self.memory:
-                return self.memory[text]
+            """Returns the value "name", in case it does not exist returns \"Unknown\""""
+            if name in self.memory:
+                return self.memory[name]
             else:
                 return "Unknown"
 
         def set(self, name: str, value) -> None:
             """Function to set or add a new value"""
-            if (text != None and text != ""):
-                self.memory[text] = value
+            if (not IsNullOrWhiteSpace(name)):
+                self.memory[name] = value
             else:
-                self.remove(text)
+                self.remove(name)
             return
 
         def remove(self, name: str) -> None:
-            """Delete the text value"""
-            del self.memory[text]
+            """Delete the name value"""
+            del self.memory[name]
             return
 
         def getRelationNameByCharacter(self, character: Character) -> Optional[str]:
