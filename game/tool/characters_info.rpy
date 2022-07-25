@@ -35,7 +35,6 @@ init python:
             self.memory = {}
             self.memory.update(other_values)
             # Great for reporting that a character has not yet been discovered
-
             self.name = name
             self.sname = sname
             self.age = age
@@ -74,14 +73,14 @@ init python:
                 self.set("age_default", self.age)
             return
 
-        def get(self, text) -> str:
+        def get(self, name: str) -> str:
             """Returns the value "text", in case it does not exist returns \"Unknown\""""
             if text in self.memory:
                 return self.memory[text]
             else:
                 return "Unknown"
 
-        def set(self, text, value) -> None:
+        def set(self, name: str, value) -> None:
             """Function to set or add a new value"""
             if (text != None and text != ""):
                 self.memory[text] = value
@@ -89,7 +88,7 @@ init python:
                 self.remove(text)
             return
 
-        def remove(self, text) -> None:
+        def remove(self, name: str) -> None:
             """Delete the text value"""
             del self.memory[text]
             return
