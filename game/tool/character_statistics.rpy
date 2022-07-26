@@ -29,7 +29,7 @@ init 9 python:
             """Delete the name value"""
             del self.memory[name]
 
-        def improve(self, name: str, amt: int = 1, max=10, min=0) -> None:
+        def improve(self, name: str, amt: int = 1, max=10, min=0, show_notify= True) -> None:
             """Wiki: """
             if (self.get(name) != None):
                 if (amt > 0 and self.memory[name] >= max):
