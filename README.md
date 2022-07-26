@@ -16,14 +16,7 @@ Feel free to contribute, fork this and send a pull request. 😄
 
 ![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/67595890/179365279-0d0b6d45-0048-4a0d-8c6d-9571b9c328f4.gif)
 
-## The main tools
-- Characters information management
-- Characters statistics and ability
-- Clothes management
-- Notifications
-- Temporary end
-- Timed menu
-- Basic artistic elements
+
 
 ## Insert Toolkit in your project
 
