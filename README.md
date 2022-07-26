@@ -7,6 +7,17 @@
 
 This repo is a set of basic tools for Visual Novel / Game developers who are planning to create a Dating sim.
 
+
+Feel free to contribute, fork this and send a pull request. 😄
+
+
+## Code snippets ([VSCode](https://code.visualstudio.com/))
+(all begin with `DR_`)
+
+![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/67595890/179365279-0d0b6d45-0048-4a0d-8c6d-9571b9c328f4.gif)
+
+
+
 ## Instructions to insert Toolkit in your repo 
 I recommend the following ways to include it in your project:
 - [**Pull branch**](https://github.com/DonRP/DS-toolkit#pull-branch) (to **insert** it into your game and **update** it easily)
