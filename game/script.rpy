@@ -29,8 +29,8 @@ relationships = {
 define girl = Character("{b}[girlI.name]{/b}", color="#f337ba", who_outlines=[(2,"#000000")], what_prefix="\"", what_suffix="\"", what_outlines=[(2,"#000000")])
 
 # Statistic
-default mcStat = Statistic()
-default friendStat = Statistic(
+default mcStatistic = Statistic()
+default friendStatistic = Statistic(
     values= {
         "strength"      :   7,
         "intelligence"  :   7,
@@ -349,15 +349,15 @@ label emblem2:
     jump emblem2
 
 label ability:
-    $ MCint = mcStat.get("intelligence")
-    $ MCstr = mcStat.get("strength")
-    $ FRint = friendStat.get("intelligence")
-    $ FRstr = friendStat.get("strength")
+    $ MCint = mcStatistic.get("intelligence")
+    $ MCstr = mcStatistic.get("strength")
+    $ FRint = friendStatistic.get("intelligence")
+    $ FRstr = friendStatistic.get("strength")
     menu:
         "Train":
-            $ mcStat.improve("strength")
+            $ mcStatistic.improve("strength")
         "Study":
-            $ mcStat.improve("intelligence")
+            $ mcStatistic.improve("intelligence")
         "Popeye: [mc]([MCstr]) vs [friend]([FRstr])":
             if isGreaterThan(MCstr, FRstr):    # MCstr > FRstr
                 "You have won"
