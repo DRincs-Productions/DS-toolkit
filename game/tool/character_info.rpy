@@ -21,16 +21,20 @@ init python:
     mp_ndata = MultiPersistent("namedata.f95zone.to")
 
     from typing import Optional
+    from typing import Literal
 
     class CharacterInfo():
         """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Information """
 
-        def __init__(self,
+        def __init__(
+                    self,
                     name: str,
+                    gender: GENDER_TYPE,
                     sname:Optional[str]=None,
                     age:Optional[int]=None,
                     relationships:dict[Character, str]=None,
-                    other_values:dict[Character, str]=None,):
+                    other_values:dict[Character, str]=None,
+                    ):
             # I use a dictionary because it is the best solution for compatibility and not to create variables that may not be used.
             self.memory = {}
             self.memory.update(other_values if other_values else {})
