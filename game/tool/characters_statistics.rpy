@@ -50,7 +50,7 @@ init 9 python:
                     return
                 self.set(name, amt)
             if show_notify:
-                self.notify(name, amt)
+                self.notify(name = name,amt= amt)
             return
 
         def get(self, name):
@@ -203,7 +203,7 @@ init 10 python:
                 "anger": decrease_anger_notify,
                 "fear": decrease_fear_notify,
             }
-            self.notify = {}
+            self.notify_dict = {}
 
         def setHeterosexual(self):
             """Knowing the denere of the gender_attracted sect character hetero"""
@@ -214,7 +214,7 @@ init 10 python:
 
         # Emblems
 
-        def isVirgin(self):
+        def isVirgin(self) -> bool:
             val = self.get("virgin")
             if val == None:
                 return True
@@ -224,7 +224,7 @@ init 10 python:
                 return val > 0
             return True
 
-        def isBisexual(self):
+        def isBisexual(self) -> bool:
             val = self.get("bisexual")
             if val == None:
                 return False
@@ -232,7 +232,7 @@ init 10 python:
                 return val
             return val > 10
 
-        def isPolyamorous(self):
+        def isPolyamorous(self) -> bool:
             val = self.get("polyamorous")
             if val == None:
                 return False
@@ -240,7 +240,7 @@ init 10 python:
                 return val
             return val > 10
 
-        def isAgainst(self):
+        def isAgainst(self) -> bool:
             val = self.get("against")
             if val == None:
                 return False
@@ -248,33 +248,33 @@ init 10 python:
                 return val
             return val <= 0
 
-        def isHealthy(self):
+        def isHealthy(self) -> bool:
             if (self.get("against") != True and self.get("against") != False and self.get("against") > 0):  # TODO: TO CHANGE
                 return False
             if (self.isSlut() or self.isSubmissive() or self.isNymphomaniac() or self.isCelebrolesis() or self.isFreeUse()):
                 return False
             return (self.get("energy") == 100 and self.get("willpower") == 100 and self.get("inhibition") == 100 and self.get("corruption") == 0 and self.get("addiction") == 0)
 
-        def isUnfaithful(self):
+        def isUnfaithful(self) -> bool:
             return (self.get("willpower") > 45 and self.get("lust") > 60 and self.get("anger") > 50 and (self.get("lust") + self.get("anger")) > 130)
 
-        def isSlut(self):
+        def isSlut(self) -> bool:
             return (self.get("lust") > 50 and (self.get("corruption") > 80 or self.get("addiction") > 60) and (self.get("lust") + self.get("corruption") + self.get("addiction")) > 160)
 
-        def isNymphomaniac(self):
+        def isNymphomaniac(self) -> bool:
             return (self.get("lust") > 90 and self.get("corruption") > 10 and self.get("inhibition") < 40)
 
-        def isSubmissive(self):
+        def isSubmissive(self) -> bool:
             return (self.get("willpower") < 20 and self.get("fear") > 80 and (self.get("fear") - self.get("willpower")) > 80)
 
-        def isCelebrolesis(self):
+        def isCelebrolesis(self) -> bool:
             return (self.get("inhibition") < 20 and (self.get("willpower") < 80 or self.get("addiction") > 20) and (self.get("addiction") - self.get("inhibition") - self.get("willpower") > 40))
 
-        def isFreeUse(self):
+        def isFreeUse(self) -> bool:
             return ((self.isSlut() and self.isSubmissive()) or (self.isSlut() and self.isCelebrolesis()))
         # Relaction
 
-        def isFriend(self):
+        def isFriend(self) -> bool:
             val = self.get("friendship")
             if val == None:
                 return False
@@ -282,24 +282,31 @@ init 10 python:
                 return val
             return val > 0
 
-        def changeFriendship(self, amt):
-            if (self.get("anger") > 0 and amt > 0):
+        def changeFriendship(self, amt) -> None:
+            valAnger = self.get("anger")
+            if (valAnger is int and valAnger > 0 and amt > 0):
                 self.changeAnger(-5)
                 return
             self.change("friendship", amt, max=100, min=-100)
+            del valAnger
+            return
 
-        def changeFavour(self, amt):
-            if (self.get("anger") > 0 and amt > 0):
+        def changeFavour(self, amt) -> None:
+            valAnger = self.get("anger")
+            if (valAnger is int and valAnger > 0 and amt > 0):
                 self.changeAnger(-1)
                 return
-            if self.get("favour") != None and (self.get("favour") + amt) >= 105:
+            if self.get("favour") is int and (self.get("favour") + amt) >= 105:
                 self.changeLove(1)
-            if self.get("favour") != None and (self.get("favour") + amt) < 0:
+            if self.get("favour") is int and (self.get("favour") + amt) < 0:
                 self.changeAnger(10)
             self.change("favour", amt, max=100, min=0)
+            del valAnger
+            return
 
-        def changeLove(self, amt):
-            if (self.get("anger") > 0 and amt > 0):
+        def changeLove(self, amt) -> None:
+            valAnger = self.get("anger")
+            if (valAnger is int and valAnger > 0 and amt > 0):
                 self.changeAnger(-5)
                 return
             if self.get("love") != None and (self.isAgainst() and (self.get("love") + amt) > 20):
@@ -313,36 +320,45 @@ init 10 python:
             if self.get("love") != None and (self.get("love") + amt) >= 110:
                 self.changeLust(1)
             self.change("love", amt, max=100, min=0)
+            return
 
-        def changeCorruption(self, amt):
+        def changeCorruption(self, amt) -> None:
             if self.get("corruption") != None and (self.get("corruption") + amt) >= 105:
                 self.changeWillpower(-5)
             self.change("corruption", amt, max=100, min=0)
+            return
 
-        def changeFear(self, amt):
+        def changeFear(self, amt) -> None:
             self.change("fear", amt, max=100, min=0)
+            return
 
-        def changeAnger(self, amt):
+        def changeAnger(self, amt) -> None:
             self.change("anger", amt, max=100, min=0)
+            return
+
         # Characteristics
-
-        def changeEnergy(self, amt):
+        def changeEnergy(self, amt) -> None:
             self.change("energy", amt, max=100, min=0)
+            return
 
-        def changeWillpower(self, amt):
+        def changeWillpower(self, amt) -> None:
             if self.get("willpower") != None and (self.get("willpower") + amt) < 0:
                 self.changeEnergy(-15)
             self.change("willpower", amt, max=100, min=0)
+            return
 
-        def changeInhibition(self, amt):
+        def changeInhibition(self, amt) -> None:
             self.change("inhibition", amt, max=100, min=0)
+            return
 
-        def changeAddiction(self, amt):
+        def changeAddiction(self, amt) -> None:
             if self.get("addiction") != None and (self.get("addiction") + amt) >= 105:
                 self.changeInhibition(-3)
             self.change("addiction", amt, max=100, min=0)
+            return
 
-        def changeLust(self, amt):
+        def changeLust(self, amt) -> None:
             if self.get("lust") != None and (self.get("lust") + amt) >= 120:
                 self.changeInhibition(-5)
             self.change("lust", amt, max=100, min=0)
+            return
