@@ -31,7 +31,7 @@ init 9 python:
             del self.memory[name]
             return
 
-        def improve(self, name: str, amt: int = 1, max=10, min=0, show_notify= True) -> None:
+        def improve(self, name: str, amt: int = 1, max=100, min=0, show_notify= True) -> None:
             """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Statistic#improvment """
             if (self.get(name) != None):
                 if (amt > 0 and self.memory[name] >= max):

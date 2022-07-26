@@ -1,0 +1,54 @@
+{
+    "DRincs Get Character Statistic": {
+        "scope": "renpy",
+        "prefix": "DR_StatisticGet",
+        "body": [
+            "$ {1}_{3} = ${1:mc}${2:Statistic}.get(\"${3:strength}\")",
+            "",
+        ],
+        "description": "Get Relation Name By Character"
+    },
+    "DRincs Set Character Statistic": {
+        "scope": "renpy",
+        "prefix": "DR_StatisticSet",
+        "body": [
+            "$ ${1:mc}${2:Statistic}.set(\"${3:strength}\", ${4:1})",
+            "",
+        ],
+        "description": "Set Character Statistic"
+    },
+    "DRincs Improvment Character Statistic": {
+        "scope": "renpy",
+        "prefix": "DR_StatisticImprovment",
+        "body": [
+            "$ ${1:mc}${2:Statistic}.improve(name = \"${3:strength}\", amt = ${4:1}, max = 10, min = 0, show_notify= True)",
+            "",
+        ],
+        "description": "Improvment Character Statistic"
+    },
+    "DRincs Challenge Character Statistic": {
+        "scope": "renpy",
+        "prefix": "DR_StatisticChallenge",
+        "body": [
+            "$ ${1}_${3} = ${1:mc}${2:Statistic}.get(\"${3:strength}\")",
+            "$ ${4}_${3} = ${4:ch}${2}.get(\"${3}\")",
+            "if isGreaterThan(${1}_${3}, ${4}_${3} ): # ${1}_${3} > ${4}_${3}",
+            "    \"You have won\"",
+            "else:",
+            "    \"You lost\"",
+            "",
+        ],
+        "description": "Challenge Character Statistic"
+    },
+    "DRincs Compare Menu Character Statistic": {
+        "scope": "renpy",
+        "prefix": "DR_StatisticCompareMenu",
+        "body": [
+            "$ ${1}_${3} = ${1:mc}${2:Statistic}.get(\"${3:strength}\")",
+            "menu:",
+            "    \"${4:Can ...}\" if isGreaterThan(${1}_${3}, ${5:0}): # ${1}_${3} > 0",
+            "        ",
+        ],
+        "description": "Compare Menu Character Statistic"
+    },
+}
