@@ -16,7 +16,14 @@ Feel free to contribute, fork this and send a pull request. 😄
 
 ![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/67595890/179365279-0d0b6d45-0048-4a0d-8c6d-9571b9c328f4.gif)
 
-
+## The main tools
+- Characters information management
+- Characters statistics and ability
+- Clothes management
+- Notifications
+- Temporary end
+- Timed menu
+- Basic artistic elements
 
 ## Instructions to insert Toolkit in your repo 
 I recommend the following ways to include it in your project:
@@ -45,18 +52,6 @@ At the end make a merge inside the arm of the project.
 ![alt text](https://github.com/DonRP/DS-toolkit/blob/master/images/04.webp "Timed menu")
 
 
-## The main tools
-- Characters information management
-- Characters statistics and ability
-- Clothes management
-- Notifications
-- Temporary end
-- Timed menu
-- Basic artistic elements
 
 
-## Goals
-- Several uses
-- Lightness and speed
-- Always updated to the latest version of Ren'py
-- Compatible with various types of devices
+
