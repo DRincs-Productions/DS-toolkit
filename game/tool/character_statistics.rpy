@@ -29,8 +29,8 @@ init 9 python:
             """Delete the name value"""
             del self.memory[name]
 
-        def change(self, name: str, amt: int, max: int = 100, min: int = 0, show_notify: bool = True):
-            """Changes a value, if it does not exist adds it"""
+        def improve(self, name: str, amt: int = 1, max=10, min=0) -> None:
+            """Wiki: """
             if (self.get(name) != None):
                 if (amt > 0 and self.memory[name] >= max):
                     return
@@ -59,10 +59,6 @@ init 9 python:
                 return self.memory[name]
             else:
                 return None
-
-        def improve(self, name: str, amt: int = 1) -> None:
-            self.change(name, amt, max=10, min=0)
-            return
 
         def notify(self, name: str, amt: int) -> None:
             if amt < 0 and name in self.notify_decrease_dict:

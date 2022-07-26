@@ -71,35 +71,35 @@ init 10 python:
             self.memory = {}
             # Characteristics
             if (gender_attracted != None):
-                self.change(name="gender_attracted",
+                self.improve(name="gender_attracted",
                             amt=gender_attracted, show_notify=False)
             else:
                 self.setHeterosexual()
             # is a contradiction to a romantic relationship
             if (against != None):
-                self.change(name="against",  amt=against, show_notify=False)
+                self.improve(name="against",  amt=against, show_notify=False)
             # Characteristics
-            self.change(name="energy",  amt=0, show_notify=False)
-            self.change(name="willpower",  amt=0, show_notify=False)
-            self.change(name="inhibition",  amt=0, show_notify=False)
+            self.improve(name="energy",  amt=0, show_notify=False)
+            self.improve(name="willpower",  amt=0, show_notify=False)
+            self.improve(name="inhibition",  amt=0, show_notify=False)
             if (addiction != None):
-                self.change(name="addiction",  amt=addiction, show_notify=False)
+                self.improve(name="addiction",  amt=addiction, show_notify=False)
             # Relaction
             if (friendship != None):
-                self.change(name="friendship",  amt=friendship, show_notify=False)
+                self.improve(name="friendship",  amt=friendship, show_notify=False)
             if (favour != None):
-                self.change(name="favour",  amt=favour, show_notify=False)
+                self.improve(name="favour",  amt=favour, show_notify=False)
             if (love != None):
-                self.change(name="love",  amt=love, show_notify=False)
+                self.improve(name="love",  amt=love, show_notify=False)
             if (corruption != None):
-                self.change(name="corruption",  amt=corruption, show_notify=False)
+                self.improve(name="corruption",  amt=corruption, show_notify=False)
             # Emblems
             if (virgin != None):
-                self.change(name="virgin",  amt=virgin, show_notify=False)
+                self.improve(name="virgin",  amt=virgin, show_notify=False)
             if (bisexual != None):
-                self.change(name="bisexual",  amt=bisexual, show_notify=False)
+                self.improve(name="bisexual",  amt=bisexual, show_notify=False)
             if (polyamorous != None):
-                self.change(name="polyamorous",
+                self.improve(name="polyamorous",
                             amt=polyamorous, show_notify=False)
 
             self.notify_increase_dict = {
@@ -175,7 +175,7 @@ init 10 python:
             return val <= 0
 
         def isHealthy(self) -> bool:
-            if (self.get("against") != True and self.get("against") != False and self.get("against") > 0):  # TODO: TO CHANGE
+            if (self.get("against") != True and self.get("against") != False and self.get("against") > 0):  # TODO: TO improve
                 return False
             if (self.isSlut() or self.isSubmissive() or self.isNymphomaniac() or self.isCelebrolesis() or self.isFreeUse()):
                 return False
@@ -209,84 +209,84 @@ init 10 python:
                 return val
             return val > 0
 
-        def changeFriendship(self, amt) -> None:
+        def improveFriendship(self, amt) -> None:
             valAnger = self.get("anger")
             if (valAnger is int and valAnger > 0 and amt > 0):
-                self.changeAnger(-5)
+                self.improveAnger(-5)
                 return
-            self.change("friendship", amt, max=100, min=-100)
+            self.improve("friendship", amt, max=100, min=-100)
             del valAnger
             return
 
-        def changeFavour(self, amt) -> None:
+        def improveFavour(self, amt) -> None:
             valAnger = self.get("anger")
             if (valAnger is int and valAnger > 0 and amt > 0):
-                self.changeAnger(-1)
+                self.improveAnger(-1)
                 return
             if self.get("favour") is int and (self.get("favour") + amt) >= 105:
-                self.changeLove(1)
+                self.improveLove(1)
             if self.get("favour") is int and (self.get("favour") + amt) < 0:
-                self.changeAnger(10)
-            self.change("favour", amt, max=100, min=0)
+                self.improveAnger(10)
+            self.improve("favour", amt, max=100, min=0)
             del valAnger
             return
 
-        def changeLove(self, amt) -> None:
+        def improveLove(self, amt) -> None:
             valAnger = self.get("anger")
             if (valAnger is int and valAnger > 0 and amt > 0):
-                self.changeAnger(-5)
+                self.improveAnger(-5)
                 return
             if self.get("love") != None and (self.isAgainst() and (self.get("love") + amt) > 20):
                 self.set("love", 20)
                 notify(against_notify)
                 return
             if self.get("fear") != None and ((self.get("fear") + amt) > 40 and amt > 0):
-                self.change("love", -amt, max=100, min=0)
+                self.improve("love", -amt, max=100, min=0)
                 notify(fear_against_notify)
                 return
             if self.get("love") != None and (self.get("love") + amt) >= 110:
-                self.changeLust(1)
-            self.change("love", amt, max=100, min=0)
+                self.improveLust(1)
+            self.improve("love", amt, max=100, min=0)
             return
 
-        def changeCorruption(self, amt) -> None:
+        def improveCorruption(self, amt) -> None:
             if self.get("corruption") != None and (self.get("corruption") + amt) >= 105:
-                self.changeWillpower(-5)
-            self.change("corruption", amt, max=100, min=0)
+                self.improveWillpower(-5)
+            self.improve("corruption", amt, max=100, min=0)
             return
 
-        def changeFear(self, amt) -> None:
-            self.change("fear", amt, max=100, min=0)
+        def improveFear(self, amt) -> None:
+            self.improve("fear", amt, max=100, min=0)
             return
 
-        def changeAnger(self, amt) -> None:
-            self.change("anger", amt, max=100, min=0)
+        def improveAnger(self, amt) -> None:
+            self.improve("anger", amt, max=100, min=0)
             return
 
 
         # Characteristics
-        def changeEnergy(self, amt) -> None:
-            self.change("energy", amt, max=100, min=0)
+        def improveEnergy(self, amt) -> None:
+            self.improve("energy", amt, max=100, min=0)
             return
 
-        def changeWillpower(self, amt) -> None:
+        def improveWillpower(self, amt) -> None:
             if self.get("willpower") != None and (self.get("willpower") + amt) < 0:
-                self.changeEnergy(-15)
-            self.change("willpower", amt, max=100, min=0)
+                self.improveEnergy(-15)
+            self.improve("willpower", amt, max=100, min=0)
             return
 
-        def changeInhibition(self, amt) -> None:
-            self.change("inhibition", amt, max=100, min=0)
+        def improveInhibition(self, amt) -> None:
+            self.improve("inhibition", amt, max=100, min=0)
             return
 
-        def changeAddiction(self, amt) -> None:
+        def improveAddiction(self, amt) -> None:
             if self.get("addiction") != None and (self.get("addiction") + amt) >= 105:
-                self.changeInhibition(-3)
-            self.change("addiction", amt, max=100, min=0)
+                self.improveInhibition(-3)
+            self.improve("addiction", amt, max=100, min=0)
             return
 
-        def changeLust(self, amt) -> None:
+        def improveLust(self, amt) -> None:
             if self.get("lust") != None and (self.get("lust") + amt) >= 120:
-                self.changeInhibition(-5)
-            self.change("lust", amt, max=100, min=0)
+                self.improveInhibition(-5)
+            self.improve("lust", amt, max=100, min=0)
             return
