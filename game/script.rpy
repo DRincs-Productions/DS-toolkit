@@ -339,8 +339,6 @@ label ability:
     $ MCstr = mcStat.get("strength")
     $ FRint = friendStat.get("intelligence")
     $ FRstr = friendStat.get("strength")
-    $ comp = compare(MCstr, FRstr)
-    $ gggggg = isGreaterThan(MCstr, FRstr)
     menu:
         "Train":
             $ mcStat.improve("strength")
