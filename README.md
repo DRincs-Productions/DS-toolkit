@@ -25,24 +25,35 @@ Feel free to contribute, fork this and send a pull request. 😄
 - Timed menu
 - Basic artistic elements
 
-## Instructions to insert Toolkit in your repo 
+## Insert Toolkit in your project
+
 I recommend the following ways to include it in your project:
-- [**Pull branch**](https://github.com/DonRP/DS-toolkit#pull-branch) (to **insert** it into your game and **update** it easily)
-- **Fork** (to improve the repo or create a Toolkit based on mine)
+
+- [**Pull branch**](#pull-branch) (to **insert** it into your game and **update** it easily)
+- [**Fork**](https://docs.github.com/en/get-started/quickstart/fork-a-repo) (to improve the repo or create a Toolkit based on mine)
+- [Manually](https://github.com/DRincs-Productions/DS-toolkit/releases) (not recommended)
+
 
 ### Pull branch
+
 To **insert** or **update** the Toolkit in your repo with Pull branch I recommend the following procedure:
 
 (only if you want to insert the repo) Create a new empty branch, in the example I'll use **DS-toolkit**
 
-`git checkout DS-toolkit`
+```shell
+git checkout -b DS-toolkit
+git checkout DS-toolkit
+git pull https://github.com/DRincs-Productions/DS-toolkit.git tool-only --allow-unrelated-histories
 
-`git pull https://github.com/DonRP/DS-toolkit.git tool-only --allow-unrelated-histories`
+```
 
 At the end make a merge inside the arm of the project.
 
+## Documentation
 
-## Images
+[Wiki](https://github.com/DRincs-Productions/DS-toolkit/wiki)
+
+## Preview
 ![alt text](https://github.com/DonRP/DS-toolkit/blob/master/images/01.webp "Main")
 
 ![alt text](https://github.com/DonRP/DS-toolkit/blob/master/images/02.webp "Characters statistics and ability")
