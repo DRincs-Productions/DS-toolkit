@@ -28,6 +28,20 @@ relationships = {
 })
 define girl = Character("{b}[girlI.name]{/b}", color="#f337ba", who_outlines=[(2,"#000000")], what_prefix="\"", what_suffix="\"", what_outlines=[(2,"#000000")])
 
+# Statistic
+default mcStat = Statistic()
+default friendStat = Statistic(
+    values= {
+        "strength"      :   7,
+        "intelligence"  :   7,
+        "agility"       :   7,
+    }
+)
+
+# statsSentimental
+default girlSentimental = SentimentalStatistic(gender_attracted = "M", virgin = True)
+default friendSentimental = SentimentalStatistic(gender_attracted = "F", virgin = False, against = 20)
+
 # Clothes
 default girl_dress = "-homesuit"
 label set_girl_homesuit:
