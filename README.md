@@ -47,13 +47,14 @@ At the end make a merge inside the arm of the project.
 [Wiki](https://github.com/DRincs-Productions/DS-toolkit/wiki)
 
 ## Preview
-![alt text](https://github.com/DonRP/DS-toolkit/blob/master/images/01.webp "Main")
 
-![alt text](https://github.com/DonRP/DS-toolkit/blob/master/images/02.webp "Characters statistics and ability")
+![01](https://user-images.githubusercontent.com/67595890/181107484-23534155-adbb-4132-bf3d-4161c21ca9e6.png "Main")
 
-![alt text](https://github.com/DonRP/DS-toolkit/blob/master/images/03.webp "Clothes management")
+![02](https://user-images.githubusercontent.com/67595890/181107510-c6affb34-1310-4100-8975-a16cc3645c76.png "Characters statistics and ability")
 
-![alt text](https://github.com/DonRP/DS-toolkit/blob/master/images/04.webp "Timed menu")
+![03](https://user-images.githubusercontent.com/67595890/181107522-d255666e-9b96-4aa8-93a9-a09d3320b47e.png "Clothes management")
+
+![04](https://user-images.githubusercontent.com/67595890/181107533-777b0a13-7ac9-49d7-be8f-86d81164f564.png "Timed menu")
 
 
 
