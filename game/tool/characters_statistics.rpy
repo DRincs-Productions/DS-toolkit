@@ -60,10 +60,11 @@ init 9 python:
             else:
                 return None
 
-        def improve(self, name: str, amt: int = 1):
+        def improve(self, name: str, amt: int = 1) -> None:
             self.change(name, amt, max=10, min=0)
+            return
 
-        def notify(self, name: str, amt: int):
+        def notify(self, name: str, amt: int) -> None:
             if amt < 0 and name in self.notify_decrease_dict:
                 notify(self.notify_decrease_dict[name])
             elif amt > 0 and name in self.notify_increase_dict:
@@ -205,20 +206,21 @@ init 10 python:
             }
             self.notify_dict = {}
 
-        def setHeterosexual(self):
+        def setHeterosexual(self) -> None:
             """Knowing the denere of the gender_attracted sect character hetero"""
             if self.get("gender") == "F":
                 self.set("gender_attracted", "M")
             else:
                 self.set("gender_attracted", "F")
+            return
+
 
         # Emblems
-
         def isVirgin(self) -> bool:
             val = self.get("virgin")
             if val == None:
                 return True
-            if val is bool (val == True or val == False):
+            elif val is bool:
                 return val
             elif val is int:
                 return val > 0
@@ -272,8 +274,9 @@ init 10 python:
 
         def isFreeUse(self) -> bool:
             return ((self.isSlut() and self.isSubmissive()) or (self.isSlut() and self.isCelebrolesis()))
-        # Relaction
 
+
+        # Relaction
         def isFriend(self) -> bool:
             val = self.get("friendship")
             if val == None:
@@ -340,6 +343,7 @@ init 10 python:
         def changeEnergy(self, amt) -> None:
             self.change("energy", amt, max=100, min=0)
             return
+
 
         def changeWillpower(self, amt) -> None:
             if self.get("willpower") != None and (self.get("willpower") + amt) < 0:

@@ -339,18 +339,20 @@ label ability:
     $ MCstr = mcStat.get("strength")
     $ FRint = friendStat.get("intelligence")
     $ FRstr = friendStat.get("strength")
+    $ comp = compare(MCstr, FRstr)
+    $ gggggg = isGreaterThan(MCstr, FRstr)
     menu:
         "Train":
-            $ mcStat.improve_ability("strength")
+            $ mcStat.improve("strength")
         "Study":
-            $ mcStat.improve_ability("intelligence")
+            $ mcStat.improve("intelligence")
         "Popeye: [mc]([MCstr]) vs [friend]([FRstr])":
-            if MCstr > FRstr:
+            if isGreaterThan(MCstr, FRstr):    # MCstr > FRstr
                 "You have won"
             else:
                 "You lost"
         "Quiz: [mc]([MCint]) vs [friend]([FRint])":
-            if MCint > FRint:
+            if isGreaterThan(MCint, FRint):     #MCint > FRint:
                 "You have won"
             else:
                 "You lost"
