@@ -4,6 +4,7 @@
         "prefix": "DR_RelationGet",
         "body": [
             "$ ${1:relaction} = ${2:mc}I.getRelationNameByCharacter(${3:friend})",
+            "${3} \"${4:Hi my [${1}]}\""
             "",
         ],
         "description": "Get Relation Name By Character"
