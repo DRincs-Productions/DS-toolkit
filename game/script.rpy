@@ -154,13 +154,13 @@ label relaction1:
     $ flov = friendSentimental.get("love")
     menu:
         "+ Friendship [friend]. Friendship: [ffr]":
-            $ friendSentimental.changeFriendship(10)
+            $ friendSentimental.improveFriendship(10)
         "- Friendship [friend]. Friendship: [ffr]":
-            $ friendSentimental.changeFriendship(-10)
+            $ friendSentimental.improveFriendship(-10)
         "+ Love [friend]. Love: [flov]":
-            $ friendSentimental.changeLove(10)
+            $ friendSentimental.improveLove(10)
         "- Love [friend]. Love: [flov]":
-            $ friendSentimental.changeLove(-10)
+            $ friendSentimental.improveLove(-10)
         "Pag2":
             jump relaction2
         "Back":
@@ -173,13 +173,13 @@ label relaction2:
         "Pag1":
             jump relaction1
         "+ Favour [girl]. Favour: [gfr]":
-            $ girlSentimental.changeFavour(10)
+            $ girlSentimental.improveFavour(10)
         "- Favour [girl]. Favour: [gfr]":
-            $ girlSentimental.changeFavour(-10)
+            $ girlSentimental.improveFavour(-10)
         "+ Love [girl]. Love: [glov]":
-            $ girlSentimental.changeLove(10)
+            $ girlSentimental.improveLove(10)
         "- Love [girl]. Love: [glov]":
-            $ girlSentimental.changeLove(-10)
+            $ girlSentimental.improveLove(-10)
         "Pag3":
             jump relaction3
         "Back":
@@ -193,17 +193,17 @@ label relaction3:
         "Pag2":
             jump relaction2
         "+ Corruption [girl]. Corruption: [gcor]":
-            $ girlSentimental.changeCorruption(10)
+            $ girlSentimental.improveCorruption(10)
         "- Corruption [girl]. Corruption: [gcor]":
-            $ girlSentimental.changeCorruption(-10)
+            $ girlSentimental.improveCorruption(-10)
         "+ Fear [girl]. Fear: [gfe]":
-            $ girlSentimental.changeFear(10)
+            $ girlSentimental.improveFear(10)
         "- Fear [girl]. Fear: [gfe]":
-            $ girlSentimental.changeFear(-10)
+            $ girlSentimental.improveFear(-10)
         "+ Anger [girl]. Anger: [gan]":
-            $ girlSentimental.changeAnger(10)
+            $ girlSentimental.improveAnger(10)
         "- Anger [girl]. Anger: [gan]":
-            $ girlSentimental.changeAnger(-10)
+            $ girlSentimental.improveAnger(-10)
         "Back":
             return
     jump relaction3
@@ -214,17 +214,17 @@ label character1:
     $ ginh = girlSentimental.get("inhibition")
     menu:
         "+ Energy [girl]. Energy: [gen]":
-            $ girlSentimental.changeEnergy(10)
+            $ girlSentimental.improveEnergy(10)
         "- Energy [girl]. Energy: [gen]":
-            $ girlSentimental.changeEnergy(-10)
+            $ girlSentimental.improveEnergy(-10)
         "+ Willpower [girl]. Willpower: [gwi]":
-            $ girlSentimental.changeWillpower(10)
+            $ girlSentimental.improveWillpower(10)
         "- Willpower [girl]. Willpower: [gwi]":
-            $ girlSentimental.changeWillpower(-10)
+            $ girlSentimental.improveWillpower(-10)
         "+ Inhibition [girl]. Inhibition: [ginh]":
-            $ girlSentimental.changeInhibition(10)
+            $ girlSentimental.improveInhibition(10)
         "- Inhibition [girl]. Inhibition: [ginh]":
-            $ girlSentimental.changeInhibition(-10)
+            $ girlSentimental.improveInhibition(-10)
         "Pag2":
             jump character2
         "Back":
@@ -237,13 +237,13 @@ label character2:
         "Pag1":
             jump character1
         "+ Addiction [girl]. Addiction: [gad]":
-            $ girlSentimental.changeAddiction(10)
+            $ girlSentimental.improveAddiction(10)
         "- Addiction [girl]. Addiction: [gad]":
-            $ girlSentimental.changeAddiction(-10)
+            $ girlSentimental.improveAddiction(-10)
         "+ Lust [girl]. Lust: [glu]":
-            $ girlSentimental.changeLust(10)
+            $ girlSentimental.improveLust(10)
         "- Lust [girl]. Lust: [glu]":
-            $ girlSentimental.changeLust(-10)
+            $ girlSentimental.improveLust(-10)
         "Back":
             return
     jump character2
@@ -269,28 +269,28 @@ label emblem1:
         "Set Against [girl]. Against: False" if (girlSentimental.isAgainst() == False):
             $ girlSentimental.set("against", True)
         "Set not Healthy [girl]. Healthy: True" if (girlSentimental.isHealthy()):
-            $ girlSentimental.changeEnergy(-100)
-            $ girlSentimental.changeWillpower(-100)
-            $ girlSentimental.changeInhibition(-100)
-            $ girlSentimental.changeCorruption(100)
-            $ girlSentimental.changeAddiction(100)
+            $ girlSentimental.improveEnergy(-100)
+            $ girlSentimental.improveWillpower(-100)
+            $ girlSentimental.improveInhibition(-100)
+            $ girlSentimental.improveCorruption(100)
+            $ girlSentimental.improveAddiction(100)
         "Set Healthy [girl]. Healthy: False" if (girlSentimental.isHealthy() == False):
-            $ girlSentimental.changeEnergy(100)
-            $ girlSentimental.changeWillpower(100)
-            $ girlSentimental.changeInhibition(100)
-            $ girlSentimental.changeCorruption(-100)
-            $ girlSentimental.changeAddiction(-100)
-            $ girlSentimental.changeFear(-50)
-            $ girlSentimental.changeLust(-50)
+            $ girlSentimental.improveEnergy(100)
+            $ girlSentimental.improveWillpower(100)
+            $ girlSentimental.improveInhibition(100)
+            $ girlSentimental.improveCorruption(-100)
+            $ girlSentimental.improveAddiction(-100)
+            $ girlSentimental.improveFear(-50)
+            $ girlSentimental.improveLust(-50)
             $ girlSentimental.against = False
         "Set not Unfaithful [girl]. Unfaithful: True" if (girlSentimental.isUnfaithful()):
-            $ girlSentimental.changeWillpower(-100)
-            $ girlSentimental.changeLust(-100)
-            $ girlSentimental.changeAnger(-100)
+            $ girlSentimental.improveWillpower(-100)
+            $ girlSentimental.improveLust(-100)
+            $ girlSentimental.improveAnger(-100)
         "Set Unfaithful [girl]. Unfaithful: False" if (girlSentimental.isUnfaithful() == False):
-            $ girlSentimental.changeWillpower(100)
-            $ girlSentimental.changeLust(100)
-            $ girlSentimental.changeAnger(100)
+            $ girlSentimental.improveWillpower(100)
+            $ girlSentimental.improveLust(100)
+            $ girlSentimental.improveAnger(100)
         "Pag2":
             jump emblem2
         "Back":
@@ -301,49 +301,49 @@ label emblem2:
         "Pag1":
             jump emblem1
         "Set not Slut [girl]. Slut: True" if (girlSentimental.isSlut()):
-            $ girlSentimental.changeLust(-100)
-            $ girlSentimental.changeCorruption(-100)
-            $ girlSentimental.changeAddiction(-100)
+            $ girlSentimental.improveLust(-100)
+            $ girlSentimental.improveCorruption(-100)
+            $ girlSentimental.improveAddiction(-100)
         "Set Slut [girl]. Slut: False" if (girlSentimental.isSlut() == False):
-            $ girlSentimental.changeLust(100)
-            $ girlSentimental.changeCorruption(100)
-            $ girlSentimental.changeAddiction(100)
+            $ girlSentimental.improveLust(100)
+            $ girlSentimental.improveCorruption(100)
+            $ girlSentimental.improveAddiction(100)
         "Set not Nymphomaniac [girl]. Nymphomaniac: True" if (girlSentimental.isNymphomaniac()):
-            $ girlSentimental.changeCorruption(-100)
-            $ girlSentimental.changeLust(-100)
-            $ girlSentimental.changeInhibition(100)
+            $ girlSentimental.improveCorruption(-100)
+            $ girlSentimental.improveLust(-100)
+            $ girlSentimental.improveInhibition(100)
         "Set Nymphomaniac [girl]. Nymphomaniac: False" if (girlSentimental.isNymphomaniac() == False):
-            $ girlSentimental.changeCorruption(100)
-            $ girlSentimental.changeLust(100)
-            $ girlSentimental.changeInhibition(-100)
+            $ girlSentimental.improveCorruption(100)
+            $ girlSentimental.improveLust(100)
+            $ girlSentimental.improveInhibition(-100)
         "Set not Submissive [girl]. Submissive: True" if (girlSentimental.isSubmissive()):
-            $ girlSentimental.changeWillpower(100)
-            $ girlSentimental.changeFear(-100)
+            $ girlSentimental.improveWillpower(100)
+            $ girlSentimental.improveFear(-100)
         "Set Submissive [girl]. Submissive: False" if (girlSentimental.isSubmissive() == False):
-            $ girlSentimental.changeWillpower(-100)
-            $ girlSentimental.changeFear(100)
+            $ girlSentimental.improveWillpower(-100)
+            $ girlSentimental.improveFear(100)
         "Set not Celebrolesis [girl]. Celebrolesis: True" if (girlSentimental.isCelebrolesis()):
-            $ girlSentimental.changeWillpower(100)
-            $ girlSentimental.changeInhibition(100)
-            $ girlSentimental.changeAddiction(-100)
+            $ girlSentimental.improveWillpower(100)
+            $ girlSentimental.improveInhibition(100)
+            $ girlSentimental.improveAddiction(-100)
         "Set Celebrolesis [girl]. Celebrolesis: False" if (girlSentimental.isCelebrolesis() == False):
-            $ girlSentimental.changeWillpower(-100)
-            $ girlSentimental.changeInhibition(-100)
-            $ girlSentimental.changeAddiction(100)
+            $ girlSentimental.improveWillpower(-100)
+            $ girlSentimental.improveInhibition(-100)
+            $ girlSentimental.improveAddiction(100)
         "Set not Free Use [girl]. Free Use: True" if (girlSentimental.isFreeUse()):
-            $ girlSentimental.changeWillpower(100)
-            $ girlSentimental.changeInhibition(100)
-            $ girlSentimental.changeFear(-100)
-            $ girlSentimental.changeLust(-100)
-            $ girlSentimental.changeCorruption(-100)
-            $ girlSentimental.changeAddiction(-100)
+            $ girlSentimental.improveWillpower(100)
+            $ girlSentimental.improveInhibition(100)
+            $ girlSentimental.improveFear(-100)
+            $ girlSentimental.improveLust(-100)
+            $ girlSentimental.improveCorruption(-100)
+            $ girlSentimental.improveAddiction(-100)
         "Set Free Use [girl]. Free Use: False" if (girlSentimental.isFreeUse() == False):
-            $ girlSentimental.changeWillpower(-100)
-            $ girlSentimental.changeInhibition(-100)
-            $ girlSentimental.changeFear(100)
-            $ girlSentimental.changeLust(100)
-            $ girlSentimental.changeCorruption(100)
-            $ girlSentimental.changeAddiction(100)
+            $ girlSentimental.improveWillpower(-100)
+            $ girlSentimental.improveInhibition(-100)
+            $ girlSentimental.improveFear(100)
+            $ girlSentimental.improveLust(100)
+            $ girlSentimental.improveCorruption(100)
+            $ girlSentimental.improveAddiction(100)
         "Back":
             return
     jump emblem2
