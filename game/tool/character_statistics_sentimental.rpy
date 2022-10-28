@@ -175,26 +175,26 @@ init 10 python:
             return val <= 0
 
         def isHealthy(self) -> bool:
-            if (self.get("against") != True and self.get("against") != False and self.get("against") > 0):  # TODO: TO improve
+            if (self.get("against") and self.get("against") != True and self.get("against") != False and self.get("against", 0) > 0):  # TODO: TO improve
                 return False
             if (self.isSlut() or self.isSubmissive() or self.isNymphomaniac() or self.isCelebrolesis() or self.isFreeUse()):
                 return False
-            return (self.get("energy") == 100 and self.get("willpower") == 100 and self.get("inhibition") == 100 and self.get("corruption") == 0 and self.get("addiction") == 0)
+            return (self.get("energy", 0) == 100 and self.get("willpower", 0) == 100 and self.get("inhibition", 0) == 100 and self.get("corruption", 0) == 0 and self.get("addiction", 0) == 0)
 
         def isUnfaithful(self) -> bool:
-            return (self.get("willpower") > 45 and self.get("lust") > 60 and self.get("anger") > 50 and (self.get("lust") + self.get("anger")) > 130)
+            return (self.get("willpower", 0) > 45 and self.get("lust", 0) > 60 and self.get("anger", 0) > 50 and (self.get("lust", 0) + self.get("anger", 0)) > 130)
 
         def isSlut(self) -> bool:
-            return (self.get("lust") > 50 and (self.get("corruption") > 80 or self.get("addiction") > 60) and (self.get("lust") + self.get("corruption") + self.get("addiction")) > 160)
+            return (self.get("lust", 0) > 50 and (self.get("corruption", 0) > 80 or self.get("addiction", 0) > 60) and (self.get("lust", 0) + self.get("corruption", 0) + self.get("addiction", 0)) > 160)
 
         def isNymphomaniac(self) -> bool:
-            return (self.get("lust") > 90 and self.get("corruption") > 10 and self.get("inhibition") < 40)
+            return (self.get("lust", 0) > 90 and self.get("corruption", 0) > 10 and self.get("inhibition", 0) < 40)
 
         def isSubmissive(self) -> bool:
-            return (self.get("willpower") < 20 and self.get("fear") > 80 and (self.get("fear") - self.get("willpower")) > 80)
+            return (self.get("willpower", 0) < 20 and self.get("fear", 0) > 80 and (self.get("fear", 0) - self.get("willpower", 0)) > 80)
 
         def isCelebrolesis(self) -> bool:
-            return (self.get("inhibition") < 20 and (self.get("willpower") < 80 or self.get("addiction") > 20) and (self.get("addiction") - self.get("inhibition") - self.get("willpower") > 40))
+            return (self.get("inhibition", 0) < 20 and (self.get("willpower", 0) < 80 or self.get("addiction", 0) > 20) and (self.get("addiction", 0) - self.get("inhibition", 0) - self.get("willpower", 0) > 40))
 
         def isFreeUse(self) -> bool:
             return ((self.isSlut() and self.isSubmissive()) or (self.isSlut() and self.isCelebrolesis()))
