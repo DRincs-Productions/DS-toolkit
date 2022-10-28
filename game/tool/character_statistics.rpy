@@ -55,12 +55,12 @@ init 9 python:
                 self.notify(name = name,amt= amt)
             return
 
-        def get(self, name):
+        def get(self, name, default_return= None): 
             """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Statistic#get """
             if name in self.memory:
                 return self.memory[name]
             else:
-                return None
+                return default_return
 
         def notify(self, name: str, amt: int) -> None:
             if amt < 0 and name in self.notify_decrease_dict:
