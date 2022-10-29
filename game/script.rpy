@@ -63,6 +63,7 @@ label start:
     scene bg blue with fade
     show friend normal at left
     show girl normal at right
+    call enable_notifyEx
 
 label loop:
     menu:
