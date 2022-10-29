@@ -1,4 +1,4 @@
-# Dating sim toolkit for Ren'py
+# Dating sim toolkit (character info) for Ren'py
 
 ![Last commit](https://img.shields.io/github/last-commit/DonRP/DS-toolkit)
 ![License](https://img.shields.io/github/license/DonRP/DS-toolkit)
