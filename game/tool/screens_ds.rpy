@@ -6,10 +6,11 @@ default cur_character_sentimental = None
 
 default chars = {}
 
+define gui.userinfo_textdistance_xsize = 250
 define gui.userinfo_lateralframe_ypos = 100
 define gui.userinfo_lateralframe_xpos = 700
 define gui.userinfo_lateralframe_ysize = 600
-define gui.userinfo_lateralframe_xsize = 450
+define gui.userinfo_lateralframe_xsize = 200 + gui.userinfo_textdistance_xsize
 
 screen menu_userinfo():
 
@@ -98,36 +99,6 @@ screen menu_userinfo():
                         SetVariable('cur_character_sentimental', friendSentimental),
                     ]
                     selected cur_character_id == "friend"
-            button:
-                textbutton "[friend]"
-            button:
-                textbutton "[friend]"
-            button:
-                textbutton "[friend]"
-            button:
-                textbutton "[friend]"
-            button:
-                textbutton "[friend]"
-            button:
-                textbutton "[friend]"
-            button:
-                textbutton "[friend]"
-            button:
-                textbutton "[friend]"
-            button:
-                textbutton "[friend]"
-            button:
-                textbutton "[friend]"
-            button:
-                textbutton "[friend]"
-            button:
-                textbutton "[friend]"
-            button:
-                textbutton "[friend]"
-            button:
-                textbutton "[friend]"
-            button:
-                textbutton "END"
         # scroll bar
         vbar value YScrollValue('vp1') style 'menu_vscroll'
 
@@ -157,14 +128,14 @@ screen menu_userinfo():
                 vbox:
                     xpos 30
                     hbox xfill True:
-                        frame xsize 250 background None:
+                        frame xsize gui.userinfo_textdistance_xsize background None:
                             text _("Name:") size gui.label_text_size color gui.accent_color
                         frame xfill True background None:
                             text "[cur_character_info.name] [cur_character_info.sname]" size gui.label_text_size
 
                     if cur_character_info.age:
                         hbox xfill True:
-                            frame xsize 250 background None:
+                            frame xsize gui.userinfo_textdistance_xsize background None:
                                 text _("Age:") size gui.label_text_size color gui.accent_color
                             frame xfill True background None:
                                 text "[cur_character_info.age]" size gui.label_text_size
@@ -177,7 +148,7 @@ screen menu_userinfo():
                         for ch in cur_character_info.relationships.keys():
                             $ relationship_name = cur_character_info.relationships[ch]
                             hbox xfill True:
-                                frame xsize 250 background None:
+                                frame xsize gui.userinfo_textdistance_xsize background None:
                                     text "[relationship_name]:" size gui.label_text_size color gui.accent_color
                                 frame xfill True background None:
                                     text "[ch]" size gui.label_text_size
@@ -193,7 +164,7 @@ screen menu_userinfo():
                             for stat in statistic_memory.keys():
                                 $ value = statistic_memory[stat]
                                 hbox xfill True:
-                                    frame xsize 250 background None:
+                                    frame xsize gui.userinfo_textdistance_xsize background None:
                                         text _("[stat]:") size gui.label_text_size color gui.accent_color
                                     frame xfill True background None:
                                         text "[value]" size gui.label_text_size
@@ -208,7 +179,7 @@ screen menu_userinfo():
                             for sent in sentimental_memory.keys():
                                 $ value = sentimental_memory[sent]
                                 hbox xfill True:
-                                    frame xsize 250 background None:
+                                    frame xsize gui.userinfo_textdistance_xsize background None:
                                         text _("[sent]:") size gui.label_text_size color gui.accent_color
                                     frame xfill True background None:
                                         text "[value]" size gui.label_text_size
