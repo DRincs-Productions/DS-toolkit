@@ -68,14 +68,7 @@ screen menu_userinfo():
         vbar value YScrollValue('vp1') style 'menu_vscroll'
 
     # Image
-    if cur_character_id == "friend":
-        imagebutton:
-            align (0.33, 1)
-            idle 'friend normal'
-    elif cur_character_id == "girl":
-        imagebutton:
-            align (0.33, 1)
-            idle 'girl normal'
+    # TODO: add a scrollbar: https://github.com/DRincs-Productions/DS-toolkit/wiki/Screen-&-Translations
 
     frame:
         ypos 100
