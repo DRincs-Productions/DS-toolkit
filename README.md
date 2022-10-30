@@ -48,7 +48,9 @@ At the end make a merge inside the arm of the project.
 
 ## Preview
 
-![01](https://user-images.githubusercontent.com/67595890/181107484-23534155-adbb-4132-bf3d-4161c21ca9e6.png "Main")
+![image](https://user-images.githubusercontent.com/67595890/198900451-6b379a7b-5e0a-4a81-a397-a3f0328a34b6.png)
+
+![image](https://user-images.githubusercontent.com/67595890/198900475-87def00c-8291-4d68-9235-4fdc1333967b.png)
 
 ![02](https://user-images.githubusercontent.com/67595890/181107510-c6affb34-1310-4100-8975-a16cc3645c76.png "Characters statistics and ability")
 
