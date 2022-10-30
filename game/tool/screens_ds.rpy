@@ -63,57 +63,7 @@ screen menu_userinfo():
         # task title list
         viewport mousewheel 'change' draggable True id 'vp1':
             has vbox spacing 5
-            # MC
-            button:
-                xpos 30
-                xsize 390
-                background None
-                xpadding 0
-                ypadding 0
-                xmargin 0
-                ymargin 0
-                textbutton "[mc]":
-                    action [
-                        SetVariable('cur_character_id', "mc"),
-                        SetVariable('cur_character_info', mcI),
-                        SetVariable('cur_character_statistic', mcStatistic),
-                        SetVariable('cur_character_sentimental', None),
-                    ]
-                    selected cur_character_id == "mc"
-            # Girl
-            button:
-                xpos 30
-                xsize 390
-                background None
-                xpadding 0
-                ypadding 0
-                xmargin 0
-                ymargin 0
-                textbutton "[girl]":
-                    action [
-                        SetVariable('cur_character_id', "girl"),
-                        SetVariable('cur_character_info', girlI),
-                        SetVariable('cur_character_statistic', None),
-                        SetVariable('cur_character_sentimental', girlSentimental),
-                    ]
-                    selected cur_character_id == "girl"
-            # Friend
-            button:
-                xpos 30
-                xsize 390
-                background None
-                xpadding 0
-                ypadding 0
-                xmargin 0
-                ymargin 0
-                textbutton "[friend]":
-                    action [
-                        SetVariable('cur_character_id', "friend"),
-                        SetVariable('cur_character_info', friendI),
-                        SetVariable('cur_character_statistic', friendStatistic),
-                        SetVariable('cur_character_sentimental', friendSentimental),
-                    ]
-                    selected cur_character_id == "friend"
+            # TODO: add a scrollbar: https://github.com/DRincs-Productions/DS-toolkit/wiki/Screen-&-Translations
         # scroll bar
         vbar value YScrollValue('vp1') style 'menu_vscroll'
 
