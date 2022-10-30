@@ -1,3 +1,19 @@
+# Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Relaction#relactions-dict
+define relactions = {
+    "mom": __("Mom"),
+    "dad": __("Dad"),
+    "son": __("Son"),
+    "daughter": __("Daughter"),
+    "brother": __("Brother"),
+    "sister": __("Sister"),
+    "uncle": __("Uncle"),
+    "aunt": __("Aunt"),
+    "cousin": __("Cousin"),
+    "friend": __("Friend"),
+    "girlfriend": __("Girlfriend"),
+    "boyfriend": __("Boyfriend"),
+}
+
 init python:
     # Multi Game Persistent Character Names
     # Recommended: male_fname, male_sname, female_fname, female_sname, futa_fname, futa_sname, other_fname or other_sname (or any, or all of these).
