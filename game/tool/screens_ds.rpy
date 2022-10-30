@@ -7,10 +7,11 @@ default cur_character_sentimental = None
 default chars = {}
 
 screen menu_userinfo():
-    add 'interface phon'
-    style_prefix 'userinfo' tag menu
+    modal True
+    style_prefix "game_menu"
+    add "gui/overlay/game_menu.png"
 
-    frame area (150, 95, 350, 50) background None:
+    frame area (150, 70, 350, 50) background None:
         text _("{b}Characters{/b}") color gui.accent_color size 28 #font 'hermes.ttf'
 
     # button for closure
@@ -92,11 +93,11 @@ screen menu_userinfo():
     # Image
     if cur_character_id == "friend":
         imagebutton:
-            align (0.3, 0)
+            align (0.33, 0)
             idle 'friend normal'
     elif cur_character_id == "girl":
         imagebutton:
-            align (0.3, 0)
+            align (0.33, 0)
             idle 'girl normal'
 
     frame:
