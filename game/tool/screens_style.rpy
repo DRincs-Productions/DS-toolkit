@@ -1,4 +1,5 @@
 define gui.lateralframescroll_ysize = 520
+
 style menu_vscroll is vscrollbar:
     xsize 7
     unscrollable 'hide'
