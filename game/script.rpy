@@ -67,6 +67,8 @@ label start:
 
 label loop:
     menu:
+        "Screens":
+            call screen menu_userinfo()
         "Notifications Test":
             $ notifyEx(msg="Hello")
         "Character":
