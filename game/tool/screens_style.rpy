@@ -1,3 +1,9 @@
+define gui.userinfo_lateralframe_ysize = 600
+define gui.lateralframescroll_ysize = 520
+style menu_vscroll is vscrollbar:
+    xsize 7
+    unscrollable 'hide'
+
 init:
     transform close_zoom:
         xanchor 25
@@ -13,8 +19,3 @@ init:
             yanchor 0 matrixcolor BrightnessMatrix(0)
         on hover:
             yanchor 0 matrixcolor BrightnessMatrix(0.9)
-
-
-style menu_vscroll is vscrollbar:
-    xsize 7
-    unscrollable 'hide'

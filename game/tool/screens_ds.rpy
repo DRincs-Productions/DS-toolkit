@@ -42,7 +42,7 @@ screen menu_userinfo():
         ypos 170
         xpos 80
         xsize 400
-        ysize 850
+        ysize gui.lateralframescroll_ysize
         background None
         # task title list
         viewport mousewheel 'change' draggable True id 'vp1':
@@ -98,6 +98,36 @@ screen menu_userinfo():
                         SetVariable('cur_character_sentimental', friendSentimental),
                     ]
                     selected cur_character_id == "friend"
+            button:
+                textbutton "[friend]"
+            button:
+                textbutton "[friend]"
+            button:
+                textbutton "[friend]"
+            button:
+                textbutton "[friend]"
+            button:
+                textbutton "[friend]"
+            button:
+                textbutton "[friend]"
+            button:
+                textbutton "[friend]"
+            button:
+                textbutton "[friend]"
+            button:
+                textbutton "[friend]"
+            button:
+                textbutton "[friend]"
+            button:
+                textbutton "[friend]"
+            button:
+                textbutton "[friend]"
+            button:
+                textbutton "[friend]"
+            button:
+                textbutton "[friend]"
+            button:
+                textbutton "END"
         # scroll bar
         vbar value YScrollValue('vp1') style 'menu_vscroll'
 
