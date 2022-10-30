@@ -10,8 +10,21 @@ define gui.userinfo_lateralframe_xpos = 700
 define gui.userinfo_lateralframe_ysize = 600
 define gui.userinfo_lateralframe_xsize = 200 + gui.userinfo_textdistance_xsize
 
-define dr_translations = {
-    "gender_attracted": "Sexuality",
+define ds_translations = {
+    "gender_attracted"      :   _("Sexuality"),
+    "friendship"            :   _("Friendship"),
+    "favour"                :   _("Favour"),
+    "love"                  :   _("Love"),
+    "corruption"            :   _("Corruption"),
+    "virgin"                :   _("Virgin"),
+    "bisexual"              :   _("Bisexual"),
+    "polyamorous"           :   _("Polyamorous"),
+    "against"               :   _("Against"),
+    "addiction"             :   _("Addiction"),
+    "max_values"            :   _("Max_values"),
+    "strength"              :   _("Strength"),
+    "intelligence"          :   _("Intelligence"),
+    "agility"               :   _("Agility"),
 }
 
 screen menu_userinfo():
@@ -165,8 +178,8 @@ screen menu_userinfo():
                                 text _("Statistic:") size gui.name_text_size
                             for stat in statistic_memory.keys():
                                 $ value = statistic_memory[stat]
-                                if stat in dr_translations:
-                                    $ stat = dr_translations[stat]
+                                if stat in ds_translations:
+                                    $ stat = ds_translations[stat]
                                 hbox xfill True:
                                     frame xsize gui.userinfo_textdistance_xsize background None:
                                         text _("[stat]:") size gui.label_text_size color gui.accent_color
@@ -189,8 +202,8 @@ screen menu_userinfo():
                                         $ value = _("Lesbo")
                                     elif not cur_character_info.gender == value:
                                         $ value = _("Straight")
-                                if sent in dr_translations:
-                                    $ sent = dr_translations[sent]
+                                if sent in ds_translations:
+                                    $ sent = ds_translations[sent]
                                 hbox xfill True:
                                     frame xsize gui.userinfo_textdistance_xsize background None:
                                         text _("[sent]:") size gui.label_text_size color gui.accent_color
