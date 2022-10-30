@@ -10,6 +10,7 @@ init 9 python:
             notify_increase_dict: Optional[dict[str]] = None,
             notify_decrease_dict: Optional[dict[str]] = None,
             notify_dict: Optional[dict[str, NotifyEx]] = None,
+            max_values: int = 100,
         ):
 
             self.memory = {}
@@ -17,6 +18,7 @@ init 9 python:
             self.notify_increase_dict = notify_increase_dict if notify_increase_dict else {}
             self.notify_decrease_dict = notify_decrease_dict if notify_decrease_dict else {}
             self.notify_dict = notify_dict if notify_dict else {}
+            self.max_values = max_values
 
         def set(self, name: str, value: int) -> None:
             """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Statistic#set """
@@ -31,8 +33,12 @@ init 9 python:
             del self.memory[name]
             return
 
-        def improve(self, name: str, amt: int = 1, max=100, min=0, show_notify= True) -> None:
+        def improve(self, name: str, amt: int = 1, max=None, min=0, show_notify= True) -> None:
             """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Statistic#improvment """
+            if amt == 0:
+                return
+            if max == None:
+                max = self.max_values
             if (self.get(name) != None):
                 if (amt > 0 and self.memory[name] >= max):
                     return
@@ -70,3 +76,11 @@ init 9 python:
             elif name in self.notify_dict:
                 notify(self.notify_dict[name])
             return
+
+        def getAll(self): 
+            """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Statistic#getAll """
+            return self.memory
+
+        def getDefaultMaxValue(self): 
+            """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Statistic#getDefaultMaxValue """
+            return self.max_values

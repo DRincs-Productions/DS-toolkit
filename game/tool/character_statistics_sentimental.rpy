@@ -65,10 +65,12 @@ init 10 python:
             bisexual: bool = False,
             polyamorous: bool = False,
             against=None,
-            addiction=None
+            addiction=None,
+            max_values: int = 100,
         ):
 
             self.memory = {}
+            self.max_values = max_values
             # Characteristics
             if (gender_attracted != None):
                 self.improve(name="gender_attracted",
