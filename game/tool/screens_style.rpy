@@ -1,4 +1,3 @@
-define gui.userinfo_lateralframe_ysize = 600
 define gui.lateralframescroll_ysize = 520
 style menu_vscroll is vscrollbar:
     xsize 7
