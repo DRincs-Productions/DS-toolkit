@@ -35,6 +35,8 @@ init 9 python:
 
         def improve(self, name: str, amt: int = 1, max=None, min=0, show_notify= True) -> None:
             """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Statistic#improvment """
+            if amt == 0:
+                return
             if max == None:
                 max = self.max_values
             if (self.get(name) != None):

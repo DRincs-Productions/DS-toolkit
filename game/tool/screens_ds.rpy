@@ -4,13 +4,15 @@ default cur_character_info = None
 default cur_character_statistic = None
 default cur_character_sentimental = None
 
-default chars = {}
-
 define gui.userinfo_textdistance_xsize = 250
 define gui.userinfo_lateralframe_ypos = 100
 define gui.userinfo_lateralframe_xpos = 700
 define gui.userinfo_lateralframe_ysize = 600
 define gui.userinfo_lateralframe_xsize = 200 + gui.userinfo_textdistance_xsize
+
+define dr_translations = {
+    "gender_attracted": "Sexuality",
+}
 
 screen menu_userinfo():
 
@@ -163,6 +165,8 @@ screen menu_userinfo():
                                 text _("Statistic:") size gui.name_text_size
                             for stat in statistic_memory.keys():
                                 $ value = statistic_memory[stat]
+                                if stat in dr_translations:
+                                    $ stat = dr_translations[stat]
                                 hbox xfill True:
                                     frame xsize gui.userinfo_textdistance_xsize background None:
                                         text _("[stat]:") size gui.label_text_size color gui.accent_color
@@ -178,6 +182,15 @@ screen menu_userinfo():
                                 text _("Sentimental:") size gui.name_text_size
                             for sent in sentimental_memory.keys():
                                 $ value = sentimental_memory[sent]
+                                if sent == "gender_attracted" and cur_character_info:
+                                    if cur_character_info.gender == "M" and value == "M":
+                                        $ value = _("Gay")
+                                    elif cur_character_info.gender == "F" and value == "F":
+                                        $ value = _("Lesbo")
+                                    elif not cur_character_info.gender == value:
+                                        $ value = _("Straight")
+                                if sent in dr_translations:
+                                    $ sent = dr_translations[sent]
                                 hbox xfill True:
                                     frame xsize gui.userinfo_textdistance_xsize background None:
                                         text _("[sent]:") size gui.label_text_size color gui.accent_color

@@ -42,6 +42,7 @@ init python:
             self.name = name
             self.sname = sname
             self.age = age
+            self.gender = gender
             # default values
             self.set("name_default", name)
             self.set("sname_default", sname)
