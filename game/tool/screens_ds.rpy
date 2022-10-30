@@ -13,9 +13,8 @@ screen menu_userinfo():
 
     # button for closure
     imagebutton:
-        pos (1740, 100)
+        align (0.95, 0.05)
         idle '/interface/button/close_idle.webp'
-        hover '/interface/button/close_hover.webp'
         action [
             Hide('menu_userinfo'),
         ]
@@ -25,72 +24,74 @@ screen menu_userinfo():
         else:
             at close_zoom_mobile
 
-    hbox pos (150, 150) spacing 30:
-        frame:
-            ypos 25
-            xsize 400
-            ysize 850
-            background None
-            has hbox
-            # character name list
-            viewport mousewheel 'change' draggable True id 'vp1':
-                has vbox spacing 5
-                # MC
-                button:
-                    xsize 390
-                    background None
+    frame:
+        ypos 170
+        xpos 80
+        xsize 400
+        ysize 850
+        background None
+        # task title list
+        viewport mousewheel 'change' draggable True id 'vp1':
+            has vbox spacing 5
+            # MC
+            button:
+                xpos 30
+                xsize 390
+                background None
+                action [
+                    SetVariable('cur_character_id', "mc"),
+                    SetVariable('cur_character_info', mcI)
+                ]
+                xpadding 0
+                ypadding 0
+                xmargin 0
+                ymargin 0
+                textbutton "[mc]":
                     action [
-                        SetVariable('cur_character_id', "mc"), 
-                        SetVariable('cur_character_info', mcI)
+                        SetVariable('cur_character_id', "mc"),
+                        SetVariable('cur_character_info', mcI),
                     ]
-                    xpadding 0
-                    ypadding 0
-                    xmargin 0
-                    ymargin 0
-                    textbutton "[mc]":
-                        action [
-                            SetVariable('cur_character_id', "mc"),
-                            SetVariable('cur_character_info', mcI),
-                        ]
-                        selected cur_character_id == "mc"
-                # Girl
-                button:
-                    xsize 390
-                    background None
+                    selected cur_character_id == "mc"
+            # Girl
+            button:
+                xpos 30
+                xsize 390
+                background None
+                action [
+                    SetVariable('cur_character_id', "girl"),
+                    SetVariable('cur_character_info', girlI)
+                ]
+                xpadding 0
+                ypadding 0
+                xmargin 0
+                ymargin 0
+                textbutton "[girl]":
                     action [
-                        SetVariable('cur_character_id', "girl"), 
-                        SetVariable('cur_character_info', girlI)
+                        SetVariable('cur_character_id', "girl"),
+                        SetVariable('cur_character_info', girlI),
                     ]
-                    xpadding 0
-                    ypadding 0
-                    xmargin 0
-                    ymargin 0
-                    textbutton "[girl]":
-                        action [
-                            SetVariable('cur_character_id', "girl"),
-                            SetVariable('cur_character_info', girlI),
-                        ]
-                        selected cur_character_id == "girl"
-                # Friend
-                button:
-                    xsize 390
-                    background None
+                    selected cur_character_id == "girl"
+            # Friend
+            button:
+                xpos 30
+                xsize 390
+                background None
+                action [
+                    SetVariable('cur_character_id', "friend"),
+                    SetVariable('cur_character_info', friendI)
+                ]
+                xpadding 0
+                ypadding 0
+                xmargin 0
+                ymargin 0
+                textbutton "[friend]":
                     action [
-                        SetVariable('cur_character_id', "friend"), 
-                        SetVariable('cur_character_info', friendI)
+                        SetVariable('cur_character_id', "friend"),
+                        SetVariable('cur_character_info', friendI),
                     ]
-                    xpadding 0
-                    ypadding 0
-                    xmargin 0
-                    ymargin 0
-                    textbutton "[friend]":
-                        action [
-                            SetVariable('cur_character_id', "friend"),
-                            SetVariable('cur_character_info', friendI),
-                        ]
-                        selected cur_character_id == "friend"
-            # scroll bar
-            vbar value YScrollValue('vp1') style 'menu_vscroll'
+                    selected cur_character_id == "friend"
+        # scroll bar
+        vbar value YScrollValue('vp1') style 'menu_vscroll'
 
     hbox pos (450, 150) spacing 30:
         # hbox ypos 25 xsize 190 spacing 5:
