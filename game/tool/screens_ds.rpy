@@ -6,13 +6,24 @@ default cur_character_sentimental = None
 
 default chars = {}
 
+define gui.userinfo_lateralframe_ypos = 100
+define gui.userinfo_lateralframe_xpos = 700
+define gui.userinfo_lateralframe_ysize = 600
+define gui.userinfo_lateralframe_xsize = 450
+
 screen menu_userinfo():
+
+    tag menu
+
+    ## Avoid predicting this screen, as it can be very large.
+    predict False
+
     modal True
     style_prefix "game_menu"
     add "gui/overlay/game_menu.png"
 
     frame area (150, 70, 350, 50) background None:
-        text _("{b}Characters{/b}") color gui.accent_color size 28 #font 'hermes.ttf'
+        text _("{b}Characters{/b}") color gui.accent_color size gui.name_text_size
 
     # button for closure
     imagebutton:
@@ -93,18 +104,18 @@ screen menu_userinfo():
     # Image
     if cur_character_id == "friend":
         imagebutton:
-            align (0.33, 0)
+            align (0.33, 1)
             idle 'friend normal'
     elif cur_character_id == "girl":
         imagebutton:
-            align (0.33, 0)
+            align (0.33, 1)
             idle 'girl normal'
 
     frame:
         ypos 100
-        xpos 700
-        xsize 450
-        ysize 600
+        xpos gui.userinfo_lateralframe_xpos
+        xsize gui.userinfo_lateralframe_xsize
+        ysize gui.userinfo_lateralframe_ysize
         background None
         viewport mousewheel 'change' draggable True id 'vp3':
             has vbox spacing 5
@@ -117,29 +128,29 @@ screen menu_userinfo():
                     xpos 30
                     hbox xfill True:
                         frame xsize 250 background None:
-                            text _("Name:") size 24 color gui.accent_color
+                            text _("Name:") size gui.label_text_size color gui.accent_color
                         frame xfill True background None:
-                            text "[cur_character_info.name] [cur_character_info.sname]" size 24
+                            text "[cur_character_info.name] [cur_character_info.sname]" size gui.label_text_size
 
                     if cur_character_info.age:
                         hbox xfill True:
                             frame xsize 250 background None:
-                                text _("Age:") size 24 color gui.accent_color
+                                text _("Age:") size gui.label_text_size color gui.accent_color
                             frame xfill True background None:
-                                text "[cur_character_info.age]" size 24
+                                text "[cur_character_info.age]" size gui.label_text_size
 
                     if cur_character_info.relationships and len(cur_character_info.relationships) > 0:
                         frame area (0, 0, 350, 25):
                             background None
                         frame xsize 300 background None:
-                            text _("Relationships:") size 26
+                            text _("Relationships:") size gui.name_text_size
                         for ch in cur_character_info.relationships.keys():
                             $ relationship_name = cur_character_info.relationships[ch]
                             hbox xfill True:
                                 frame xsize 250 background None:
-                                    text "[relationship_name]:" size 24 color gui.accent_color
+                                    text "[relationship_name]:" size gui.label_text_size color gui.accent_color
                                 frame xfill True background None:
-                                    text "[ch]" size 24
+                                    text "[ch]" size gui.label_text_size
 
                     if cur_character_statistic:
                         $ statistic_memory = cur_character_statistic.getAll()
@@ -148,14 +159,14 @@ screen menu_userinfo():
                             frame area (0, 0, 350, 25):
                                 background None
                             frame xsize 300 background None:
-                                text _("Statistic:") size 26
+                                text _("Statistic:") size gui.name_text_size
                             for stat in statistic_memory.keys():
                                 $ value = statistic_memory[stat]
                                 hbox xfill True:
                                     frame xsize 250 background None:
-                                        text _("[stat]:") size 24 color gui.accent_color
+                                        text _("[stat]:") size gui.label_text_size color gui.accent_color
                                     frame xfill True background None:
-                                        text "[value]" size 24
+                                        text "[value]" size gui.label_text_size
 
                     if cur_character_sentimental:
                         $ sentimental_memory = cur_character_sentimental.getAll()
@@ -163,14 +174,14 @@ screen menu_userinfo():
                             frame area (0, 0, 350, 25):
                                 background None
                             frame xsize 300 background None:
-                                text _("Sentimental:") size 26
+                                text _("Sentimental:") size gui.name_text_size
                             for sent in sentimental_memory.keys():
                                 $ value = sentimental_memory[sent]
                                 hbox xfill True:
                                     frame xsize 250 background None:
-                                        text _("[sent]:") size 24 color gui.accent_color
+                                        text _("[sent]:") size gui.label_text_size color gui.accent_color
                                     frame xfill True background None:
-                                        text "[value]" size 24
+                                        text "[value]" size gui.label_text_size
 
                 # End Space
                 frame area (0, 0, 350, 20):
