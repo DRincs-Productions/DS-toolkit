@@ -61,7 +61,7 @@ screen menu_userinfo():
         ysize gui.lateralframescroll_ysize
         background None
         # task title list
-        viewport mousewheel 'change' draggable True id 'vp1':
+        viewport mousewheel True draggable True id 'vp1':
             has vbox spacing 5
             # MC
             button:
@@ -133,7 +133,7 @@ screen menu_userinfo():
         xsize gui.userinfo_lateralframe_xsize
         ysize gui.userinfo_lateralframe_ysize
         background None
-        viewport mousewheel 'change' draggable True id 'vp3':
+        viewport mousewheel True draggable True id 'vp3':
             has vbox spacing 5
             if cur_character_info:
                 # Start Space
