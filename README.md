@@ -10,6 +10,9 @@ This repo is a set of basic tools for Visual Novel / Game developers who are pla
 
 Feel free to contribute, fork this and send a pull request. 😄
 
+## Documentation
+
+[Wiki](https://github.com/DRincs-Productions/DS-toolkit/wiki)
 
 ## Code snippets ([VSCode](https://code.visualstudio.com/))
 (all begin with `DR_`)
@@ -42,9 +45,6 @@ git pull https://github.com/DRincs-Productions/DS-toolkit.git tool-only --allow-
 
 At the end make a merge inside the arm of the project.
 
-## Documentation
-
-[Wiki](https://github.com/DRincs-Productions/DS-toolkit/wiki)
 
 ## Preview
 
