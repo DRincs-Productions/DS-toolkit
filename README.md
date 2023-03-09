@@ -1,3 +1,5 @@
+![image](https://user-images.githubusercontent.com/67595890/198900451-6b379a7b-5e0a-4a81-a397-a3f0328a34b6.png)
+
 # Dating sim toolkit (character info) for Ren'py
 
 ![Last commit](https://img.shields.io/github/last-commit/DonRP/DS-toolkit)
