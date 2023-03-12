@@ -1,4 +1,7 @@
 init 10 python:
+    from pythonpackages.renpy_custom_notify import NotifyEx
+    from pythonpackages.ds.character_statistics import Statistic
+
     against_notify = NotifyEx(msg=__("Is against a love affair with you"),
                             img="/images_tool/icon/notification/emblems-against.webp")
     fear_against_notify = NotifyEx(msg=__("Has too much fear of you for a love affair"),

@@ -5,6 +5,10 @@ image bg blue = "#b1e3ff"
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 
+init 10 python:
+    from pythonpackages.ds.character_info import CharacterInfo
+
+
 default mcI = CharacterInfo(name = "Liam", sname = "Johnson", age = 20, gender = "M",
 relationships = {
     girl : relactions["girlfriend"],
