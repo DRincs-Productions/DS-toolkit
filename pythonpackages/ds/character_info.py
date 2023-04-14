@@ -21,7 +21,8 @@ class CharacterInfo():
         age: Optional[int] = None,
         relationships: Optional[dict[Character, str]] = None,
         other_values: Optional[dict[Character, str]] = None,
-        gender_attracted: Optional[Union[list[GenderEnum], GenderEnum]] = None,
+        attraction_genders: Optional[Union[list[GenderEnum],
+                                           GenderEnum]] = None,
     ):
         self._memory = {}
         self.memory = other_values
@@ -33,7 +34,7 @@ class CharacterInfo():
         self.set("surname_default", sname)
         self.set("age_default", age)
         self.relationships = relationships
-        self.attraction_genders = gender_attracted
+        self.attraction_genders = attraction_genders
 
     @property
     def name(self) -> str:
