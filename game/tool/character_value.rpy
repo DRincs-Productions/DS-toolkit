@@ -15,7 +15,7 @@ define relactions = {
 }
 
 define ds_translations = {
-    "gender_attracted"      :   _("Sexuality"),
+    "attraction_genders"      :   _("Sexuality"),
     "friendship"            :   _("Friendship"),
     "favour"                :   _("Favour"),
     "love"                  :   _("Love"),
