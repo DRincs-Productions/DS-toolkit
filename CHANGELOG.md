@@ -43,3 +43,9 @@ Use search and replace of vscode with regex functionality enabled
 
 * `notifyExClean\((.*)\)`
 * `notify_remove($1)`
+
+
+### GENDER_TYPE
+
+* `GENDER_TYPE`
+* `GenderEnum`

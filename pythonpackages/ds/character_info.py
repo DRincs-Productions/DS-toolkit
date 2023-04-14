@@ -4,7 +4,7 @@ from typing import Optional, Union
 import renpy.exports as renpy
 from renpy.character import Character
 
-from pythonpackages.ds.character_type import GENDER_TYPE
+from pythonpackages.ds.character_type import GenderEnum
 from pythonpackages.utility import IsNullOrWhiteSpace
 
 UNKNOWN_STRING = "Unknown"
@@ -16,7 +16,7 @@ class CharacterInfo():
     def __init__(
         self,
         name: str,
-        gender: GENDER_TYPE,
+        gender: GenderEnum,
         sname: Optional[str] = None,
         age: Optional[int] = None,
         relationships: Optional[dict[Character, str]] = None,
@@ -45,12 +45,12 @@ class CharacterInfo():
             self._name = value
 
     @property
-    def gender(self) -> GENDER_TYPE:
+    def gender(self) -> GenderEnum:
         """Gender of the character"""
-        return self._gender  # type: ignore
+        return self._gender
 
     @gender.setter
-    def gender(self, value: GENDER_TYPE) -> None:
+    def gender(self, value: GenderEnum) -> None:
         self._gender = value
 
     @property

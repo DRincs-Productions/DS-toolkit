@@ -1,3 +1,7 @@
+from enum import Enum
 from typing import Literal
 
-GENDER_TYPE = Literal["M", "F"]
+
+class GenderEnum(Enum):
+    MALE = 1
+    FEMALE = 2
