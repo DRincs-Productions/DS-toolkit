@@ -61,7 +61,7 @@ class Statistic(object):
 
     @property
     def memory(self) -> dict[str, int]:
-        """Dictionary of all stats. Why a dictionary? Because it's easier to add new stats without editing the code."""
+        """Dictionary of all stats. Why a dictionary? Because it's easier to add new stats without editing the class code."""
         return self._memory if self._memory else {}
 
     @memory.setter

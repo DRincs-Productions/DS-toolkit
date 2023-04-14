@@ -155,28 +155,18 @@ class SentimentalStatistic(Statistic):
         self._default_show_notify = False
 
         # is a contradiction to a romantic relationship
-        if (against != None):
-            self.improve(name="against",  amt=against, show_notify=False)
+        self.against = against
         # Characteristics
-        self.improve(name="energy",  amt=0, show_notify=False)
-        self.improve(name="willpower",  amt=0, show_notify=False)
-        self.improve(name="inhibition",  amt=0, show_notify=False)
-        if (addiction != None):
-            self.improve(name="addiction",  amt=addiction, show_notify=False)
+        self.against = against
         # Relaction
         self.friendship = friendship
         self.favour = favour
         self.love = love
-        if (corruption != None):
-            self.improve(name="corruption",  amt=corruption, show_notify=False)
+        self.corruption = corruption
         # Emblems
-        if (virgin != None):
-            self.improve(name="virgin",  amt=virgin, show_notify=False)
-        if (bisexual != None):
-            self.improve(name="bisexual",  amt=bisexual, show_notify=False)
-        if (polyamorous != None):
-            self.improve(name="polyamorous",
-                         amt=polyamorous, show_notify=False)
+        self.virgin = virgin
+        self.bisexual = bisexual
+        self.polyamorous = polyamorous
 
         self._default_show_notify = True
 
@@ -187,7 +177,8 @@ class SentimentalStatistic(Statistic):
 
     @friendship.setter
     def friendship(self, value: int) -> None:
-        amt = value - self.get("friendship")
+        cur_value = self.get("friendship")
+        amt = value - cur_value
         if (self.anger > 0 and amt > 0):
             self.anger = self.anger - 5
             return
@@ -240,6 +231,44 @@ class SentimentalStatistic(Statistic):
         if cur_value != None and (cur_value + amt) >= 110:
             self.lust = self.lust + 1
         self.improve("love", amt, max=100, min=0)
+        return
+
+    # Corruption
+    @property
+    def corruption(self) -> int:
+        return self.get("corruption")
+
+    @corruption.setter
+    def corruption(self, value: int) -> None:
+        cur_value = self.get("corruption")
+        amt = value - cur_value
+        if cur_value + amt >= 105:
+            self.willpower = self.willpower - 5
+        self.improve("corruption", amt, max=100, min=0)
+        return
+
+    # Fear
+    @property
+    def fear(self) -> int:
+        return self.get("fear")
+
+    @fear.setter
+    def fear(self, value: int) -> None:
+        cur_value = self.get("fear")
+        amt = value - cur_value
+        self.improve("fear", amt, max=100, min=0)
+        return
+
+    # Anger
+    @property
+    def anger(self) -> int:
+        return self.get("anger")
+
+    @anger.setter
+    def anger(self, value: int) -> None:
+        cur_value = self.get("anger")
+        amt = value - cur_value
+        self.improve("anger", amt, max=100, min=0)
         return
 
     @property
@@ -307,20 +336,6 @@ class SentimentalStatistic(Statistic):
     @property
     def is_freeUse(self) -> bool:
         return ((self.is_slut and self.is_submissive) or (self.is_slut and self.is_celebrolesis))
-
-    def improveCorruption(self, amt) -> None:
-        if self.get("corruption") != None and (self.get("corruption") + amt) >= 105:
-            self.improveWillpower(-5)
-        self.improve("corruption", amt, max=100, min=0)
-        return
-
-    def improveFear(self, amt) -> None:
-        self.improve("fear", amt, max=100, min=0)
-        return
-
-    def improveAnger(self, amt) -> None:
-        self.improve("anger", amt, max=100, min=0)
-        return
 
     # Characteristics
 
