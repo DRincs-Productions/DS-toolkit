@@ -108,7 +108,6 @@ class SentimentalStatistic(Statistic):
 
     def __init__(
         self,
-        gender_attracted: GenderEnum,
         friendship: int = 0,
         favour: int = 0,
         love: int = 0,
@@ -153,7 +152,7 @@ class SentimentalStatistic(Statistic):
         )
 
         # SentimentalStatistic init
-        self.gender_attracted = gender_attracted
+        self._default_show_notify = False
 
         # is a contradiction to a romantic relationship
         if (against != None):
@@ -165,8 +164,7 @@ class SentimentalStatistic(Statistic):
         if (addiction != None):
             self.improve(name="addiction",  amt=addiction, show_notify=False)
         # Relaction
-        if (friendship != None):
-            self.improve(name="friendship",  amt=friendship, show_notify=False)
+        self.friendship = friendship
         if (favour != None):
             self.improve(name="favour",  amt=favour, show_notify=False)
         if (love != None):
@@ -181,6 +179,8 @@ class SentimentalStatistic(Statistic):
         if (polyamorous != None):
             self.improve(name="polyamorous",
                          amt=polyamorous, show_notify=False)
+
+        self._default_show_notify = True
 
     # Friendship
     @property

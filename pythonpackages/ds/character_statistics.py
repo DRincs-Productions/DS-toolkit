@@ -14,13 +14,14 @@ class Statistic(object):
         notify_dict: Optional[dict[str, NotifyEx]] = None,
         max_values: int = 100,
     ):
-
+        self._default_show_notify = False
         self.memory = {}
         self.memory.update(values if values else {})
         self.notify_increase_dict = notify_increase_dict
         self.notify_decrease_dict = notify_decrease_dict
         self.notify_dict = notify_dict
         self.max_values = max_values
+        self._default_show_notify = True
 
     @property
     def max_values(self) -> int:
@@ -60,7 +61,7 @@ class Statistic(object):
 
     @property
     def memory(self) -> dict[str, int]:
-        """Dictionary of all stats"""
+        """Dictionary of all stats. Why a dictionary? Because it's easier to add new stats without editing the code."""
         return self._memory if self._memory else {}
 
     @memory.setter
@@ -82,8 +83,10 @@ class Statistic(object):
         del self.memory[name]
         return
 
-    def improve(self, name: str, amt: int = 1, max=None, min=0, show_notify=True) -> None:
+    def improve(self, name: str, amt: int = 1, max=None, min=0, show_notify=None) -> None:
         """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Statistic#improvment """
+        if show_notify is None:
+            show_notify = self._default_show_notify
         if amt == 0:
             return
         if max == None:
