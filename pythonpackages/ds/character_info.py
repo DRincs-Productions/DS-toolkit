@@ -22,20 +22,15 @@ class CharacterInfo():
         relationships: Optional[dict[Character, str]] = None,
         other_values: Optional[dict[Character, str]] = None,
     ):
-        # I use a dictionary because it is the best solution for compatibility and not to create variables that may not be used.
-        self.memory = {}
-        self.memory.update(other_values if other_values else {})
-        # Great for reporting that a character has not yet been discovered
+        self.memory = other_values
         self.name = name
         self.sname = sname
         self.age = age
         self.gender = gender
-        # default values
         self.set("name_default", name)
         self.set("surname_default", sname)
         self.set("age_default", age)
-        # default values
-        self.relationships = relationships if relationships else {}
+        self.relationships = relationships
 
     @property
     def name(self) -> str:
@@ -48,6 +43,15 @@ class CharacterInfo():
             self._name = self.get("name_default")
         else:
             self._name = value
+
+    @property
+    def gender(self) -> GENDER_TYPE:
+        """Gender of the character"""
+        return self._gender  # type: ignore
+
+    @gender.setter
+    def gender(self, value: GENDER_TYPE) -> None:
+        self._gender = value
 
     @property
     def sname(self) -> str:
@@ -87,6 +91,26 @@ class CharacterInfo():
             self._age = self.get("age_default")
         else:
             self._age = value
+
+    @property
+    def relationships(self) -> dict[Character, str]:
+        """Relationships of the character"""
+        return self._relationships or {}
+
+    @relationships.setter
+    def relationships(self, value: Optional[dict[Character, str]]) -> None:
+        self._relationships = value
+
+    @property
+    def memory(self) -> dict[str, str]:
+        """I use a dictionary because it is the best solution for compatibility and not to create variables that may not be used."""
+        return self._memory or {}
+
+    @memory.setter
+    def memory(self, value: Optional[dict[str, str]]) -> None:
+        if (value is None):
+            self._memory = {}
+        self._memory.update(value if value else {})
 
     def changeName(self) -> None:
         """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Information#change-name """
