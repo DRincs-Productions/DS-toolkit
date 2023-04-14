@@ -2,56 +2,104 @@ init 10 python:
     from pythonpackages.renpy_custom_notify import NotifyEx
     from pythonpackages.ds.character_statistics import Statistic
 
-    against_notify = NotifyEx(msg=__("Is against a love affair with you"),
-                            img="/images_tool/icon/notification/emblems-against.webp")
-    fear_against_notify = NotifyEx(msg=__("Has too much fear of you for a love affair"),
-                                img="/images_tool/icon/notification/relations-fear.webp")
+    against_notify = NotifyEx(
+        message = __("Is against a love affair with you"),
+        image = "/images_tool/icon/notification/emblems-against.webp",
+    )
+    fear_against_notify = NotifyEx(
+        message = __("Has too much fear of you for a love affair"),
+        image = "/images_tool/icon/notification/relations-fear.webp",
+    )
     # Characteristics
-    increase_energy_notify = NotifyEx(msg=__(
-        "{color=#00ff00}{b}+{/b} Energy{/color}"), img="/images_tool/icon/notification/characteristics-energy.webp")
-    decrease_energy_notify = NotifyEx(msg=__(
-        "{color=#f00} {b}-{/b} Energy{/color}"), img="/images_tool/icon/notification/characteristics-energy.webp")
-    increase_willpower_notify = NotifyEx(msg=__(
-        "{color=#00ff00}{b}+{/b} Willpower{/color}"), img="/images_tool/icon/notification/characteristics-willpower.webp")
-    decrease_willpower_notify = NotifyEx(msg=__(
-        "{color=#f00} {b}-{/b} Willpower{/color}"), img="/images_tool/icon/notification/characteristics-willpower.webp")
-    increase_inhibition_notify = NotifyEx(msg=__(
-        "{color=#f00}{b}+{/b} Inhibition{/color}"), img="/images_tool/icon/notification/characteristics-inhibition.webp")
-    decrease_inhibition_notify = NotifyEx(msg=__(
-        "{color=#00ff00} {b}-{/b} Inhibition{/color}"), img="/images_tool/icon/notification/characteristics-inhibition.webp")
-    increase_addiction_notify = NotifyEx(msg=__(
-        "{color=#00ff00}{b}+{/b} Addictions{/color}"), img="/images_tool/icon/notification/characteristics-addiction.webp")
-    decrease_addiction_notify = NotifyEx(msg=__(
-        "{color=#f00} {b}-{/b} Addictions{/color}"), img="/images_tool/icon/notification/characteristics-addiction.webp")
-    increase_lust_notify = NotifyEx(msg=__(
-        "{color=#00ff00}{b}+{/b} Lust{/color}"), img="/images_tool/icon/notification/characteristics-lust.webp")
-    decrease_lust_notify = NotifyEx(msg=__(
-        "{color=#f00} {b}-{/b} Lust{/color}"), img="/images_tool/icon/notification/characteristics-lust.webp")
+    increase_energy_notify = NotifyEx(
+        message = __("{color=#00ff00}{b}+{/b} Energy{/color}"),
+        image = "/images_tool/icon/notification/characteristics-energy.webp",
+    )
+    decrease_energy_notify = NotifyEx(
+        message = __("{color=#f00} {b}-{/b} Energy{/color}"),
+        image = "/images_tool/icon/notification/characteristics-energy.webp",
+    )
+    increase_willpower_notify = NotifyEx(
+        message = __("{color=#00ff00}{b}+{/b} Willpower{/color}"),
+        image = "/images_tool/icon/notification/characteristics-willpower.webp",
+    )
+    decrease_willpower_notify = NotifyEx(
+        message = __("{color=#f00} {b}-{/b} Willpower{/color}"),
+        image = "/images_tool/icon/notification/characteristics-willpower.webp",
+    )
+    increase_inhibition_notify = NotifyEx(
+        message = __("{color=#f00}{b}+{/b} Inhibition{/color}"),
+        image = "/images_tool/icon/notification/characteristics-inhibition.webp",
+    )
+    decrease_inhibition_notify = NotifyEx(
+        message = __("{color=#00ff00} {b}-{/b} Inhibition{/color}"),
+        image = "/images_tool/icon/notification/characteristics-inhibition.webp",
+    )
+    increase_addiction_notify = NotifyEx(
+        message = __("{color=#00ff00}{b}+{/b} Addictions{/color}"),
+        image = "/images_tool/icon/notification/characteristics-addiction.webp",
+    )
+    decrease_addiction_notify = NotifyEx(
+        message = __("{color=#f00} {b}-{/b} Addictions{/color}"),
+        image = "/images_tool/icon/notification/characteristics-addiction.webp",
+    )
+    increase_lust_notify = NotifyEx(
+        message = __("{color=#00ff00}{b}+{/b} Lust{/color}"),
+        image = "/images_tool/icon/notification/characteristics-lust.webp",
+    )
+    decrease_lust_notify = NotifyEx(
+        message = __("{color=#f00} {b}-{/b} Lust{/color}"),
+        image = "/images_tool/icon/notification/characteristics-lust.webp",
+    )
     # Relations
-    increase_friendship_notify = NotifyEx(msg=__(
-        "{color=#00ff00}{b}+{/b} Friendship{/color}"), img="/images_tool/icon/notification/relations-friendship.webp")
-    decrease_friendship_notify = NotifyEx(msg=__(
-        "{color=#f00} {b}-{/b} Friendship{/color}"), img="/images_tool/icon/notification/relations-friendship.webp")
-    increase_favour_notify = NotifyEx(msg=__(
-        "{color=#00ff00}{b}+{/b} Favour{/color}"), img="/images_tool/icon/notification/relations-favour.webp")
-    decrease_favour_notify = NotifyEx(msg=__(
-        "{color=#f00} {b}-{/b} Favour{/color}"), img="/images_tool/icon/notification/relations-favour.webp")
-    increase_love_notify = NotifyEx(msg=__(
-        "{color=#00ff00}{b}+{/b} Love{/color}"), img="/images_tool/icon/notification/relations-love.webp")
-    decrease_love_notify = NotifyEx(msg=__(
-        "{color=#f00} {b}-{/b} Love{/color}"), img="/images_tool/icon/notification/relations-love.webp")
-    increase_corruption_notify = NotifyEx(msg=__(
-        "{color=#00ff00}{b}+{/b} Corruption{/color}"), img="/images_tool/icon/notification/relations-corruption.webp")
-    decrease_corruption_notify = NotifyEx(msg=__(
-        "{color=#f00} {b}-{/b} Corruption{/color}"), img="/images_tool/icon/notification/relations-corruption.webp")
-    increase_anger_notify = NotifyEx(msg=__(
-        "{color=#f00}{b}+{/b} Anger{/color}"), img="/images_tool/icon/notification/relations-anger.webp")
-    decrease_anger_notify = NotifyEx(msg=__(
-        "{color=#00ff00} {b}-{/b} Anger{/color}"), img="/images_tool/icon/notification/relations-anger.webp")
-    increase_fear_notify = NotifyEx(msg=__(
-        "{color=#f00}{b}+{/b} Fear{/color}"), img="/images_tool/icon/notification/relations-fear.webp")
-    decrease_fear_notify = NotifyEx(msg=__(
-        "{color=#00ff00} {b}-{/b} Fear{/color}"), img="/images_tool/icon/notification/relations-fear.webp")
+    increase_friendship_notify = NotifyEx(
+        message = __("{color=#00ff00}{b}+{/b} Friendship{/color}"),
+        image = "/images_tool/icon/notification/relations-friendship.webp",
+    )
+    decrease_friendship_notify = NotifyEx(
+        message = __("{color=#f00} {b}-{/b} Friendship{/color}"),
+        image = "/images_tool/icon/notification/relations-friendship.webp",
+    )
+    increase_favour_notify = NotifyEx(
+        message = __("{color=#00ff00}{b}+{/b} Favour{/color}"),
+        image = "/images_tool/icon/notification/relations-favour.webp",
+    )
+    decrease_favour_notify = NotifyEx(
+        message = __("{color=#f00} {b}-{/b} Favour{/color}"),
+        image = "/images_tool/icon/notification/relations-favour.webp",
+    )
+    increase_love_notify = NotifyEx(
+        message = __("{color=#00ff00}{b}+{/b} Love{/color}"),
+        image = "/images_tool/icon/notification/relations-love.webp",
+    )
+    decrease_love_notify = NotifyEx(
+        message = __("{color=#f00} {b}-{/b} Love{/color}"),
+        image = "/images_tool/icon/notification/relations-love.webp",
+    )
+    increase_corruption_notify = NotifyEx(
+        message = __("{color=#00ff00}{b}+{/b} Corruption{/color}"),
+        image = "/images_tool/icon/notification/relations-corruption.webp",
+    )
+    decrease_corruption_notify = NotifyEx(
+        message = __("{color=#f00} {b}-{/b} Corruption{/color}"),
+        image = "/images_tool/icon/notification/relations-corruption.webp",
+    )
+    increase_anger_notify = NotifyEx(
+        message = __("{color=#f00}{b}+{/b} Anger{/color}"),
+        image = "/images_tool/icon/notification/relations-anger.webp",
+    )
+    decrease_anger_notify = NotifyEx(
+        message = __("{color=#00ff00} {b}-{/b} Anger{/color}"),
+        image = "/images_tool/icon/notification/relations-anger.webp",
+    )
+    increase_fear_notify = NotifyEx(
+        message = __("{color=#f00}{b}+{/b} Fear{/color}"),
+        image = "/images_tool/icon/notification/relations-fear.webp",
+    )
+    decrease_fear_notify = NotifyEx(
+        message = __("{color=#00ff00} {b}-{/b} Fear{/color}"),
+        image = "/images_tool/icon/notification/relations-fear.webp",
+    )
 
 
     class SentimentalStatistic(Statistic):

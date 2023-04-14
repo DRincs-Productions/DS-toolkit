@@ -74,7 +74,7 @@ label loop:
         "Screens":
             call screen menu_userinfo()
         "Notifications Test":
-            $ notifyEx(msg="Hello")
+            $ notify_add(msg="Hello")
         "Character":
             call character
         "Clothes":
