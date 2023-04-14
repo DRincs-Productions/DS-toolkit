@@ -182,6 +182,27 @@ class SentimentalStatistic(Statistic):
             self.improve(name="polyamorous",
                          amt=polyamorous, show_notify=False)
 
+    # Friendship
+    @property
+    def friendship(self) -> int:
+        return self.get("friendship")
+
+    @friendship.setter
+    def friendship(self, value: int):
+        amt = value - self.get("friendship")
+        if (self.anger > 0 and amt > 0):
+            self.anger = self.anger - 5
+            return
+        self.improve("friendship", amt, max=100, min=-100)
+        return
+
+    @property
+    def is_friend(self) -> bool:
+        val = self.get("friendship")
+        if val == None:
+            return False
+        return val > 0
+
     @property
     def is_virgin(self) -> bool:
         """Return True if the character is a virgin, False otherwise."""
@@ -247,22 +268,6 @@ class SentimentalStatistic(Statistic):
     @property
     def is_freeUse(self) -> bool:
         return ((self.is_slut and self.is_submissive) or (self.is_slut and self.is_celebrolesis))
-
-    @property
-    def is_friend(self) -> bool:
-        val = self.get("friendship")
-        if val == None:
-            return False
-        return val > 0
-
-    def improveFriendship(self, amt) -> None:
-        valAnger = self.get("anger")
-        if (valAnger is int and valAnger > 0 and amt > 0):
-            self.improveAnger(-5)
-            return
-        self.improve("friendship", amt, max=100, min=-100)
-        del valAnger
-        return
 
     def improveFavour(self, amt) -> None:
         valAnger = self.get("anger")
