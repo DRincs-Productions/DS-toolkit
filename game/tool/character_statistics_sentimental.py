@@ -1,4 +1,3 @@
-# init 10 python:
 from pythonpackages.ds.character_type import GenderEnum
 from pythonpackages.renpy_custom_notify import NotifyEx
 from pythonpackages.ds.character_statistics import Statistic
@@ -121,14 +120,40 @@ class SentimentalStatistic(Statistic):
         max_values: int = 100,
     ):
 
-        self.memory = {}
-        self.max_values = max_values
-        # Characteristics
-        if (gender_attracted != None):
-            self.improve(name="gender_attracted",
-                         amt=gender_attracted, show_notify=False)
-        else:
-            self.setHeterosexual()
+        # Statistic init
+        super().__init__(
+            notify_increase_dict={
+                "energy": increase_energy_notify,
+                "willpower": increase_willpower_notify,
+                "inhibition": increase_inhibition_notify,
+                "addiction": increase_addiction_notify,
+                "lust": increase_lust_notify,
+                "friendship": increase_friendship_notify,
+                "favour": increase_favour_notify,
+                "love": increase_love_notify,
+                "corruption": increase_corruption_notify,
+                "anger": increase_anger_notify,
+                "fear": increase_fear_notify,
+            },
+            notify_decrease_dict={
+                "energy": decrease_energy_notify,
+                "willpower": decrease_willpower_notify,
+                "inhibition": decrease_inhibition_notify,
+                "addiction": decrease_addiction_notify,
+                "lust": decrease_lust_notify,
+                "friendship": decrease_friendship_notify,
+                "favour": decrease_favour_notify,
+                "love": decrease_love_notify,
+                "corruption": decrease_corruption_notify,
+                "anger": decrease_anger_notify,
+                "fear": decrease_fear_notify,
+            },
+            max_values=max_values,
+        )
+
+        # SentimentalStatistic init
+        self.gender_attracted = gender_attracted
+
         # is a contradiction to a romantic relationship
         if (against != None):
             self.improve(name="against",  amt=against, show_notify=False)
@@ -156,44 +181,7 @@ class SentimentalStatistic(Statistic):
             self.improve(name="polyamorous",
                          amt=polyamorous, show_notify=False)
 
-        self.notify_increase_dict = {
-            "energy": increase_energy_notify,
-            "willpower": increase_willpower_notify,
-            "inhibition": increase_inhibition_notify,
-            "addiction": increase_addiction_notify,
-            "lust": increase_lust_notify,
-            "friendship": increase_friendship_notify,
-            "favour": increase_favour_notify,
-            "love": increase_love_notify,
-            "corruption": increase_corruption_notify,
-            "anger": increase_anger_notify,
-            "fear": increase_fear_notify,
-        }
-        self.notify_decrease_dict = {
-            "energy": decrease_energy_notify,
-            "willpower": decrease_willpower_notify,
-            "inhibition": decrease_inhibition_notify,
-            "addiction": decrease_addiction_notify,
-            "lust": decrease_lust_notify,
-            "friendship": decrease_friendship_notify,
-            "favour": decrease_favour_notify,
-            "love": decrease_love_notify,
-            "corruption": decrease_corruption_notify,
-            "anger": decrease_anger_notify,
-            "fear": decrease_fear_notify,
-        }
-        self.notify_dict = {}
-
-    def setHeterosexual(self) -> None:
-        """Knowing the denere of the gender_attracted sect character hetero"""
-        if self.get("gender") == "F":
-            self.set("gender_attracted", GenderEnum.MALE)
-        else:
-            self.set("gender_attracted", GenderEnum.FEMALE)
-        return
-
     # Emblems
-
     def isVirgin(self) -> bool:
         val = self.get("virgin")
         if val == None:

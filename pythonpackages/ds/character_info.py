@@ -21,6 +21,7 @@ class CharacterInfo():
         age: Optional[int] = None,
         relationships: Optional[dict[Character, str]] = None,
         other_values: Optional[dict[Character, str]] = None,
+        gender_attracted: Optional[Union[list[GenderEnum], GenderEnum]] = None,
     ):
         self.memory = other_values
         self.name = name
@@ -31,6 +32,7 @@ class CharacterInfo():
         self.set("surname_default", sname)
         self.set("age_default", age)
         self.relationships = relationships
+        self.attraction_genders = gender_attracted
 
     @property
     def name(self) -> str:
@@ -111,6 +113,40 @@ class CharacterInfo():
         if (self._memory is None):
             self._memory = {}
         self._memory.update(value if value else {})
+
+    @property
+    def attraction_genders(self) -> list[GenderEnum]:
+        """Gender attracted to the character"""
+        if (self._attraction_genders == None):
+            if (GenderEnum.MALE == self.gender):
+                return [GenderEnum.FEMALE]
+            else:
+                return [GenderEnum.MALE]
+        else:
+            return self._attraction_genders
+
+    @attraction_genders.setter
+    def attraction_genders(self, value: Optional[Union[list[GenderEnum], GenderEnum]]):
+        if (isinstance(value, GenderEnum)):
+            value = [value]
+        self._attraction_genders = value
+
+    @property
+    def is_heterosexual(self) -> bool:
+        return not self.gender in self.attraction_genders
+
+    @is_heterosexual.setter
+    def is_heterosexual(self, value: bool):
+        if value:
+            if self.gender == GenderEnum.MALE:
+                self.attraction_genders = [GenderEnum.FEMALE]
+            else:
+                self.attraction_genders = [GenderEnum.MALE]
+        else:
+            if self.gender == GenderEnum.MALE:
+                self.attraction_genders.append(GenderEnum.MALE)
+            else:
+                self.attraction_genders.append(GenderEnum.FEMALE)
 
     def changeName(self) -> None:
         """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Information#change-name """
