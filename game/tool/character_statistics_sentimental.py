@@ -116,7 +116,7 @@ class SentimentalStatistic(Statistic):
         bisexual: bool = False,
         polyamorous: bool = False,
         against=None,
-        addiction=None,
+        addiction=0,
         max_values: int = 100,
     ):
 
