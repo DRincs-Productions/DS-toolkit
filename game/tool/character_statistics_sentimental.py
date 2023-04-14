@@ -188,7 +188,7 @@ class SentimentalStatistic(Statistic):
         return self.get("friendship")
 
     @friendship.setter
-    def friendship(self, value: int):
+    def friendship(self, value: int) -> None:
         amt = value - self.get("friendship")
         if (self.anger > 0 and amt > 0):
             self.anger = self.anger - 5
@@ -202,6 +202,25 @@ class SentimentalStatistic(Statistic):
         if val == None:
             return False
         return val > 0
+
+    # Favour
+    @property
+    def favour(self) -> int:
+        return self.get("favour")
+
+    @favour.setter
+    def favour(self, value: int) -> None:
+        cur_value = self.get("favour")
+        amt = value - cur_value
+        if (self.anger is int and self.anger > 0 and amt > 0):
+            self.anger = self.anger - 1
+            return
+        if cur_value is int and (cur_value + amt) >= 105:
+            self.love = self.love + 1
+        if cur_value is int and (cur_value + amt) < 0:
+            self.anger = self.anger + 10
+        self.improve("favour", amt, max=100, min=0)
+        return
 
     @property
     def is_virgin(self) -> bool:
@@ -268,19 +287,6 @@ class SentimentalStatistic(Statistic):
     @property
     def is_freeUse(self) -> bool:
         return ((self.is_slut and self.is_submissive) or (self.is_slut and self.is_celebrolesis))
-
-    def improveFavour(self, amt) -> None:
-        valAnger = self.get("anger")
-        if (valAnger is int and valAnger > 0 and amt > 0):
-            self.improveAnger(-1)
-            return
-        if self.get("favour") is int and (self.get("favour") + amt) >= 105:
-            self.improveLove(1)
-        if self.get("favour") is int and (self.get("favour") + amt) < 0:
-            self.improveAnger(10)
-        self.improve("favour", amt, max=100, min=0)
-        del valAnger
-        return
 
     def improveLove(self, amt) -> None:
         valAnger = self.get("anger")
