@@ -1,7 +1,8 @@
 from typing import Union
+
+from pythonpackages.ds.character_statistics import Statistic
 from pythonpackages.ds.character_type import GenderEnum
 from pythonpackages.renpy_custom_notify import NotifyEx, notify
-from pythonpackages.ds.character_statistics import Statistic
 
 against_notify = NotifyEx(
     message=__("Is against a love affair with you"),
@@ -349,6 +350,13 @@ class SentimentalStatistic(Statistic):
         self.improve("against", amt, max=100, min=0)
         return
 
+    @property
+    def is_against(self) -> bool:
+        val = self.get("against")
+        if val == None:
+            return False
+        return val <= 0
+
     # Other
 
     @property
@@ -379,39 +387,32 @@ class SentimentalStatistic(Statistic):
         return val > 10
 
     @property
-    def is_against(self) -> bool:
-        val = self.get("against")
-        if val == None:
-            return False
-        return val <= 0
-
-    @property
     def is_healthy(self) -> bool:
-        if (self.get("against") and self.get("against") != True and self.get("against") != False and self.get("against", 0) > 0):  # TODO: TO improve
+        if (not self.is_against):
             return False
         if (self.is_slut or self.is_submissive or self.is_nymphomaniac or self.is_celebrolesis or self.is_freeUse):
             return False
-        return (self.get("energy", 0) == 100 and self.get("willpower", 0) == 100 and self.get("inhibition", 0) == 100 and self.get("corruption", 0) == 0 and self.get("addiction", 0) == 0)
+        return (self.energy == 100 and self.willpower == 100 and self.inhibition == 100 and self.corruption == 0 and self.addiction == 0)
 
     @property
     def is_unfaithful(self) -> bool:
-        return (self.get("willpower", 0) > 45 and self.get("lust", 0) > 60 and self.get("anger", 0) > 50 and (self.get("lust", 0) + self.get("anger", 0)) > 130)
+        return (self.willpower > 45 and self.lust > 60 and self.anger > 50 and (self.lust + self.anger) > 130)
 
     @property
     def is_slut(self) -> bool:
-        return (self.get("lust", 0) > 50 and (self.get("corruption", 0) > 80 or self.get("addiction", 0) > 60) and (self.get("lust", 0) + self.get("corruption", 0) + self.get("addiction", 0)) > 160)
+        return (self.lust > 50 and (self.corruption > 80 or self.addiction > 60) and (self.lust + self.corruption + self.addiction) > 160)
 
     @property
     def is_nymphomaniac(self) -> bool:
-        return (self.get("lust", 0) > 90 and self.get("corruption", 0) > 10 and self.get("inhibition", 0) < 40)
+        return (self.lust > 90 and self.corruption > 10 and self.inhibition < 40)
 
     @property
     def is_submissive(self) -> bool:
-        return (self.get("willpower", 0) < 20 and self.get("fear", 0) > 80 and (self.get("fear", 0) - self.get("willpower", 0)) > 80)
+        return (self.willpower < 20 and self.fear > 80 and (self.fear - self.willpower) > 80)
 
     @property
     def is_celebrolesis(self) -> bool:
-        return (self.get("inhibition", 0) < 20 and (self.get("willpower", 0) < 80 or self.get("addiction", 0) > 20) and (self.get("addiction", 0) - self.get("inhibition", 0) - self.get("willpower", 0) > 40))
+        return (self.inhibition < 20 and (self.willpower < 80 or self.addiction > 20) and (self.addiction - self.inhibition - self.willpower > 40))
 
     @property
     def is_freeUse(self) -> bool:
