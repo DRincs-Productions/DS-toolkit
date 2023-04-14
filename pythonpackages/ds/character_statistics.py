@@ -9,18 +9,65 @@ class Statistic(object):
     def __init__(
         self,
         values: Optional[dict[str, int]] = None,
-        notify_increase_dict: Optional[dict[str]] = None,
-        notify_decrease_dict: Optional[dict[str]] = None,
+        notify_increase_dict: Optional[dict[str, NotifyEx]] = None,
+        notify_decrease_dict: Optional[dict[str, NotifyEx]] = None,
         notify_dict: Optional[dict[str, NotifyEx]] = None,
         max_values: int = 100,
     ):
 
         self.memory = {}
         self.memory.update(values if values else {})
-        self.notify_increase_dict = notify_increase_dict if notify_increase_dict else {}
-        self.notify_decrease_dict = notify_decrease_dict if notify_decrease_dict else {}
-        self.notify_dict = notify_dict if notify_dict else {}
+        self.notify_increase_dict = notify_increase_dict
+        self.notify_decrease_dict = notify_decrease_dict
+        self.notify_dict = notify_dict
         self.max_values = max_values
+
+    @property
+    def max_values(self) -> int:
+        """Default max value for all stats"""
+        return self._max_values
+
+    @max_values.setter
+    def max_values(self, value: int) -> None:
+        self._max_values = value
+
+    @property
+    def notify_increase_dict(self) -> dict[str, NotifyEx]:
+        """Dictionary of notifications for when a stat increases"""
+        return self._notify_increase_dict if self._notify_increase_dict else {}
+
+    @notify_increase_dict.setter
+    def notify_increase_dict(self, value: Optional[dict[str, NotifyEx]]) -> None:
+        self._notify_increase_dict = value
+
+    @property
+    def notify_decrease_dict(self) -> dict[str, NotifyEx]:
+        """Dictionary of notifications for when a stat decreases"""
+        return self._notify_decrease_dict if self._notify_decrease_dict else {}
+
+    @notify_decrease_dict.setter
+    def notify_decrease_dict(self, value: Optional[dict[str, NotifyEx]]) -> None:
+        self._notify_decrease_dict = value
+
+    @property
+    def notify_dict(self) -> dict[str, NotifyEx]:
+        """Dictionary of notifications for when a stat changes"""
+        return self._notify_dict if self._notify_dict else {}
+
+    @notify_dict.setter
+    def notify_dict(self, value: Optional[dict[str, NotifyEx]]) -> None:
+        self._notify_dict = value
+
+    @property
+    def memory(self) -> dict[str, int]:
+        """Dictionary of all stats"""
+        return self._memory if self._memory else {}
+
+    @memory.setter
+    def memory(self, value: Optional[dict[str, int]]) -> None:
+        if (self._memory is None):
+            self._memory = {}
+        self._memory.update(value if value else {})
 
     def set(self, name: str, value: int) -> None:
         """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Statistic#set """

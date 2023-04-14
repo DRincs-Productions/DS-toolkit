@@ -108,7 +108,7 @@ class CharacterInfo():
 
     @memory.setter
     def memory(self, value: Optional[dict[str, str]]) -> None:
-        if (value is None):
+        if (self._memory is None):
             self._memory = {}
         self._memory.update(value if value else {})
 
