@@ -1,15 +1,13 @@
-import json
-
 from pythonpackages.renpy_custom_log import *
 
 __all__ = [
-    "updateFlags",
-    "getFlags",
-    "setFlags",
+    "update_flags",
+    "get_flags",
+    "set_flags",
 ]
 
 
-def updateFlags(flags: dict[str, bool], flag_keys: list[str]):
+def update_flags(flags: dict[str, bool], flag_keys: list[str]):
     """update flags by making it with the same elements of flag_keys. in case you have to add them set them as False"""
     # check if there are less elements than flag_keys
     # in case you add them set with False
@@ -28,7 +26,7 @@ def updateFlags(flags: dict[str, bool], flag_keys: list[str]):
     return flags
 
 
-def getFlags(flag_id: str, flags: dict[str, bool]) -> bool:
+def get_flags(flag_id: str, flags: dict[str, bool]) -> bool:
     """returns the value of the flag_id in flags"""
     if (flag_id in flags):
         return flags[flag_id]
@@ -36,6 +34,6 @@ def getFlags(flag_id: str, flags: dict[str, bool]) -> bool:
         return False
 
 
-def setFlags(flag_id: str, value: bool, flags: dict[str, bool]):
+def set_flags(flag_id: str, value: bool, flags: dict[str, bool]):
     flags[flag_id] = value
     return
