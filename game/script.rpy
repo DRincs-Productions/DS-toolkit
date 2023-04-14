@@ -43,8 +43,8 @@ default friendStatistic = Statistic(
 )
 
 # statsSentimental
-default girlSentimental = SentimentalStatistic(attraction_genders = "M", virgin = True)
-default friendSentimental = SentimentalStatistic(attraction_genders = "F", virgin = False, against = 20)
+default girlSentimental = SentimentalStatistic(virgin = True)
+default friendSentimental = SentimentalStatistic(virgin = False, against = 20)
 
 # Clothes
 default girl_dress = "-homesuit"
