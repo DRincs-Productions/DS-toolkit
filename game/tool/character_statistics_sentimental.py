@@ -201,9 +201,9 @@ class SentimentalStatistic(Statistic):
         if (self.anger is int and self.anger > 0 and amt > 0):
             self.anger = self.anger - 1
             return
-        if cur_value is int and (cur_value + amt) >= 105:
+        if (cur_value + amt) >= 105:
             self.love = self.love + 1
-        if cur_value is int and (cur_value + amt) < 0:
+        if (cur_value + amt) < 0:
             self.anger = self.anger + 10
         self.improve("favour", amt, max=100, min=0)
         return
@@ -220,7 +220,7 @@ class SentimentalStatistic(Statistic):
         if (self.anger is int and self.anger > 0 and amt > 0):
             self.anger = self.anger - 5
             return
-        if cur_value != None and (self.is_against and (cur_value + amt) > 20):
+        if (self.is_against and (cur_value + amt) > 20):
             self.set("love", 20)
             notify(against_notify)
             return
@@ -228,7 +228,7 @@ class SentimentalStatistic(Statistic):
             self.improve("love", -amt, max=100, min=0)
             notify(fear_against_notify)
             return
-        if cur_value != None and (cur_value + amt) >= 110:
+        if (cur_value + amt) >= 110:
             self.lust = self.lust + 1
         self.improve("love", amt, max=100, min=0)
         return
@@ -242,7 +242,7 @@ class SentimentalStatistic(Statistic):
     def corruption(self, value: int) -> None:
         cur_value = self.get("corruption")
         amt = value - cur_value
-        if cur_value + amt >= 105:
+        if (cur_value + amt) >= 105:
             self.willpower = self.willpower - 5
         self.improve("corruption", amt, max=100, min=0)
         return
@@ -270,6 +270,74 @@ class SentimentalStatistic(Statistic):
         amt = value - cur_value
         self.improve("anger", amt, max=100, min=0)
         return
+
+    # Energy
+    @property
+    def energy(self) -> int:
+        return self.get("energy")
+
+    @energy.setter
+    def energy(self, value: int) -> None:
+        cur_value = self.get("energy")
+        amt = value - cur_value
+        self.improve("energy", amt, max=100, min=0)
+        return
+
+    # Willpower
+    @property
+    def willpower(self) -> int:
+        return self.get("willpower")
+
+    @willpower.setter
+    def willpower(self, value: int) -> None:
+        cur_value = self.get("willpower")
+        amt = value - cur_value
+        if (cur_value + amt) < 0:
+            self.energy = self.energy - 15
+        self.improve("willpower", amt, max=100, min=0)
+        return
+
+    # Inhibition
+    @property
+    def inhibition(self) -> int:
+        return self.get("inhibition")
+
+    @inhibition.setter
+    def inhibition(self, value: int) -> None:
+        cur_value = self.get("inhibition")
+        amt = value - cur_value
+        self.improve("inhibition", amt, max=100, min=0)
+        return
+
+    # Addiction
+    @property
+    def addiction(self) -> int:
+        return self.get("addiction")
+
+    @addiction.setter
+    def addiction(self, value: int) -> None:
+        cur_value = self.get("addiction")
+        amt = value - cur_value
+        if (cur_value + amt) >= 105:
+            self.inhibition = self.inhibition - 3
+        self.improve("addiction", amt, max=100, min=0)
+        return
+
+    # Lust
+    @property
+    def lust(self) -> int:
+        return self.get("lust")
+
+    @lust.setter
+    def lust(self, value: int) -> None:
+        cur_value = self.get("lust")
+        amt = value - cur_value
+        if (cur_value + amt) >= 120:
+            self.inhibition = self.inhibition - 5
+        self.improve("lust", amt, max=100, min=0)
+        return
+
+    # Other
 
     @property
     def is_virgin(self) -> bool:
@@ -336,31 +404,3 @@ class SentimentalStatistic(Statistic):
     @property
     def is_freeUse(self) -> bool:
         return ((self.is_slut and self.is_submissive) or (self.is_slut and self.is_celebrolesis))
-
-    # Characteristics
-
-    def improveEnergy(self, amt) -> None:
-        self.improve("energy", amt, max=100, min=0)
-        return
-
-    def improveWillpower(self, amt) -> None:
-        if self.get("willpower") != None and (self.get("willpower") + amt) < 0:
-            self.improveEnergy(-15)
-        self.improve("willpower", amt, max=100, min=0)
-        return
-
-    def improveInhibition(self, amt) -> None:
-        self.improve("inhibition", amt, max=100, min=0)
-        return
-
-    def improveAddiction(self, amt) -> None:
-        if self.get("addiction") != None and (self.get("addiction") + amt) >= 105:
-            self.improveInhibition(-3)
-        self.improve("addiction", amt, max=100, min=0)
-        return
-
-    def improveLust(self, amt) -> None:
-        if self.get("lust") != None and (self.get("lust") + amt) >= 120:
-            self.improveInhibition(-5)
-        self.improve("lust", amt, max=100, min=0)
-        return
