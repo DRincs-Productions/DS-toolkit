@@ -1,6 +1,6 @@
 from typing import Union
 from pythonpackages.ds.character_type import GenderEnum
-from pythonpackages.renpy_custom_notify import NotifyEx
+from pythonpackages.renpy_custom_notify import NotifyEx, notify
 from pythonpackages.ds.character_statistics import Statistic
 
 against_notify = NotifyEx(
@@ -165,10 +165,8 @@ class SentimentalStatistic(Statistic):
             self.improve(name="addiction",  amt=addiction, show_notify=False)
         # Relaction
         self.friendship = friendship
-        if (favour != None):
-            self.improve(name="favour",  amt=favour, show_notify=False)
-        if (love != None):
-            self.improve(name="love",  amt=love, show_notify=False)
+        self.favour = favour
+        self.love = love
         if (corruption != None):
             self.improve(name="corruption",  amt=corruption, show_notify=False)
         # Emblems
@@ -198,10 +196,7 @@ class SentimentalStatistic(Statistic):
 
     @property
     def is_friend(self) -> bool:
-        val = self.get("friendship")
-        if val == None:
-            return False
-        return val > 0
+        return self.friendship > 0
 
     # Favour
     @property
@@ -220,6 +215,31 @@ class SentimentalStatistic(Statistic):
         if cur_value is int and (cur_value + amt) < 0:
             self.anger = self.anger + 10
         self.improve("favour", amt, max=100, min=0)
+        return
+
+    # Love
+    @property
+    def love(self) -> int:
+        return self.get("love")
+
+    @love.setter
+    def love(self, value: int) -> None:
+        cur_value = self.get("love")
+        amt = value - cur_value
+        if (self.anger is int and self.anger > 0 and amt > 0):
+            self.improveAnger(-5)
+            return
+        if cur_value != None and (self.is_against and (cur_value + amt) > 20):
+            self.set("love", 20)
+            notify(against_notify)
+            return
+        if (self.fear + amt) > 40 and amt > 0:
+            self.improve("love", -amt, max=100, min=0)
+            notify(fear_against_notify)
+            return
+        if cur_value != None and (cur_value + amt) >= 110:
+            self.lust = self.lust + 1
+        self.improve("love", amt, max=100, min=0)
         return
 
     @property
@@ -287,24 +307,6 @@ class SentimentalStatistic(Statistic):
     @property
     def is_freeUse(self) -> bool:
         return ((self.is_slut and self.is_submissive) or (self.is_slut and self.is_celebrolesis))
-
-    def improveLove(self, amt) -> None:
-        valAnger = self.get("anger")
-        if (valAnger is int and valAnger > 0 and amt > 0):
-            self.improveAnger(-5)
-            return
-        if self.get("love") != None and (self.is_against and (self.get("love") + amt) > 20):
-            self.set("love", 20)
-            notify(against_notify)
-            return
-        if self.get("fear") != None and ((self.get("fear") + amt) > 40 and amt > 0):
-            self.improve("love", -amt, max=100, min=0)
-            notify(fear_against_notify)
-            return
-        if self.get("love") != None and (self.get("love") + amt) >= 110:
-            self.improveLust(1)
-        self.improve("love", amt, max=100, min=0)
-        return
 
     def improveCorruption(self, amt) -> None:
         if self.get("corruption") != None and (self.get("corruption") + amt) >= 105:
