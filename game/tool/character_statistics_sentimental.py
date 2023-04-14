@@ -157,7 +157,7 @@ class SentimentalStatistic(Statistic):
         # is a contradiction to a romantic relationship
         self.against = against
         # Characteristics
-        self.against = against
+        self.addiction = addiction
         # Relaction
         self.friendship = friendship
         self.favour = favour
