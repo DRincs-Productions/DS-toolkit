@@ -1,3 +1,4 @@
+from typing import Union
 from pythonpackages.ds.character_type import GenderEnum
 from pythonpackages.renpy_custom_notify import NotifyEx
 from pythonpackages.ds.character_statistics import Statistic
@@ -181,74 +182,77 @@ class SentimentalStatistic(Statistic):
             self.improve(name="polyamorous",
                          amt=polyamorous, show_notify=False)
 
-    # Emblems
-    def isVirgin(self) -> bool:
-        val = self.get("virgin")
+    @property
+    def is_virgin(self) -> bool:
+        """Return True if the character is a virgin, False otherwise."""
+        val = self.get("sex_actions")
         if val == None:
             return True
-        elif val is bool:
-            return val
-        elif val is int:
-            return val > 0
+        elif isinstance(val, int):
+            return val < 0
         return True
 
-    def isBisexual(self) -> bool:
-        val = self.get("bisexual")
-        if val == None:
-            return False
-        if (val == True or val == False):
-            return val
-        return val > 10
+    @is_virgin.setter
+    def is_virgin(self, value: Union[bool, int]):
+        """Set the virginity of the character."""
+        if isinstance(value, bool):
+            if value:
+                self.set("sex_actions", 0)
+            else:
+                self.improve("sex_actions", 1)
+        self.set("sex_actions", value)
 
-    def isPolyamorous(self) -> bool:
+    @property
+    def is_polyamorous(self) -> bool:
         val = self.get("polyamorous")
         if val == None:
             return False
-        if (val == True or val == False):
-            return val
         return val > 10
 
-    def isAgainst(self) -> bool:
+    @property
+    def is_against(self) -> bool:
         val = self.get("against")
         if val == None:
             return False
-        if (val == True or val == False):
-            return val
         return val <= 0
 
-    def isHealthy(self) -> bool:
+    @property
+    def is_healthy(self) -> bool:
         if (self.get("against") and self.get("against") != True and self.get("against") != False and self.get("against", 0) > 0):  # TODO: TO improve
             return False
-        if (self.isSlut() or self.isSubmissive() or self.isNymphomaniac() or self.isCelebrolesis() or self.isFreeUse()):
+        if (self.is_slut or self.is_submissive or self.is_nymphomaniac or self.is_celebrolesis or self.is_freeUse):
             return False
         return (self.get("energy", 0) == 100 and self.get("willpower", 0) == 100 and self.get("inhibition", 0) == 100 and self.get("corruption", 0) == 0 and self.get("addiction", 0) == 0)
 
-    def isUnfaithful(self) -> bool:
+    @property
+    def is_unfaithful(self) -> bool:
         return (self.get("willpower", 0) > 45 and self.get("lust", 0) > 60 and self.get("anger", 0) > 50 and (self.get("lust", 0) + self.get("anger", 0)) > 130)
 
-    def isSlut(self) -> bool:
+    @property
+    def is_slut(self) -> bool:
         return (self.get("lust", 0) > 50 and (self.get("corruption", 0) > 80 or self.get("addiction", 0) > 60) and (self.get("lust", 0) + self.get("corruption", 0) + self.get("addiction", 0)) > 160)
 
-    def isNymphomaniac(self) -> bool:
+    @property
+    def is_nymphomaniac(self) -> bool:
         return (self.get("lust", 0) > 90 and self.get("corruption", 0) > 10 and self.get("inhibition", 0) < 40)
 
-    def isSubmissive(self) -> bool:
+    @property
+    def is_submissive(self) -> bool:
         return (self.get("willpower", 0) < 20 and self.get("fear", 0) > 80 and (self.get("fear", 0) - self.get("willpower", 0)) > 80)
 
-    def isCelebrolesis(self) -> bool:
+    @property
+    def is_celebrolesis(self) -> bool:
         return (self.get("inhibition", 0) < 20 and (self.get("willpower", 0) < 80 or self.get("addiction", 0) > 20) and (self.get("addiction", 0) - self.get("inhibition", 0) - self.get("willpower", 0) > 40))
 
-    def isFreeUse(self) -> bool:
-        return ((self.isSlut() and self.isSubmissive()) or (self.isSlut() and self.isCelebrolesis()))
+    @property
+    def is_freeUse(self) -> bool:
+        return ((self.is_slut and self.is_submissive) or (self.is_slut and self.is_celebrolesis))
 
-    # Relaction
-
-    def isFriend(self) -> bool:
+    @property
+    def is_friend(self) -> bool:
         val = self.get("friendship")
         if val == None:
             return False
-        if (val == True or val == False):
-            return val
         return val > 0
 
     def improveFriendship(self, amt) -> None:
@@ -278,7 +282,7 @@ class SentimentalStatistic(Statistic):
         if (valAnger is int and valAnger > 0 and amt > 0):
             self.improveAnger(-5)
             return
-        if self.get("love") != None and (self.isAgainst() and (self.get("love") + amt) > 20):
+        if self.get("love") != None and (self.is_against and (self.get("love") + amt) > 20):
             self.set("love", 20)
             notify(against_notify)
             return

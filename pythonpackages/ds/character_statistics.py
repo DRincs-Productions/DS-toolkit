@@ -110,7 +110,7 @@ class Statistic(object):
             self.notify(name=name, amt=amt)
         return
 
-    def get(self, name, default_return=None):
+    def get(self, name, default_return=0) -> int:
         """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Statistic#get """
         if name in self.memory:
             return self.memory[name]
