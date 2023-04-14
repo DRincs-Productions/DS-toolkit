@@ -218,7 +218,7 @@ class SentimentalStatistic(Statistic):
         cur_value = self.get("love")
         amt = value - cur_value
         if (self.anger is int and self.anger > 0 and amt > 0):
-            self.improveAnger(-5)
+            self.anger = self.anger - 5
             return
         if cur_value != None and (self.is_against and (cur_value + amt) > 20):
             self.set("love", 20)
