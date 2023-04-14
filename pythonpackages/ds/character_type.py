@@ -1,3 +1,3 @@
 from typing import Literal
 
-GENDER_TYPE = type(Literal["M", "F"])
+GENDER_TYPE = Literal["M", "F"]
