@@ -23,6 +23,7 @@ class CharacterInfo():
         other_values: Optional[dict[Character, str]] = None,
         gender_attracted: Optional[Union[list[GenderEnum], GenderEnum]] = None,
     ):
+        self._memory = {}
         self.memory = other_values
         self.name = name
         self.sname = sname
@@ -110,8 +111,6 @@ class CharacterInfo():
 
     @memory.setter
     def memory(self, value: Optional[dict[str, str]]) -> None:
-        if (self._memory is None):
-            self._memory = {}
         self._memory.update(value if value else {})
 
     @property

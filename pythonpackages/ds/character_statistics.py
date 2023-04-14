@@ -14,8 +14,8 @@ class Statistic(object):
         notify_dict: Optional[dict[str, NotifyEx]] = None,
         max_values: int = 100,
     ):
+        self._memory = {}
         self._default_show_notify = False
-        self.memory = {}
         self.memory.update(values if values else {})
         self.notify_increase_dict = notify_increase_dict
         self.notify_decrease_dict = notify_decrease_dict
@@ -66,8 +66,6 @@ class Statistic(object):
 
     @memory.setter
     def memory(self, value: Optional[dict[str, int]]) -> None:
-        if (self._memory is None):
-            self._memory = {}
         self._memory.update(value if value else {})
 
     def set(self, name: str, value: int) -> None:
