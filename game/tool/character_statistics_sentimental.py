@@ -337,6 +337,18 @@ class SentimentalStatistic(Statistic):
         self.improve("lust", amt, max=100, min=0)
         return
 
+    # Against
+    @property
+    def against(self) -> int:
+        return self.get("against")
+
+    @against.setter
+    def against(self, value: int) -> None:
+        cur_value = self.get("lust")
+        amt = value - cur_value
+        self.improve("against", amt, max=100, min=0)
+        return
+
     # Other
 
     @property
