@@ -9,9 +9,9 @@ label renaming_mc:
     # allow default name(s) to be saved across multiple games
     if renpy.variant("pc"):
         if mp_ndata.male_fname != None:
-            $ mcI.set("name_default", mp_ndata.male_fname)
+            $ mcI.default_name = mp_ndata.male_fname
         if mp_ndata.male_sname != None:
-            $ mcI.set("sname_default", mp_ndata.male_sname)
+            $ mcI.default_surname = mp_ndata.male_sname
 
     "Player" "My name is:"
     $ mcI.changeName()
@@ -19,9 +19,9 @@ label renaming_mc:
     $ mcI.changeSurname()
 
     if renpy.variant("pc"):
-        if mcI.name != mcI.get("name_default"):
+        if mcI.name != mcI.default_name:
             $ mp_ndata.male_fname = mcI.name
-        if mcI.sname != mcI.get("sname_default"):
-            $ mp_ndata.male_sname = mcI.sname
+        if mcI.surname != mcI.default_surname:
+            $ mp_ndata.male_sname = mcI.surname
         $ mp_ndata.save()
     return

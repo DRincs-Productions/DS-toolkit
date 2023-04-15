@@ -8,6 +8,9 @@ from pythonpackages.ds.character_type import GenderEnum
 from pythonpackages.utility import IsNullOrWhiteSpace
 
 UNKNOWN_STRING = "Unknown"
+DEFAULT_SURNAME_KEY = "default_surname"
+DEFAULT_NAME_KEY = "default_name"
+DEFAULT_AGE_KEY = "default_age"
 
 
 class CharacterInfo():
@@ -17,7 +20,7 @@ class CharacterInfo():
         self,
         name: str,
         gender: GenderEnum,
-        sname: Optional[str] = None,
+        surname: Optional[str] = None,
         age: Optional[int] = None,
         relationships: Optional[dict[Character, str]] = None,
         other_values: Optional[dict[Character, str]] = None,
@@ -27,12 +30,14 @@ class CharacterInfo():
         self._memory = {}
         self.memory = other_values
         self.name = name
-        self.sname = sname
+        self.default_name = name
+        self.surname = surname
+        if (surname != None):
+            self.default_surname = surname
         self.age = age
+        if (age != None):
+            self.default_age = age
         self.gender = gender
-        self.set("name_default", name)
-        self.set("surname_default", sname)
-        self.set("age_default", age)
         self.relationships = relationships
         self.attraction_genders = attraction_genders
 
@@ -44,7 +49,7 @@ class CharacterInfo():
     @name.setter
     def name(self, value: Optional[str]) -> None:
         if IsNullOrWhiteSpace(value):
-            self._name = self.get("name_default")
+            self._name = self.get(DEFAULT_NAME_KEY)
         else:
             self._name = value
 
@@ -70,14 +75,14 @@ class CharacterInfo():
     @sname.setter
     def sname(self, value: Optional[str]) -> None:
         if IsNullOrWhiteSpace(value):
-            self._surname = self.get("surname_default")
+            self._surname = self.get(DEFAULT_SURNAME_KEY)
         else:
             self._surname = value
 
     @surname.setter
     def surname(self, value: Optional[str]) -> None:
         if IsNullOrWhiteSpace(value):
-            self._surname = self.get("surname_default")
+            self._surname = self.get(DEFAULT_SURNAME_KEY)
         else:
             self._surname = value
 
@@ -92,9 +97,36 @@ class CharacterInfo():
             self._age = value
             return
         if IsNullOrWhiteSpace(value):
-            self._age = self.get("age_default")
+            self._age = self.get(DEFAULT_AGE_KEY)
         else:
             self._age = value
+
+    @property
+    def default_name(self) -> str:
+        """Default name of the character"""
+        return self.get(DEFAULT_NAME_KEY)
+
+    @default_name.setter
+    def default_name(self, value: str) -> None:
+        self.set(DEFAULT_NAME_KEY, value)
+
+    @property
+    def default_surname(self) -> str:
+        """Default surname of the character"""
+        return self.get(DEFAULT_SURNAME_KEY)
+
+    @default_surname.setter
+    def default_surname(self, value: str) -> None:
+        self.set(DEFAULT_SURNAME_KEY, value)
+
+    @property
+    def default_age(self) -> Union[int, str]:
+        """Default age of the character"""
+        return self.get(DEFAULT_AGE_KEY)
+
+    @default_age.setter
+    def default_age(self, value: Union[int, str]) -> None:
+        self.set(DEFAULT_AGE_KEY, value)
 
     @property
     def relationships(self) -> dict[Character, str]:
@@ -151,25 +183,25 @@ class CharacterInfo():
     def changeName(self) -> None:
         """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Information#change-name """
         self.name = renpy.input(
-            "{i}(Default: " + self.get("name_default") + "){/i}")
-        if (self.get("name_default") == UNKNOWN_STRING):
-            self.set("name_default", self.name)
+            "{i}(Default: " + self.get(DEFAULT_NAME_KEY) + "){/i}")
+        if (self.get(DEFAULT_NAME_KEY) == UNKNOWN_STRING):
+            self.set(DEFAULT_NAME_KEY, self.name)
         return
 
     def changeSurname(self) -> None:
         """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Information#change-surname """
         self.sname = renpy.input(
-            "{i}(Default: " + self.get("surname_default") + "){/i}")
-        if (self.get("surname_default") == UNKNOWN_STRING):
-            self.set("surname_default", self.sname)
+            "{i}(Default: " + self.get(DEFAULT_SURNAME_KEY) + "){/i}")
+        if (self.get(DEFAULT_SURNAME_KEY) == UNKNOWN_STRING):
+            self.set(DEFAULT_SURNAME_KEY, self.sname)
         return
 
     def changeAge(self) -> None:
         """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Information#change-age """
         self.age = renpy.input(
-            "{i}(Default: " + str(self.get("age_default")) + "){/i}")
-        if (self.get("age_default") == UNKNOWN_STRING):
-            self.set("age_default", self.age)
+            "{i}(Default: " + str(self.get(DEFAULT_AGE_KEY)) + "){/i}")
+        if (self.get(DEFAULT_AGE_KEY) == UNKNOWN_STRING):
+            self.set(DEFAULT_AGE_KEY, self.age)
         return
 
     def get(self, name: str) -> str:
