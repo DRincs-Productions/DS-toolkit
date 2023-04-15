@@ -183,25 +183,25 @@ class CharacterInfo():
     def changeName(self) -> None:
         """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Information#change-name """
         self.name = renpy.input(
-            "{i}(Default: " + self.get(DEFAULT_NAME_KEY) + "){/i}")
-        if (self.get(DEFAULT_NAME_KEY) == UNKNOWN_STRING):
-            self.set(DEFAULT_NAME_KEY, self.name)
+            "{i}(Default: " + self.default_name + "){/i}")
+        if self.default_name == UNKNOWN_STRING:
+            self.default_name = self.name
         return
 
     def changeSurname(self) -> None:
         """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Information#change-surname """
         self.sname = renpy.input(
-            "{i}(Default: " + self.get(DEFAULT_SURNAME_KEY) + "){/i}")
-        if (self.get(DEFAULT_SURNAME_KEY) == UNKNOWN_STRING):
-            self.set(DEFAULT_SURNAME_KEY, self.sname)
+            "{i}(Default: " + self.default_surname + "){/i}")
+        if self.default_surname == UNKNOWN_STRING:
+            self.default_surname = self.sname
         return
 
     def changeAge(self) -> None:
         """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Information#change-age """
         self.age = renpy.input(
-            "{i}(Default: " + str(self.get(DEFAULT_AGE_KEY)) + "){/i}")
-        if (self.get(DEFAULT_AGE_KEY) == UNKNOWN_STRING):
-            self.set(DEFAULT_AGE_KEY, self.age)
+            "{i}(Default: " + str(self.default_age) + "){/i}")
+        if (self.default_age == UNKNOWN_STRING):
+            self.default_age = self.age
         return
 
     def get(self, name: str) -> str:
