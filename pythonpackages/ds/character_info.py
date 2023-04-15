@@ -134,7 +134,7 @@ class CharacterInfo():
     @property
     def relationships(self) -> dict[Character, str]:
         """Relationships of the character"""
-        return self._relationships or {}
+        return self._relationships if self._relationships else {}
 
     @relationships.setter
     def relationships(self, value: Optional[dict[Character, str]]) -> None:
@@ -143,7 +143,7 @@ class CharacterInfo():
     @property
     def memory(self) -> dict[str, str]:
         """I use a dictionary because it is the best solution for compatibility and not to create variables that may not be used."""
-        return self._memory or {}
+        return self._memory if self._memory else {}
 
     @memory.setter
     def memory(self, value: Optional[dict[str, str]]) -> None:
