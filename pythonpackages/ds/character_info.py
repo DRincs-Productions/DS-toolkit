@@ -41,19 +41,35 @@ class CharacterInfo():
         self.relationships = relationships
         self.attraction_genders = attraction_genders
 
+    # Name
+
     @property
     def name(self) -> str:
         """Name of the character"""
         if self._name == None or IsNullOrWhiteSpace(self._name):
-            return UNKNOWN_STRING
+            return self.default_name
         return self._name
 
     @name.setter
     def name(self, value: Optional[str]) -> None:
-        if IsNullOrWhiteSpace(value):
-            self._name = self.default_name
-        else:
-            self._name = value
+        self._name = value
+
+    @property
+    def default_name(self) -> str:
+        """Default name of the character"""
+        return self.get(DEFAULT_NAME_KEY)
+
+    @default_name.setter
+    def default_name(self, value: str) -> None:
+        self.set(DEFAULT_NAME_KEY, value)
+
+    def changeName(self) -> None:
+        """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Information#change-name """
+        self.name = renpy.input(
+            "{i}(Default: " + self.default_name + "){/i}")
+        if self.default_name == UNKNOWN_STRING:
+            self.default_name = self.name
+        return
 
     @property
     def gender(self) -> GenderEnum:
@@ -103,15 +119,6 @@ class CharacterInfo():
             self._age = self.get(DEFAULT_AGE_KEY)
         else:
             self._age = value
-
-    @property
-    def default_name(self) -> str:
-        """Default name of the character"""
-        return self.get(DEFAULT_NAME_KEY)
-
-    @default_name.setter
-    def default_name(self, value: str) -> None:
-        self.set(DEFAULT_NAME_KEY, value)
 
     @property
     def default_surname(self) -> str:
@@ -183,14 +190,6 @@ class CharacterInfo():
             else:
                 self.attraction_genders.append(GenderEnum.FEMALE)
 
-    def changeName(self) -> None:
-        """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Information#change-name """
-        self.name = renpy.input(
-            "{i}(Default: " + self.default_name + "){/i}")
-        if self.default_name == UNKNOWN_STRING:
-            self.default_name = self.name
-        return
-
     def changeSurname(self) -> None:
         """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Information#change-surname """
         self.sname = renpy.input(
@@ -209,17 +208,19 @@ class CharacterInfo():
 
     def get(self, name: str) -> str:
         """Returns the value "name", in case it does not exist returns UNKNOWN_STRING"""
-        if name in self.memory:
-            return self.memory[name]
-        else:
-            return UNKNOWN_STRING
+        # if name in self.memory.keys():
+        return self.memory[name]
+        # else:
+        #     return UNKNOWN_STRING
 
-    def set(self, name: str, value) -> None:
+    def set(self, key: str, value) -> None:
         """Function to set or add a new value"""
-        if (not IsNullOrWhiteSpace(name)):
-            self.memory[name] = value
+        if value == None:
+            self.remove(key)
+        elif isinstance(value, str) and IsNullOrWhiteSpace(value):
+            self.remove(key)
         else:
-            self.remove(name)
+            self.memory[key] = value
         return
 
     def remove(self, name: str) -> None:
