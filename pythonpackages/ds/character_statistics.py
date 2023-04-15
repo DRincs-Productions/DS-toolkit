@@ -89,21 +89,22 @@ class Statistic(object):
             return
         if max == None:
             max = self.max_values
-        if (self.get(name) != None):
-            if (amt > 0 and self.memory[name] >= max):
+        cur_value = self.get(name)
+        if isinstance(cur_value, int):
+            if (amt > 0 and cur_value >= max):
                 return
-            elif (amt < 0 and self.memory[name] <= min):
+            elif (amt < 0 and cur_value <= min):
                 return
-            self.memory[name] += amt
-            if self.memory[name] < min:
-                self.memory[name] = min
-            elif self.memory[name] > max:
-                self.memory[name] = max
+            cur_value += amt
+            if cur_value < min:
+                cur_value = min
+            elif cur_value > max:
+                cur_value = max
         else:
-            if (amt is int and amt >= max):
+            if (amt >= max):
                 self.set(name, max)
                 return
-            elif (amt is int and amt <= min):
+            elif (amt <= min):
                 self.set(name, min)
                 return
             self.set(name, amt)
