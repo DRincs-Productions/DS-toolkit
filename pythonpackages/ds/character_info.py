@@ -44,7 +44,9 @@ class CharacterInfo():
     @property
     def name(self) -> str:
         """Name of the character"""
-        return self._name or UNKNOWN_STRING
+        if self._name == None or IsNullOrWhiteSpace(self._name):
+            return UNKNOWN_STRING
+        return self._name
 
     @name.setter
     def name(self, value: Optional[str]) -> None:
@@ -65,19 +67,18 @@ class CharacterInfo():
     @property
     def sname(self) -> str:
         """Surname of the character"""
-        return self._surname or UNKNOWN_STRING
+        return self.surname
 
     @property
     def surname(self) -> str:
         """Surname of the character"""
-        return self._surname or UNKNOWN_STRING
+        if self._surname == None or IsNullOrWhiteSpace(self._surname):
+            return UNKNOWN_STRING
+        return self._surname
 
     @sname.setter
     def sname(self, value: Optional[str]) -> None:
-        if IsNullOrWhiteSpace(value):
-            self._surname = self.get(DEFAULT_SURNAME_KEY)
-        else:
-            self._surname = value
+        self.surname = value
 
     @surname.setter
     def surname(self, value: Optional[str]) -> None:
@@ -89,7 +90,9 @@ class CharacterInfo():
     @property
     def age(self) -> Union[int, str]:
         """Age of the character"""
-        return self._age or UNKNOWN_STRING
+        if (self._age == None):
+            return UNKNOWN_STRING
+        return self._age
 
     @age.setter
     def age(self, value: Optional[Union[int, str]]) -> None:
