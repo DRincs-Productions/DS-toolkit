@@ -8,9 +8,9 @@ init python:
 label renaming_mc:
     # allow default name(s) to be saved across multiple games
     if renpy.variant("pc"):
-        if mp_ndata.male_fname != None:
+        if not IsNullOrWhiteSpace(mp_ndata.male_fname):
             $ mcI.default_name = mp_ndata.male_fname
-        if mp_ndata.male_sname != None:
+        if not IsNullOrWhiteSpace(mp_ndata.male_sname):
             $ mcI.default_surname = mp_ndata.male_sname
 
     "Player" "My name is:"

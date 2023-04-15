@@ -51,7 +51,7 @@ class CharacterInfo():
     @name.setter
     def name(self, value: Optional[str]) -> None:
         if IsNullOrWhiteSpace(value):
-            self._name = self.get(DEFAULT_NAME_KEY)
+            self._name = self.default_name
         else:
             self._name = value
 
@@ -73,7 +73,7 @@ class CharacterInfo():
     def surname(self) -> str:
         """Surname of the character"""
         if self._surname == None or IsNullOrWhiteSpace(self._surname):
-            return UNKNOWN_STRING
+            return self.default_surname
         return self._surname
 
     @sname.setter
@@ -91,7 +91,7 @@ class CharacterInfo():
     def age(self) -> Union[int, str]:
         """Age of the character"""
         if (self._age == None):
-            return UNKNOWN_STRING
+            return self.default_age
         return self._age
 
     @age.setter
@@ -208,7 +208,7 @@ class CharacterInfo():
         return
 
     def get(self, name: str) -> str:
-        """Returns the value "name", in case it does not exist returns \"Unknown\""""
+        """Returns the value "name", in case it does not exist returns UNKNOWN_STRING"""
         if name in self.memory:
             return self.memory[name]
         else:
