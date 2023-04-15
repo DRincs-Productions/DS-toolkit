@@ -208,10 +208,10 @@ class CharacterInfo():
 
     def get(self, name: str) -> str:
         """Returns the value "name", in case it does not exist returns UNKNOWN_STRING"""
-        # if name in self.memory.keys():
-        return self.memory[name]
-        # else:
-        #     return UNKNOWN_STRING
+        if name in self.memory.keys():
+            return self.memory[name]
+        else:
+            return UNKNOWN_STRING
 
     def set(self, key: str, value) -> None:
         """Function to set or add a new value"""
