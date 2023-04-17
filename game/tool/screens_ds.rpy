@@ -178,7 +178,7 @@ screen menu_userinfo():
                                 text _("Sentimental:") size gui.name_text_size
                             for sent in sentimental_memory.keys():
                                 $ value = sentimental_memory[sent]
-                                if sent == "gender_attracted" and cur_character_info:
+                                if sent == "attraction_genders" and cur_character_info:
                                     if cur_character_info.gender == "M" and value == "M":
                                         $ value = _("Gay")
                                     elif cur_character_info.gender == "F" and value == "F":

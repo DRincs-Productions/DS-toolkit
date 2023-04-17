@@ -5,30 +5,31 @@ image bg blue = "#b1e3ff"
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 
-init 10 python:
+init -10 python:
     from pythonpackages.ds.character_info import CharacterInfo
+    from pythonpackages.ds.character_type import GenderEnum
 
 
-default mcI = CharacterInfo(name = "Liam", sname = "Johnson", age = 20, gender = "M",
+default mcI = CharacterInfo(name = "Liam", surname = "Johnson", age = 20, gender = GenderEnum.MALE,
 relationships = {
-    girl : relactions["girlfriend"],
-    friend : relactions["friend"],
+    girl : "girlfriend",
+    friend : "friend",
 })
 define mc = Character("{b}[mcI.name]{/b}", color="#37b3f3", who_outlines=[(2,"#000000")], what_prefix="\"", what_suffix="\"", what_outlines=[(2,"#000000")])
 
-default friendI = CharacterInfo(name = "Nick", sname = "Valentine", age = 26, gender = "M",
+default friendI = CharacterInfo(name = "Nick", surname = "Valentine", age = 26, gender = GenderEnum.MALE,
 relationships = {
     mc : relactions["friend"],
 })
 define friend = Character("{b}[friendI.name] C.J.{/b}", color="#37c68f", who_outlines=[(2,"#000000")], what_prefix="\"", what_suffix="\"", what_outlines=[(2,"#000000")])
 image friend normal = "/friend.webp"
 
-default girlI = CharacterInfo(name = "Eileen", sname = "Fisher", age = 18, gender = "F",
+default girlI = CharacterInfo(name = "Eileen", surname = "Fisher", age = 18, gender = GenderEnum.FEMALE,
 other_values ={
     "story": __("She has always been before class.")
-}, 
+},
 relationships = {
-    mc : relactions["boyfriend"],
+    mc : "boyfriend",
 })
 define girl = Character("{b}[girlI.name]{/b}", color="#f337ba", who_outlines=[(2,"#000000")], what_prefix="\"", what_suffix="\"", what_outlines=[(2,"#000000")])
 
@@ -43,8 +44,8 @@ default friendStatistic = Statistic(
 )
 
 # statsSentimental
-default girlSentimental = SentimentalStatistic(gender_attracted = "M", virgin = True)
-default friendSentimental = SentimentalStatistic(gender_attracted = "F", virgin = False, against = 20)
+default girlSentimental = SentimentalStatistic(virgin = True, love = 10)
+default friendSentimental = SentimentalStatistic(virgin = False, against = 20)
 
 # Clothes
 default girl_dress = "-homesuit"
@@ -74,7 +75,7 @@ label loop:
         "Screens":
             call screen menu_userinfo()
         "Notifications Test":
-            $ notifyEx(msg="Hello")
+            $ notify_add(message="Hello")
         "Character":
             call character
         "Clothes":
@@ -103,36 +104,36 @@ label character:
         "Change labels [girl]":
             "Her name is:"
             $ girlI.changeName()
-            "She is my:"
-            $ girlI.setRelationNameByCharacter(character= mc)
-            "I'm [girl]'s:"
-            $ mcI.setRelationNameByCharacter(character= girl)
-            $ relaction = mcI.getRelationNameByCharacter(girl)
+            "I am for [girl], his..."
+            $ girlI.setRelationNameByCharacter(character = mc, default_relation_key = "boyfriend", relaction_types = relactions)
+            "She is my..."
+            $ mcI.setRelationNameByCharacter(character = girl, default_relation_key = "girlfriend", relaction_types = relactions)
+            $ relaction = girlI.getRelationNameByCharacter(character = mc, relaction_types = relactions)
             girl "Hi my [relaction]"
-            $ relaction = mcI.getRelationNameByCharacter(girl)
+            $ relaction = mcI.getRelationNameByCharacter(character = girl, relaction_types = relactions)
             mc "Hi my [relaction]"
         "Speaks [girl]":
-            $ relaction = mcI.getRelationNameByCharacter(girl)
+            $ relaction = girlI.getRelationNameByCharacter(character = mc, relaction_types = relactions)
             girl "Hi my [relaction]"
-            $ relaction = mcI.getRelationNameByCharacter(girl)
+            $ relaction = mcI.getRelationNameByCharacter(character = girl, relaction_types = relactions)
             mc "Hi my [relaction]"
         "Change label [friend]":
             "His name is:"
             $ friendI.changeName()
-            "He is my:"
-            $ friendI.setRelationNameByCharacter(character= mc)
-            "I'm [friend]'s:"
-            $ mcI.setRelationNameByCharacter(character= friend)
-            $ relaction = mcI.getRelationNameByCharacter(friend)
+            "I am for [friend], his..."
+            $ friendI.setRelationNameByCharacter(character = mc, default_relation_key = "friend", relaction_types = relactions)
+            "He is my..."
+            $ mcI.setRelationNameByCharacter(character= friend, default_relation_key = "friend", relaction_types = relactions)
+            $ relaction = mcI.getRelationNameByCharacter(character = friend, relaction_types = relactions)
             friend "Hi my [relaction]"
-            $ relaction = friendI.getRelationNameByCharacter(mc)
+            $ relaction = friendI.getRelationNameByCharacter(character = mc, relaction_types = relactions)
             mc "Hi my [relaction]"
         "Speaks [friend]":
-            $ relaction = mcI.getRelationNameByCharacter(friend)
+            $ relaction = mcI.getRelationNameByCharacter(character = friend, relaction_types = relactions)
             friend "Hi my [relaction]"
-            $ relaction = friendI.getRelationNameByCharacter(mc)
+            $ relaction = friendI.getRelationNameByCharacter(character = mc, relaction_types = relactions)
             mc "Hi my [relaction]"
-            if (friendSentimental.isFriend()):
+            if (friendSentimental.is_friend):
                 friend "We are friends"
             else:
                 friend "We are not friends"
@@ -157,147 +158,110 @@ label clothes:
     jump clothes
 
 label relaction1:
-    $ ffr = friendSentimental.get("friendship")
-    $ flov = friendSentimental.get("love")
     menu:
-        "+ Friendship [friend]. Friendship: [ffr]":
-            $ friendSentimental.improveFriendship(10)
-        "- Friendship [friend]. Friendship: [ffr]":
-            $ friendSentimental.improveFriendship(-10)
-        "+ Love [friend]. Love: [flov]":
-            $ friendSentimental.improveLove(10)
-        "- Love [friend]. Love: [flov]":
-            $ friendSentimental.improveLove(-10)
+        "+ Friendship [friend]. Friendship: [friendSentimental.friendship]":
+            $ friendSentimental.friendship += 10
+        "- Friendship [friend]. Friendship: [friendSentimental.friendship]":
+            $ friendSentimental.friendship -= 10
+        "+ Love [friend]. Love: [friendSentimental.love]":
+            $ friendSentimental.love += 10
+        "- Love [friend]. Love: [friendSentimental.love]":
+            $ friendSentimental.love -= 10
         "Pag2":
             jump relaction2
         "Back":
             return
     jump relaction1
 label relaction2:
-    $ gfr = girlSentimental.get("favour")
-    $ glov = girlSentimental.get("love")
     menu:
         "Pag1":
             jump relaction1
-        "+ Favour [girl]. Favour: [gfr]":
-            $ girlSentimental.improveFavour(10)
-        "- Favour [girl]. Favour: [gfr]":
-            $ girlSentimental.improveFavour(-10)
-        "+ Love [girl]. Love: [glov]":
-            $ girlSentimental.improveLove(10)
-        "- Love [girl]. Love: [glov]":
-            $ girlSentimental.improveLove(-10)
+        "+ Favour [girl]. Favour: [girlSentimental.favour]":
+            $ girlSentimental.favour += 10
+        "- Favour [girl]. Favour: [girlSentimental.favour]":
+            $ girlSentimental.favour -= 10
+        "+ Love [girl]. Love: [girlSentimental.love]":
+            $ girlSentimental.love += 10
+        "- Love [girl]. Love: [girlSentimental.love]":
+            $ girlSentimental.love -= 10
         "Pag3":
             jump relaction3
         "Back":
             return
     jump relaction2
 label relaction3:
-    $ gcor = girlSentimental.get("corruption")
-    $ gfe = girlSentimental.get("fear")
-    $ gan = girlSentimental.get("anger")
     menu:
         "Pag2":
             jump relaction2
-        "+ Corruption [girl]. Corruption: [gcor]":
-            $ girlSentimental.improveCorruption(10)
-        "- Corruption [girl]. Corruption: [gcor]":
-            $ girlSentimental.improveCorruption(-10)
-        "+ Fear [girl]. Fear: [gfe]":
-            $ girlSentimental.improveFear(10)
-        "- Fear [girl]. Fear: [gfe]":
-            $ girlSentimental.improveFear(-10)
-        "+ Anger [girl]. Anger: [gan]":
-            $ girlSentimental.improveAnger(10)
-        "- Anger [girl]. Anger: [gan]":
-            $ girlSentimental.improveAnger(-10)
+        "+ Corruption [girl]. Corruption: [girlSentimental.corruption]":
+            $ girlSentimental.corruption += 10
+        "- Corruption [girl]. Corruption: [girlSentimental.corruption]":
+            $ girlSentimental.corruption -= 10
+        "+ Fear [girl]. Fear: [girlSentimental.fear]":
+            $ girlSentimental.fear += 10
+        "- Fear [girl]. Fear: [girlSentimental.fear]":
+            $ girlSentimental.fear -= 10
+        "+ Anger [girl]. Anger: [girlSentimental.anger]":
+            $ girlSentimental.anger += 10
+        "- Anger [girl]. Anger: [girlSentimental.anger]":
+            $ girlSentimental.anger -= 10
         "Back":
             return
     jump relaction3
 
 label character1:
-    $ gen = girlSentimental.get("energy")
-    $ gwi = girlSentimental.get("willpower")
-    $ ginh = girlSentimental.get("inhibition")
     menu:
-        "+ Energy [girl]. Energy: [gen]":
-            $ girlSentimental.improveEnergy(10)
-        "- Energy [girl]. Energy: [gen]":
-            $ girlSentimental.improveEnergy(-10)
-        "+ Willpower [girl]. Willpower: [gwi]":
-            $ girlSentimental.improveWillpower(10)
-        "- Willpower [girl]. Willpower: [gwi]":
-            $ girlSentimental.improveWillpower(-10)
-        "+ Inhibition [girl]. Inhibition: [ginh]":
-            $ girlSentimental.improveInhibition(10)
-        "- Inhibition [girl]. Inhibition: [ginh]":
-            $ girlSentimental.improveInhibition(-10)
+        "+ Energy [girl]. Energy: [girlSentimental.energy]":
+            $ girlSentimental.energy += 10
+        "- Energy [girl]. Energy: [girlSentimental.energy]":
+            $ girlSentimental.energy -= 10
+        "+ Willpower [girl]. Willpower: [girlSentimental.willpower]":
+            $ girlSentimental.willpower += 10
+        "- Willpower [girl]. Willpower: [girlSentimental.willpower]":
+            $ girlSentimental.willpower -= 10
+        "+ Inhibition [girl]. Inhibition: [girlSentimental.inhibition]":
+            $ girlSentimental.inhibition += 10
+        "- Inhibition [girl]. Inhibition: [girlSentimental.inhibition]":
+            $ girlSentimental.inhibition -= 10
         "Pag2":
             jump character2
         "Back":
             return
     jump character1
 label character2:
-    $ gad = girlSentimental.get("addiction")
-    $ glu = girlSentimental.get("lust")
     menu:
         "Pag1":
             jump character1
-        "+ Addiction [girl]. Addiction: [gad]":
-            $ girlSentimental.improveAddiction(10)
-        "- Addiction [girl]. Addiction: [gad]":
-            $ girlSentimental.improveAddiction(-10)
-        "+ Lust [girl]. Lust: [glu]":
-            $ girlSentimental.improveLust(10)
-        "- Lust [girl]. Lust: [glu]":
-            $ girlSentimental.improveLust(-10)
+        "+ Addiction [girl]. Addiction: [girlSentimental.addiction]":
+            $ girlSentimental.addiction += 10
+        "- Addiction [girl]. Addiction: [girlSentimental.addiction]":
+            $ girlSentimental.addiction -= 10
+        "+ Lust [girl]. Lust: [girlSentimental.lust]":
+            $ girlSentimental.lust += 10
+        "- Lust [girl]. Lust: [girlSentimental.lust]":
+            $ girlSentimental.lust -= 10
         "Back":
             return
     jump character2
 
 label emblem1:
     menu:
-        "Set not Virgin [girl]. Virgin: True" if (girlSentimental.isVirgin()):
-            $ girlSentimental.set("virgin", False)
-        "Set Virgin [girl]. Virgin: False" if (girlSentimental.isVirgin() == False):
-            $ girlSentimental.set("virgin", True)
-        "Set not Bisexual [girl]. Bisexual: True" if (girlSentimental.isBisexual()):
-            $ girlSentimental.set("bisexual", False)
-        "Set Bisexual [girl]. Bisexual: False" if (girlSentimental.isBisexual() == False):
-            $ girlSentimental.set("bisexual", True)
-        "Set not Polyamorous [girl]. Polyamorous: True" if (girlSentimental.isPolyamorous()):
-            $ girlSentimental.set("polyamorous", False)
-        "Set Polyamorous [girl]. Polyamorous: False" if (girlSentimental.isPolyamorous() == False):
-            $ girlSentimental.set("polyamorous", True)
-        "Set Against false [girl]. Against: True" if (girlSentimental.isAgainst()):
-            $ girlSentimental.set("against", 20)
-        "Set Against=0 [girl]. Against: True" if (girlSentimental.isAgainst()):
-            $ girlSentimental.set("against", 0)
-        "Set Against [girl]. Against: False" if (girlSentimental.isAgainst() == False):
-            $ girlSentimental.set("against", True)
-        "Set not Healthy [girl]. Healthy: True" if (girlSentimental.isHealthy()):
-            $ girlSentimental.improveEnergy(-100)
-            $ girlSentimental.improveWillpower(-100)
-            $ girlSentimental.improveInhibition(-100)
-            $ girlSentimental.improveCorruption(100)
-            $ girlSentimental.improveAddiction(100)
-        "Set Healthy [girl]. Healthy: False" if (girlSentimental.isHealthy() == False):
-            $ girlSentimental.improveEnergy(100)
-            $ girlSentimental.improveWillpower(100)
-            $ girlSentimental.improveInhibition(100)
-            $ girlSentimental.improveCorruption(-100)
-            $ girlSentimental.improveAddiction(-100)
-            $ girlSentimental.improveFear(-50)
-            $ girlSentimental.improveLust(-50)
-            $ girlSentimental.against = False
-        "Set not Unfaithful [girl]. Unfaithful: True" if (girlSentimental.isUnfaithful()):
-            $ girlSentimental.improveWillpower(-100)
-            $ girlSentimental.improveLust(-100)
-            $ girlSentimental.improveAnger(-100)
-        "Set Unfaithful [girl]. Unfaithful: False" if (girlSentimental.isUnfaithful() == False):
-            $ girlSentimental.improveWillpower(100)
-            $ girlSentimental.improveLust(100)
-            $ girlSentimental.improveAnger(100)
+        "Set not Virgin [girl]. Virgin: True" if (girlSentimental.is_virgin):
+            $ girlSentimental.is_virgin = False
+        "Set Virgin [girl]. Virgin: False" if (not girlSentimental.is_virgin):
+            $ girlSentimental.is_virgin = True
+        "Set not Against false [girl]. Against: True" if (girlSentimental.is_against):
+            $ girlSentimental.is_against = False
+        "Set Against [girl]. Against: False" if (not girlSentimental.is_against):
+            $ girlSentimental.is_against = True
+        "Set not Healthy [girl]. Healthy: True" if (girlSentimental.is_healthy):
+            $ girlSentimental.is_healthy = False
+        "Set Healthy [girl]. Healthy: False" if (not girlSentimental.is_healthy):
+            $ girlSentimental.is_healthy = True
+        "Set not Unfaithful [girl]. Unfaithful: True" if (girlSentimental.is_unfaithful):
+            $ girlSentimental.is_unfaithful = False
+        "Set Unfaithful [girl]. Unfaithful: False" if (not girlSentimental.is_unfaithful):
+            $ girlSentimental.is_unfaithful = True
         "Pag2":
             jump emblem2
         "Back":
@@ -307,50 +271,26 @@ label emblem2:
     menu:
         "Pag1":
             jump emblem1
-        "Set not Slut [girl]. Slut: True" if (girlSentimental.isSlut()):
-            $ girlSentimental.improveLust(-100)
-            $ girlSentimental.improveCorruption(-100)
-            $ girlSentimental.improveAddiction(-100)
-        "Set Slut [girl]. Slut: False" if (girlSentimental.isSlut() == False):
-            $ girlSentimental.improveLust(100)
-            $ girlSentimental.improveCorruption(100)
-            $ girlSentimental.improveAddiction(100)
-        "Set not Nymphomaniac [girl]. Nymphomaniac: True" if (girlSentimental.isNymphomaniac()):
-            $ girlSentimental.improveCorruption(-100)
-            $ girlSentimental.improveLust(-100)
-            $ girlSentimental.improveInhibition(100)
-        "Set Nymphomaniac [girl]. Nymphomaniac: False" if (girlSentimental.isNymphomaniac() == False):
-            $ girlSentimental.improveCorruption(100)
-            $ girlSentimental.improveLust(100)
-            $ girlSentimental.improveInhibition(-100)
-        "Set not Submissive [girl]. Submissive: True" if (girlSentimental.isSubmissive()):
-            $ girlSentimental.improveWillpower(100)
-            $ girlSentimental.improveFear(-100)
-        "Set Submissive [girl]. Submissive: False" if (girlSentimental.isSubmissive() == False):
-            $ girlSentimental.improveWillpower(-100)
-            $ girlSentimental.improveFear(100)
-        "Set not Celebrolesis [girl]. Celebrolesis: True" if (girlSentimental.isCelebrolesis()):
-            $ girlSentimental.improveWillpower(100)
-            $ girlSentimental.improveInhibition(100)
-            $ girlSentimental.improveAddiction(-100)
-        "Set Celebrolesis [girl]. Celebrolesis: False" if (girlSentimental.isCelebrolesis() == False):
-            $ girlSentimental.improveWillpower(-100)
-            $ girlSentimental.improveInhibition(-100)
-            $ girlSentimental.improveAddiction(100)
-        "Set not Free Use [girl]. Free Use: True" if (girlSentimental.isFreeUse()):
-            $ girlSentimental.improveWillpower(100)
-            $ girlSentimental.improveInhibition(100)
-            $ girlSentimental.improveFear(-100)
-            $ girlSentimental.improveLust(-100)
-            $ girlSentimental.improveCorruption(-100)
-            $ girlSentimental.improveAddiction(-100)
-        "Set Free Use [girl]. Free Use: False" if (girlSentimental.isFreeUse() == False):
-            $ girlSentimental.improveWillpower(-100)
-            $ girlSentimental.improveInhibition(-100)
-            $ girlSentimental.improveFear(100)
-            $ girlSentimental.improveLust(100)
-            $ girlSentimental.improveCorruption(100)
-            $ girlSentimental.improveAddiction(100)
+        "Set not Slut [girl]. Slut: True" if (girlSentimental.is_slut):
+            $ girlSentimental.is_slut = False
+        "Set Slut [girl]. Slut: False" if (not girlSentimental.is_slut):
+            $ girlSentimental.is_slut = True
+        "Set not Nymphomaniac [girl]. Nymphomaniac: True" if (girlSentimental.is_nymphomaniac):
+            $ girlSentimental.is_nymphomaniac = False
+        "Set Nymphomaniac [girl]. Nymphomaniac: False" if (not girlSentimental.is_nymphomaniac):
+            $ girlSentimental.is_nymphomaniac = True
+        "Set not Submissive [girl]. Submissive: True" if (girlSentimental.is_submissive):
+            $ girlSentimental.is_submissive = False
+        "Set Submissive [girl]. Submissive: False" if (not girlSentimental.is_submissive):
+            $ girlSentimental.is_submissive = True
+        "Set not Celebrolesis [girl]. Celebrolesis: True" if (girlSentimental.is_celebrolesis):
+            $ girlSentimental.is_celebrolesis = False
+        "Set Celebrolesis [girl]. Celebrolesis: False" if (not girlSentimental.is_celebrolesis):
+            $ girlSentimental.is_celebrolesis = True
+        "Set not Free Use [girl]. Free Use: True" if (girlSentimental.is_free_use):
+            $ girlSentimental.is_free_use = False
+        "Set Free Use [girl]. Free Use: False" if (not girlSentimental.is_free_use):
+            $ girlSentimental.is_free_use = True
         "Back":
             return
     jump emblem2
