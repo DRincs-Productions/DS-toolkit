@@ -104,34 +104,34 @@ label character:
         "Change labels [girl]":
             "Her name is:"
             $ girlI.changeName()
-            "She is my:"
-            $ girlI.setRelationNameByCharacter(character= mc)
             "I'm [girl]'s:"
-            $ mcI.setRelationNameByCharacter(character= girl)
-            $ relaction = mcI.getRelationNameByCharacter(girl)
+            $ girlI.setRelationNameByCharacter(character = mc, default_relation_key = "boyfriend", relaction_types = relactions)
+            "She is my:"
+            $ mcI.setRelationNameByCharacter(character = girl, default_relation_key = "girlfriend", relaction_types = relactions)
+            $ relaction = mcI.getRelationNameByCharacter(character = girl, relaction_types = relactions)
             girl "Hi my [relaction]"
-            $ relaction = mcI.getRelationNameByCharacter(girl)
+            $ relaction = mcI.getRelationNameByCharacter(character = girl, relaction_types = relactions)
             mc "Hi my [relaction]"
         "Speaks [girl]":
-            $ relaction = mcI.getRelationNameByCharacter(girl)
+            $ relaction = mcI.getRelationNameByCharacter(character = girl, relaction_types = relactions)
             girl "Hi my [relaction]"
-            $ relaction = mcI.getRelationNameByCharacter(girl)
+            $ relaction = mcI.getRelationNameByCharacter(character = girl, relaction_types = relactions)
             mc "Hi my [relaction]"
         "Change label [friend]":
             "His name is:"
             $ friendI.changeName()
-            "He is my:"
-            $ friendI.setRelationNameByCharacter(character= mc)
             "I'm [friend]'s:"
-            $ mcI.setRelationNameByCharacter(character= friend)
-            $ relaction = mcI.getRelationNameByCharacter(friend)
+            $ friendI.setRelationNameByCharacter(character = mc, default_relation_key = "friend", relaction_types = relactions)
+            "He is my:"
+            $ mcI.setRelationNameByCharacter(character= friend, default_relation_key = "friend", relaction_types = relactions)
+            $ relaction = mcI.getRelationNameByCharacter(character = friend, relaction_types = relactions)
             friend "Hi my [relaction]"
-            $ relaction = friendI.getRelationNameByCharacter(mc)
+            $ relaction = friendI.getRelationNameByCharacter(character = mc, relaction_types = relactions)
             mc "Hi my [relaction]"
         "Speaks [friend]":
-            $ relaction = mcI.getRelationNameByCharacter(friend)
+            $ relaction = mcI.getRelationNameByCharacter(character = friend, relaction_types = relactions)
             friend "Hi my [relaction]"
-            $ relaction = friendI.getRelationNameByCharacter(mc)
+            $ relaction = friendI.getRelationNameByCharacter(character = mc, relaction_types = relactions)
             mc "Hi my [relaction]"
             if (friendSentimental.is_friend()):
                 friend "We are friends"

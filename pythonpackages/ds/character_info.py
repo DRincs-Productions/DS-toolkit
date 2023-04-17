@@ -194,24 +194,38 @@ class CharacterInfo():
     def relationships(self, value: Optional[dict[Character, str]]) -> None:
         self._relationships = value
 
-    def getRelationNameByCharacter(self, character: Character) -> Optional[str]:
+    def getRelationNameByCharacter(self, character: Character, relaction_types: dict[str, tuple[str]] = {}) -> Optional[str]:
         """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Relaction#get-relation-name-by-character """
         if character in self.relationships:
-            return self.relationships[character]
+            key = self.relationships[character]
+            if key in relaction_types:
+                value = relaction_types[key]
+                if isinstance(value, tuple):
+                    return value[0]
+                else:
+                    return value
         else:
             return None
 
-    def setRelationNameByCharacter(self, character: Character, relation: Optional[str], relaction_types: dict[str, Union[str, int]] = {}) -> None:
+    def setRelationNameByCharacter(self, character: Character, default_relation_key: str, relaction_types: dict[str, tuple[str]] = {}) -> None:
         """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Relaction#set-relation-name-by-character """
-        if IsNullOrWhiteSpace(relation):
-            value = renpy.input(self.name+" is:")
-            self.relationships[character] = value
-            del value
-        if relation == None:
-            if character in self.relationships:
-                del self.relationships[character]
-        else:
-            self.relationships[character] = relation
+        default_value = default_relation_key
+        if default_value in relaction_types:
+            default_value = relaction_types[default_value]
+
+        if isinstance(default_value, tuple):
+            default_value = default_value[0]
+
+        value = renpy.input("{i}(Default: " + str(default_value) + "){/i}")
+        if IsNullOrWhiteSpace(value):
+            value = default_value
+        self.relationships[character] = value
+        return
+
+    def delete_relation(self, character: Character) -> None:
+        """Delete relation with character"""
+        if character in self.relationships:
+            del self.relationships[character]
         return
 
     # Gender
