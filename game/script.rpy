@@ -44,7 +44,7 @@ default friendStatistic = Statistic(
 )
 
 # statsSentimental
-default girlSentimental = SentimentalStatistic(virgin = True)
+default girlSentimental = SentimentalStatistic(virgin = True, love = 10)
 default friendSentimental = SentimentalStatistic(virgin = False, against = 20)
 
 # Clothes
@@ -158,17 +158,17 @@ label clothes:
     jump clothes
 
 label relaction1:
-    $ ffr = friendSentimental.get("friendship")
-    $ flov = friendSentimental.get("love")
+    $ ffr = friendSentimental.friendship
+    $ flov = friendSentimental.love
     menu:
         "+ Friendship [friend]. Friendship: [ffr]":
-            $ friendSentimental.improveFriendship(10)
+            $ friendSentimental.friendship += 10
         "- Friendship [friend]. Friendship: [ffr]":
-            $ friendSentimental.improveFriendship(-10)
+            $ friendSentimental.friendship -= 10
         "+ Love [friend]. Love: [flov]":
-            $ friendSentimental.improveLove(10)
+            $ friendSentimental.love += 10
         "- Love [friend]. Love: [flov]":
-            $ friendSentimental.improveLove(-10)
+            $ friendSentimental.love -= 10
         "Pag2":
             jump relaction2
         "Back":
