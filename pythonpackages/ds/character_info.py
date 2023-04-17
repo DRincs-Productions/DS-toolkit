@@ -221,6 +221,17 @@ class CharacterInfo():
         if IsNullOrWhiteSpace(value):
             self._relationships[character] = default_relation_key
         else:
+            value = str.lower(value)
+            for key, rel in relaction_types.items():
+                if isinstance(rel, tuple):
+                    for name in rel:
+                        if str.lower(name) == value:
+                            self._relationships[character] = key
+                            return
+                else:
+                    if str.lower(rel) == value:
+                        self._relationships[character] = key
+                        return
             self._relationships[character] = value
         return
 

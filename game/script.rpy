@@ -108,12 +108,12 @@ label character:
             $ girlI.setRelationNameByCharacter(character = mc, default_relation_key = "boyfriend", relaction_types = relactions)
             "She is my..."
             $ mcI.setRelationNameByCharacter(character = girl, default_relation_key = "girlfriend", relaction_types = relactions)
-            $ relaction = girlI.getRelationNameByCharacter(character = girl, relaction_types = relactions)
+            $ relaction = girlI.getRelationNameByCharacter(character = mc, relaction_types = relactions)
             girl "Hi my [relaction]"
             $ relaction = mcI.getRelationNameByCharacter(character = girl, relaction_types = relactions)
             mc "Hi my [relaction]"
         "Speaks [girl]":
-            $ relaction = girlI.getRelationNameByCharacter(character = girl, relaction_types = relactions)
+            $ relaction = girlI.getRelationNameByCharacter(character = mc, relaction_types = relactions)
             girl "Hi my [relaction]"
             $ relaction = mcI.getRelationNameByCharacter(character = girl, relaction_types = relactions)
             mc "Hi my [relaction]"
