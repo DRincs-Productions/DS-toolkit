@@ -36,10 +36,10 @@ class Statistic(object):
 
     def set(self, name: str, value: int) -> None:
         """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Statistic#set """
-        # if (value != 0):
-        self._memory[name] = value
-        # else:
-        #     self.remove(name)
+        if (value != 0):
+            self._memory[name] = value
+        else:
+            self.remove(name)
         return
 
     def remove(self, name: str) -> None:
