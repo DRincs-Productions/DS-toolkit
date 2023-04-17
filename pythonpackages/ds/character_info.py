@@ -28,6 +28,7 @@ class CharacterInfo():
                                            GenderEnum]] = None,
     ):
         self._memory = {}
+        self._relationships = {}
         self.memory = other_values
         self.name = name
         self.default_name = name
@@ -141,10 +142,10 @@ class CharacterInfo():
 
     def changeSurname(self) -> None:
         """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Information#change-surname """
-        self.sname = renpy.input(
+        self.surname = renpy.input(
             "{i}(Default: " + self.default_surname + "){/i}")
         if self.default_surname == UNKNOWN_STRING:
-            self.default_surname = self.sname
+            self.default_surname = self.surname
         return
 
     # Age
@@ -192,12 +193,12 @@ class CharacterInfo():
 
     @relationships.setter
     def relationships(self, value: Optional[dict[Character, str]]) -> None:
-        self._relationships = value
+        self._relationships.update(value if value else {})
 
     def getRelationNameByCharacter(self, character: Character, relaction_types: dict[str, tuple[str]] = {}) -> Optional[str]:
         """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Relaction#get-relation-name-by-character """
         if character in self.relationships:
-            key = self.relationships[character]
+            key = self._relationships[character]
             if key in relaction_types:
                 value = relaction_types[key]
                 if isinstance(value, tuple):
@@ -218,14 +219,15 @@ class CharacterInfo():
 
         value = renpy.input("{i}(Default: " + str(default_value) + "){/i}")
         if IsNullOrWhiteSpace(value):
-            value = default_value
-        self.relationships[character] = value
+            self._relationships[character] = default_relation_key
+        else:
+            self._relationships[character] = value
         return
 
     def delete_relation(self, character: Character) -> None:
         """Delete relation with character"""
         if character in self.relationships:
-            del self.relationships[character]
+            del self._relationships[character]
         return
 
     # Gender
