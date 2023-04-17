@@ -41,6 +41,39 @@ class CharacterInfo():
         self.relationships = relationships
         self.attraction_genders = attraction_genders
 
+    # Memory
+
+    @property
+    def memory(self) -> dict[str, str]:
+        """I use a dictionary because it is the best solution for compatibility and not to create variables that may not be used."""
+        return self._memory if self._memory else {}
+
+    @memory.setter
+    def memory(self, value: Optional[dict[str, str]]) -> None:
+        self._memory.update(value if value else {})
+
+    def get(self, name: str) -> str:
+        """Returns the value "name", in case it does not exist returns UNKNOWN_STRING"""
+        if name in self._memory.keys():
+            return self._memory[name]
+        else:
+            return UNKNOWN_STRING
+
+    def set(self, key: str, value) -> None:
+        """Function to set or add a new value"""
+        if value == None:
+            self.remove(key)
+        elif isinstance(value, str) and IsNullOrWhiteSpace(value):
+            self.remove(key)
+        else:
+            self._memory[key] = value
+        return
+
+    def remove(self, name: str) -> None:
+        """Delete the name value"""
+        del self._memory[name]
+        return
+
     # Name
 
     @property
@@ -71,14 +104,7 @@ class CharacterInfo():
             self.default_name = self.name
         return
 
-    @property
-    def gender(self) -> GenderEnum:
-        """Gender of the character"""
-        return self._gender
-
-    @gender.setter
-    def gender(self, value: GenderEnum) -> None:
-        self._gender = value
+    # Surname
 
     @property
     def sname(self) -> str:
@@ -104,6 +130,25 @@ class CharacterInfo():
             self._surname = value
 
     @property
+    def default_surname(self) -> str:
+        """Default surname of the character"""
+        return self.get(DEFAULT_SURNAME_KEY)
+
+    @default_surname.setter
+    def default_surname(self, value: str) -> None:
+        self.set(DEFAULT_SURNAME_KEY, value)
+
+    def changeSurname(self) -> None:
+        """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Information#change-surname """
+        self.sname = renpy.input(
+            "{i}(Default: " + self.default_surname + "){/i}")
+        if self.default_surname == UNKNOWN_STRING:
+            self.default_surname = self.sname
+        return
+
+    # Age
+
+    @property
     def age(self) -> Union[int, str]:
         """Age of the character"""
         if (self._age == None):
@@ -121,15 +166,6 @@ class CharacterInfo():
             self._age = value
 
     @property
-    def default_surname(self) -> str:
-        """Default surname of the character"""
-        return self.get(DEFAULT_SURNAME_KEY)
-
-    @default_surname.setter
-    def default_surname(self, value: str) -> None:
-        self.set(DEFAULT_SURNAME_KEY, value)
-
-    @property
     def default_age(self) -> Union[int, str]:
         """Default age of the character"""
         return self.get(DEFAULT_AGE_KEY)
@@ -137,6 +173,25 @@ class CharacterInfo():
     @default_age.setter
     def default_age(self, value: Union[int, str]) -> None:
         self.set(DEFAULT_AGE_KEY, value)
+
+    def changeAge(self) -> None:
+        """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Information#change-age """
+        self.age = renpy.input(
+            "{i}(Default: " + str(self.default_age) + "){/i}")
+        if (self.default_age == UNKNOWN_STRING):
+            self.default_age = self.age
+        return
+
+    # Gender
+
+    @property
+    def gender(self) -> GenderEnum:
+        """Gender of the character"""
+        return self._gender
+
+    @gender.setter
+    def gender(self, value: GenderEnum) -> None:
+        self._gender = value
 
     @property
     def relationships(self) -> dict[Character, str]:
@@ -146,15 +201,6 @@ class CharacterInfo():
     @relationships.setter
     def relationships(self, value: Optional[dict[Character, str]]) -> None:
         self._relationships = value
-
-    @property
-    def memory(self) -> dict[str, str]:
-        """I use a dictionary because it is the best solution for compatibility and not to create variables that may not be used."""
-        return self._memory if self._memory else {}
-
-    @memory.setter
-    def memory(self, value: Optional[dict[str, str]]) -> None:
-        self._memory.update(value if value else {})
 
     @property
     def attraction_genders(self) -> list[GenderEnum]:
@@ -189,44 +235,6 @@ class CharacterInfo():
                 self.attraction_genders.append(GenderEnum.MALE)
             else:
                 self.attraction_genders.append(GenderEnum.FEMALE)
-
-    def changeSurname(self) -> None:
-        """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Information#change-surname """
-        self.sname = renpy.input(
-            "{i}(Default: " + self.default_surname + "){/i}")
-        if self.default_surname == UNKNOWN_STRING:
-            self.default_surname = self.sname
-        return
-
-    def changeAge(self) -> None:
-        """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Information#change-age """
-        self.age = renpy.input(
-            "{i}(Default: " + str(self.default_age) + "){/i}")
-        if (self.default_age == UNKNOWN_STRING):
-            self.default_age = self.age
-        return
-
-    def get(self, name: str) -> str:
-        """Returns the value "name", in case it does not exist returns UNKNOWN_STRING"""
-        if name in self._memory.keys():
-            return self._memory[name]
-        else:
-            return UNKNOWN_STRING
-
-    def set(self, key: str, value) -> None:
-        """Function to set or add a new value"""
-        if value == None:
-            self.remove(key)
-        elif isinstance(value, str) and IsNullOrWhiteSpace(value):
-            self.remove(key)
-        else:
-            self._memory[key] = value
-        return
-
-    def remove(self, name: str) -> None:
-        """Delete the name value"""
-        del self._memory[name]
-        return
 
     def getRelationNameByCharacter(self, character: Character) -> Optional[str]:
         """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Relaction#get-relation-name-by-character """
