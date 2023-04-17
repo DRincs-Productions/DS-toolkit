@@ -59,9 +59,9 @@ class Statistic(object):
         cur_value = self.get(name)
         value = 0
         if isinstance(cur_value, int) and cur_value != 0:
-            if amt > 0 and cur_value > max:
+            if amt > 0 and cur_value >= max:
                 return
-            elif amt < 0 and cur_value < min:
+            elif amt < 0 and cur_value <= min:
                 return
             else:
                 value = cur_value + amt
