@@ -10,6 +10,10 @@ define gui.userinfo_lateralframe_xpos = 700
 define gui.userinfo_lateralframe_ysize = 600
 define gui.userinfo_lateralframe_xsize = 200 + gui.userinfo_textdistance_xsize
 
+
+init -10 python:
+    from pythonpackages.ds.character_type import GenderEnum
+
 screen menu_userinfo():
 
     tag menu
@@ -138,18 +142,31 @@ screen menu_userinfo():
                             frame xfill True background None:
                                 text "[cur_character_info.age]" size gui.label_text_size
 
+                    if cur_character_info.attraction_genders:
+                        hbox xfill True:
+                            frame xsize gui.userinfo_textdistance_xsize background None:
+                                text _("Sexuality:") size gui.label_text_size color gui.accent_color
+                            frame xfill True background None:
+                                if cur_character_info.is_heterosexual:
+                                    text _("Straight") size gui.label_text_size
+                                else:
+                                    if cur_character_info.gender == GenderEnum.MALE:
+                                        text _("Gay") size gui.label_text_size
+                                    elif cur_character_info.gender == GenderEnum.FEMALE:
+                                        text _("Lesbo") size gui.label_text_size
+
                     if cur_character_info.relationships and len(cur_character_info.relationships) > 0:
                         frame area (0, 0, 350, 25):
                             background None
                         frame xsize 300 background None:
                             text _("Relationships:") size gui.name_text_size
                         for ch in cur_character_info.relationships.keys():
-                            $ relationship_name = cur_character_info.relationships[ch]
+                            $ relationship_name = cur_character_info.getRelationNameByCharacter(character = ch, relaction_types = relactions)
                             hbox xfill True:
                                 frame xsize gui.userinfo_textdistance_xsize background None:
-                                    text "[relationship_name]:" size gui.label_text_size color gui.accent_color
+                                    text "[ch]:" size gui.label_text_size color gui.accent_color
                                 frame xfill True background None:
-                                    text "[ch]" size gui.label_text_size
+                                    text "[relationship_name]" size gui.label_text_size
 
                     if cur_character_statistic:
                         $ statistic_memory = cur_character_statistic.getAll()
@@ -178,13 +195,6 @@ screen menu_userinfo():
                                 text _("Sentimental:") size gui.name_text_size
                             for sent in sentimental_memory.keys():
                                 $ value = sentimental_memory[sent]
-                                if sent == "attraction_genders" and cur_character_info:
-                                    if cur_character_info.gender == "M" and value == "M":
-                                        $ value = _("Gay")
-                                    elif cur_character_info.gender == "F" and value == "F":
-                                        $ value = _("Lesbo")
-                                    elif not cur_character_info.gender == value:
-                                        $ value = _("Straight")
                                 if sent in ds_translations:
                                     $ sent = ds_translations[sent]
                                 hbox xfill True:
