@@ -133,7 +133,7 @@ label character:
             friend "Hi my [relaction]"
             $ relaction = friendI.getRelationNameByCharacter(character = mc, relaction_types = relactions)
             mc "Hi my [relaction]"
-            if (friendSentimental.is_friend()):
+            if (friendSentimental.is_friend):
                 friend "We are friends"
             else:
                 friend "We are not friends"
