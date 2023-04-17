@@ -1,4 +1,4 @@
-init 10 python:
+init python:
     from typing import Union
 
     from pythonpackages.ds.character_statistics import Statistic

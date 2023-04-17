@@ -158,16 +158,14 @@ label clothes:
     jump clothes
 
 label relaction1:
-    $ ffr = friendSentimental.friendship
-    $ flov = friendSentimental.love
     menu:
-        "+ Friendship [friend]. Friendship: [ffr]":
+        "+ Friendship [friend]. Friendship: [friendSentimental.friendship]":
             $ friendSentimental.friendship += 10
-        "- Friendship [friend]. Friendship: [ffr]":
+        "- Friendship [friend]. Friendship: [friendSentimental.friendship]":
             $ friendSentimental.friendship -= 10
-        "+ Love [friend]. Love: [flov]":
+        "+ Love [friend]. Love: [friendSentimental.love]":
             $ friendSentimental.love += 10
-        "- Love [friend]. Love: [flov]":
+        "- Love [friend]. Love: [friendSentimental.love]":
             $ friendSentimental.love -= 10
         "Pag2":
             jump relaction2
@@ -175,83 +173,73 @@ label relaction1:
             return
     jump relaction1
 label relaction2:
-    $ gfr = girlSentimental.get("favour")
-    $ glov = girlSentimental.get("love")
     menu:
         "Pag1":
             jump relaction1
-        "+ Favour [girl]. Favour: [gfr]":
-            $ girlSentimental.improveFavour(10)
-        "- Favour [girl]. Favour: [gfr]":
-            $ girlSentimental.improveFavour(-10)
-        "+ Love [girl]. Love: [glov]":
-            $ girlSentimental.improveLove(10)
-        "- Love [girl]. Love: [glov]":
-            $ girlSentimental.improveLove(-10)
+        "+ Favour [girl]. Favour: [girlSentimental.favour]":
+            $ girlSentimental.favour += 10
+        "- Favour [girl]. Favour: [girlSentimental.favour]":
+            $ girlSentimental.favour -= 10
+        "+ Love [girl]. Love: [girlSentimental.love]":
+            $ girlSentimental.love += 10
+        "- Love [girl]. Love: [girlSentimental.love]":
+            $ girlSentimental.love -= 10
         "Pag3":
             jump relaction3
         "Back":
             return
     jump relaction2
 label relaction3:
-    $ gcor = girlSentimental.get("corruption")
-    $ gfe = girlSentimental.get("fear")
-    $ gan = girlSentimental.get("anger")
     menu:
         "Pag2":
             jump relaction2
-        "+ Corruption [girl]. Corruption: [gcor]":
-            $ girlSentimental.improveCorruption(10)
-        "- Corruption [girl]. Corruption: [gcor]":
-            $ girlSentimental.improveCorruption(-10)
-        "+ Fear [girl]. Fear: [gfe]":
-            $ girlSentimental.improveFear(10)
-        "- Fear [girl]. Fear: [gfe]":
-            $ girlSentimental.improveFear(-10)
-        "+ Anger [girl]. Anger: [gan]":
-            $ girlSentimental.improveAnger(10)
-        "- Anger [girl]. Anger: [gan]":
-            $ girlSentimental.improveAnger(-10)
+        "+ Corruption [girl]. Corruption: [girlSentimental.corruption]":
+            $ girlSentimental.corruption += 10
+        "- Corruption [girl]. Corruption: [girlSentimental.corruption]":
+            $ girlSentimental.corruption -= 10
+        "+ Fear [girl]. Fear: [girlSentimental.fear]":
+            $ girlSentimental.fear += 10
+        "- Fear [girl]. Fear: [girlSentimental.fear]":
+            $ girlSentimental.fear -= 10
+        "+ Anger [girl]. Anger: [girlSentimental.anger]":
+            $ girlSentimental.anger += 10
+        "- Anger [girl]. Anger: [girlSentimental.anger]":
+            $ girlSentimental.anger -= 10
         "Back":
             return
     jump relaction3
 
 label character1:
-    $ gen = girlSentimental.get("energy")
-    $ gwi = girlSentimental.get("willpower")
-    $ ginh = girlSentimental.get("inhibition")
     menu:
-        "+ Energy [girl]. Energy: [gen]":
-            $ girlSentimental.improveEnergy(10)
-        "- Energy [girl]. Energy: [gen]":
-            $ girlSentimental.improveEnergy(-10)
-        "+ Willpower [girl]. Willpower: [gwi]":
-            $ girlSentimental.improveWillpower(10)
-        "- Willpower [girl]. Willpower: [gwi]":
-            $ girlSentimental.improveWillpower(-10)
-        "+ Inhibition [girl]. Inhibition: [ginh]":
-            $ girlSentimental.improveInhibition(10)
-        "- Inhibition [girl]. Inhibition: [ginh]":
-            $ girlSentimental.improveInhibition(-10)
+        "+ Energy [girl]. Energy: [girlSentimental.energy]":
+            $ girlSentimental.energy += 10
+        "- Energy [girl]. Energy: [girlSentimental.energy]":
+            $ girlSentimental.energy -= 10
+        "+ Willpower [girl]. Willpower: [girlSentimental.willpower]":
+            $ girlSentimental.willpower += 10
+        "- Willpower [girl]. Willpower: [girlSentimental.willpower]":
+            $ girlSentimental.willpower -= 10
+        "+ Inhibition [girl]. Inhibition: [girlSentimental.inhibition]":
+            $ girlSentimental.inhibition += 10
+        "- Inhibition [girl]. Inhibition: [girlSentimental.inhibition]":
+            $ girlSentimental.inhibition -= 10
         "Pag2":
             jump character2
         "Back":
             return
     jump character1
 label character2:
-    $ gad = girlSentimental.get("addiction")
-    $ glu = girlSentimental.get("lust")
     menu:
         "Pag1":
             jump character1
-        "+ Addiction [girl]. Addiction: [gad]":
-            $ girlSentimental.improveAddiction(10)
-        "- Addiction [girl]. Addiction: [gad]":
-            $ girlSentimental.improveAddiction(-10)
-        "+ Lust [girl]. Lust: [glu]":
-            $ girlSentimental.improveLust(10)
-        "- Lust [girl]. Lust: [glu]":
-            $ girlSentimental.improveLust(-10)
+        "+ Addiction [girl]. Addiction: [girlSentimental.addiction]":
+            $ girlSentimental.addiction += 10
+        "- Addiction [girl]. Addiction: [girlSentimental.addiction]":
+            $ girlSentimental.addiction -= 10
+        "+ Lust [girl]. Lust: [girlSentimental.lust]":
+            $ girlSentimental.lust += 10
+        "- Lust [girl]. Lust: [girlSentimental.lust]":
+            $ girlSentimental.lust -= 10
         "Back":
             return
     jump character2
