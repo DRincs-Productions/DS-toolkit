@@ -183,6 +183,37 @@ class CharacterInfo():
             self.default_age = self.age
         return
 
+    # Relationships
+
+    @property
+    def relationships(self) -> dict[Character, str]:
+        """Relationships of the character"""
+        return self._relationships if self._relationships else {}
+
+    @relationships.setter
+    def relationships(self, value: Optional[dict[Character, str]]) -> None:
+        self._relationships = value
+
+    def getRelationNameByCharacter(self, character: Character) -> Optional[str]:
+        """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Relaction#get-relation-name-by-character """
+        if character in self.relationships:
+            return self.relationships[character]
+        else:
+            return None
+
+    def setRelationNameByCharacter(self, character: Character, relation: Optional[str], relaction_types: dict[str, Union[str, int]] = {}) -> None:
+        """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Relaction#set-relation-name-by-character """
+        if IsNullOrWhiteSpace(relation):
+            value = renpy.input(self.name+" is:")
+            self.relationships[character] = value
+            del value
+        if relation == None:
+            if character in self.relationships:
+                del self.relationships[character]
+        else:
+            self.relationships[character] = relation
+        return
+
     # Gender
 
     @property
@@ -193,15 +224,6 @@ class CharacterInfo():
     @gender.setter
     def gender(self, value: GenderEnum) -> None:
         self._gender = value
-
-    @property
-    def relationships(self) -> dict[Character, str]:
-        """Relationships of the character"""
-        return self._relationships if self._relationships else {}
-
-    @relationships.setter
-    def relationships(self, value: Optional[dict[Character, str]]) -> None:
-        self._relationships = value
 
     @property
     def attraction_genders(self) -> list[GenderEnum]:
@@ -236,20 +258,3 @@ class CharacterInfo():
                 self.attraction_genders.append(GenderEnum.MALE)
             else:
                 self.attraction_genders.append(GenderEnum.FEMALE)
-
-    def getRelationNameByCharacter(self, character: Character) -> Optional[str]:
-        """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Relaction#get-relation-name-by-character """
-        if character in self.relationships:
-            return self.relationships[character]
-        else:
-            return None
-
-    def setRelationNameByCharacter(self, character: Character, relation: Optional[str] = None) -> None:
-        """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Relaction#set-relation-name-by-character """
-        if IsNullOrWhiteSpace(relation):
-            value = renpy.input(self.name+" is:")
-            self.relationships[character] = value
-            del value
-        else:
-            self.relationships[character] = relation  # type: ignore
-        return
