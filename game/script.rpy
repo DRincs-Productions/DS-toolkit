@@ -12,8 +12,8 @@ init -10 python:
 
 default mcI = CharacterInfo(name = "Liam", surname = "Johnson", age = 20, gender = GenderEnum.MALE,
 relationships = {
-    girl : relactions["girlfriend"],
-    friend : relactions["friend"],
+    girl : "girlfriend",
+    friend : "friend",
 })
 define mc = Character("{b}[mcI.name]{/b}", color="#37b3f3", who_outlines=[(2,"#000000")], what_prefix="\"", what_suffix="\"", what_outlines=[(2,"#000000")])
 
@@ -27,9 +27,9 @@ image friend normal = "/friend.webp"
 default girlI = CharacterInfo(name = "Eileen", surname = "Fisher", age = 18, gender = GenderEnum.FEMALE,
 other_values ={
     "story": __("She has always been before class.")
-}, 
+},
 relationships = {
-    mc : relactions["boyfriend"],
+    mc : "boyfriend",
 })
 define girl = Character("{b}[girlI.name]{/b}", color="#f337ba", who_outlines=[(2,"#000000")], what_prefix="\"", what_suffix="\"", what_outlines=[(2,"#000000")])
 
@@ -104,9 +104,9 @@ label character:
         "Change labels [girl]":
             "Her name is:"
             $ girlI.changeName()
-            "I'm [girl]'s:"
+            "I am for [girl], his..."
             $ girlI.setRelationNameByCharacter(character = mc, default_relation_key = "boyfriend", relaction_types = relactions)
-            "She is my:"
+            "She is my..."
             $ mcI.setRelationNameByCharacter(character = girl, default_relation_key = "girlfriend", relaction_types = relactions)
             $ relaction = mcI.getRelationNameByCharacter(character = girl, relaction_types = relactions)
             girl "Hi my [relaction]"
@@ -120,9 +120,9 @@ label character:
         "Change label [friend]":
             "His name is:"
             $ friendI.changeName()
-            "I'm [friend]'s:"
+            "I am for [friend], his..."
             $ friendI.setRelationNameByCharacter(character = mc, default_relation_key = "friend", relaction_types = relactions)
-            "He is my:"
+            "He is my..."
             $ mcI.setRelationNameByCharacter(character= friend, default_relation_key = "friend", relaction_types = relactions)
             $ relaction = mcI.getRelationNameByCharacter(character = friend, relaction_types = relactions)
             friend "Hi my [relaction]"
