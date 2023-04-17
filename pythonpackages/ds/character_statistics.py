@@ -70,15 +70,15 @@ class Statistic(object):
 
     def set(self, name: str, value: int) -> None:
         """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Statistic#set """
-        if (name != None and name != ""):
-            self.memory[name] = value
+        if (value != 0):
+            self._memory[name] = value
         else:
             self.remove(name)
         return
 
     def remove(self, name: str) -> None:
         """Delete the name value"""
-        del self.memory[name]
+        del self._memory[name]
         return
 
     def improve(self, name: str, amt: int = 1, max=None, min=0, show_notify=None) -> None:
@@ -114,8 +114,8 @@ class Statistic(object):
 
     def get(self, name, default_return=0) -> int:
         """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Statistic#get """
-        if name in self.memory:
-            return self.memory[name]
+        if name in self._memory:
+            return self._memory[name]
         else:
             return default_return
 

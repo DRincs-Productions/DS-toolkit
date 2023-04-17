@@ -208,8 +208,8 @@ class CharacterInfo():
 
     def get(self, name: str) -> str:
         """Returns the value "name", in case it does not exist returns UNKNOWN_STRING"""
-        if name in self.memory.keys():
-            return self.memory[name]
+        if name in self._memory.keys():
+            return self._memory[name]
         else:
             return UNKNOWN_STRING
 
@@ -220,12 +220,12 @@ class CharacterInfo():
         elif isinstance(value, str) and IsNullOrWhiteSpace(value):
             self.remove(key)
         else:
-            self.memory[key] = value
+            self._memory[key] = value
         return
 
     def remove(self, name: str) -> None:
         """Delete the name value"""
-        del self.memory[name]
+        del self._memory[name]
         return
 
     def getRelationNameByCharacter(self, character: Character) -> Optional[str]:
