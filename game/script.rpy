@@ -247,44 +247,21 @@ label character2:
 label emblem1:
     menu:
         "Set not Virgin [girl]. Virgin: True" if (girlSentimental.is_virgin):
-            $ girlSentimental.virgin = False
+            $ girlSentimental.is_virgin = False
         "Set Virgin [girl]. Virgin: False" if (not girlSentimental.is_virgin):
-            $ girlSentimental.virgin = True
-        "Set not Bisexual [girl]. Bisexual: True" if (girlSentimental.is_bisexual):
-            $ girlSentimental.set("bisexual", False)
-        "Set Bisexual [girl]. Bisexual: False" if (not girlSentimental.is_bisexual):
-            $ girlSentimental.set("bisexual", True)
-        "Set not Polyamorous [girl]. Polyamorous: True" if (girlSentimental.is_polyamorous):
-            $ girlSentimental.set("polyamorous", False)
-        "Set Polyamorous [girl]. Polyamorous: False" if (not girlSentimental.is_polyamorous):
-            $ girlSentimental.set("polyamorous", True)
+            $ girlSentimental.is_virgin = True
         "Set not Against false [girl]. Against: True" if (girlSentimental.is_against):
-            $ girlSentimental.set("against", False)
+            $ girlSentimental.is_against = False
         "Set Against [girl]. Against: False" if (not girlSentimental.is_against):
-            $ girlSentimental.set("against", True)
+            $ girlSentimental.is_against = True
         "Set not Healthy [girl]. Healthy: True" if (girlSentimental.is_healthy):
-            $ girlSentimental.improveEnergy(-100)
-            $ girlSentimental.improveWillpower(-100)
-            $ girlSentimental.improveInhibition(-100)
-            $ girlSentimental.improveCorruption(100)
-            $ girlSentimental.improveAddiction(100)
+            $ girlSentimental.is_healthy = False
         "Set Healthy [girl]. Healthy: False" if (not girlSentimental.is_healthy):
-            $ girlSentimental.improveEnergy(100)
-            $ girlSentimental.improveWillpower(100)
-            $ girlSentimental.improveInhibition(100)
-            $ girlSentimental.improveCorruption(-100)
-            $ girlSentimental.improveAddiction(-100)
-            $ girlSentimental.improveFear(-50)
-            $ girlSentimental.improveLust(-50)
-            $ girlSentimental.against = False
+            $ girlSentimental.is_healthy = True
         "Set not Unfaithful [girl]. Unfaithful: True" if (girlSentimental.is_unfaithful):
-            $ girlSentimental.improveWillpower(-100)
-            $ girlSentimental.improveLust(-100)
-            $ girlSentimental.improveAnger(-100)
+            $ girlSentimental.is_unfaithful = False
         "Set Unfaithful [girl]. Unfaithful: False" if (not girlSentimental.is_unfaithful):
-            $ girlSentimental.improveWillpower(100)
-            $ girlSentimental.improveLust(100)
-            $ girlSentimental.improveAnger(100)
+            $ girlSentimental.is_unfaithful = True
         "Pag2":
             jump emblem2
         "Back":
@@ -295,49 +272,25 @@ label emblem2:
         "Pag1":
             jump emblem1
         "Set not Slut [girl]. Slut: True" if (girlSentimental.is_slut):
-            $ girlSentimental.improveLust(-100)
-            $ girlSentimental.improveCorruption(-100)
-            $ girlSentimental.improveAddiction(-100)
+            $ girlSentimental.is_slut = False
         "Set Slut [girl]. Slut: False" if (not girlSentimental.is_slut):
-            $ girlSentimental.improveLust(100)
-            $ girlSentimental.improveCorruption(100)
-            $ girlSentimental.improveAddiction(100)
+            $ girlSentimental.is_slut = True
         "Set not Nymphomaniac [girl]. Nymphomaniac: True" if (girlSentimental.is_nymphomaniac):
-            $ girlSentimental.improveCorruption(-100)
-            $ girlSentimental.improveLust(-100)
-            $ girlSentimental.improveInhibition(100)
+            $ girlSentimental.is_nymphomaniac = False
         "Set Nymphomaniac [girl]. Nymphomaniac: False" if (not girlSentimental.is_nymphomaniac):
-            $ girlSentimental.improveCorruption(100)
-            $ girlSentimental.improveLust(100)
-            $ girlSentimental.improveInhibition(-100)
+            $ girlSentimental.is_nymphomaniac = True
         "Set not Submissive [girl]. Submissive: True" if (girlSentimental.is_submissive):
-            $ girlSentimental.improveWillpower(100)
-            $ girlSentimental.improveFear(-100)
+            $ girlSentimental.is_submissive = False
         "Set Submissive [girl]. Submissive: False" if (not girlSentimental.is_submissive):
-            $ girlSentimental.improveWillpower(-100)
-            $ girlSentimental.improveFear(100)
+            $ girlSentimental.is_submissive = True
         "Set not Celebrolesis [girl]. Celebrolesis: True" if (girlSentimental.is_celebrolesis):
-            $ girlSentimental.improveWillpower(100)
-            $ girlSentimental.improveInhibition(100)
-            $ girlSentimental.improveAddiction(-100)
+            $ girlSentimental.is_celebrolesis = False
         "Set Celebrolesis [girl]. Celebrolesis: False" if (not girlSentimental.is_celebrolesis):
-            $ girlSentimental.improveWillpower(-100)
-            $ girlSentimental.improveInhibition(-100)
-            $ girlSentimental.improveAddiction(100)
+            $ girlSentimental.is_celebrolesis = True
         "Set not Free Use [girl]. Free Use: True" if (girlSentimental.is_free_use):
-            $ girlSentimental.improveWillpower(100)
-            $ girlSentimental.improveInhibition(100)
-            $ girlSentimental.improveFear(-100)
-            $ girlSentimental.improveLust(-100)
-            $ girlSentimental.improveCorruption(-100)
-            $ girlSentimental.improveAddiction(-100)
+            $ girlSentimental.is_free_use = False
         "Set Free Use [girl]. Free Use: False" if (not girlSentimental.is_free_use):
-            $ girlSentimental.improveWillpower(-100)
-            $ girlSentimental.improveInhibition(-100)
-            $ girlSentimental.improveFear(100)
-            $ girlSentimental.improveLust(100)
-            $ girlSentimental.improveCorruption(100)
-            $ girlSentimental.improveAddiction(100)
+            $ girlSentimental.is_free_use = True
         "Back":
             return
     jump emblem2

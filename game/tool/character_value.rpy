@@ -22,7 +22,6 @@ define ds_translations = {
     "corruption"            :   _("Corruption"),
     "virgin"                :   _("Virgin"),
     "bisexual"              :   _("Bisexual"),
-    "polyamorous"           :   _("Polyamorous"),
     "against"               :   _("Against"),
     "addiction"             :   _("Addiction"),
     "max_values"            :   _("Max_values"),
