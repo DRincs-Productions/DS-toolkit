@@ -58,7 +58,7 @@ class Statistic(object):
             max = self.max_values
         cur_value = self.get(name)
         value = 0
-        if isinstance(cur_value, int) and cur_value != 0:
+        if isinstance(cur_value, int):
             if amt > 0 and cur_value >= max:
                 return
             elif amt < 0 and cur_value <= min:
