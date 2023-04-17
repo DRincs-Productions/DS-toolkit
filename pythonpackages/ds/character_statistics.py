@@ -42,9 +42,10 @@ class Statistic(object):
             self.remove(name)
         return
 
-    def remove(self, name: str) -> None:
+    def remove(self, key: str) -> None:
         """Delete the name value"""
-        del self._memory[name]
+        if key in self._memory.keys():
+            del self._memory[key]
         return
 
     def improve(self, name: str, amt: int = 1, max: Optional[int] = None, min: int = 0, show_notify: Optional[int] = None) -> None:
