@@ -25,21 +25,21 @@ screen menu_userinfo():
     style_prefix "game_menu"
     add "gui/overlay/game_menu.png"
 
-    frame area (150, 70, 350, 50) background None:
-        text _("{b}Characters{/b}") color gui.accent_color size gui.name_text_size
+    use menu_tile(_("Characters"))
 
     # button for closure
     use close_button('menu_userinfo')
 
     frame:
-        ypos 170
-        xpos 80
-        xsize 400
-        ysize gui.lateralframescroll_ysize
+        ypos gui.nqtr_menu_memo_ypos
+        xpos gui.nqtr_menu_memo_xpos
+        ysize gui.nqtr_menu_memo_ysize
+        xsize gui.nqtr_menu_memo_xsize
         background None
         # task title list
-        viewport mousewheel True draggable True id 'vp1':
-            has vbox spacing 5
+        viewport mousewheel True draggable True id 'menu_userinfo_task_title_list':
+            has vbox
+            spacing 5
             # MC
             button:
                 xpos 30
@@ -92,7 +92,7 @@ screen menu_userinfo():
                     ]
                     selected cur_character_id == "friend"
         # scroll bar
-        vbar value YScrollValue('vp1') style 'menu_vscroll'
+        vbar value YScrollValue('menu_userinfo_task_title_list') style 'dr_menu_vscroll'
 
     # Image
     if cur_character_id == "friend":
@@ -197,7 +197,7 @@ screen menu_userinfo():
                 frame area (0, 0, 350, 20):
                     background None
 
-        vbar value YScrollValue('vp3') style 'menu_vscroll'
+        vbar value YScrollValue('vp3') style 'dr_menu_vscroll'
 
     key 'K_ESCAPE' action Hide('menu_userinfo')
     key 'mouseup_3' action Hide('menu_userinfo')
