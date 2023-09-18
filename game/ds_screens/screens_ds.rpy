@@ -33,26 +33,28 @@ screen menu_userinfo(character_dict):
             spacing 5
             # for into dictioanry to get key and value
             for ch_id in character_dict.keys():
-                button:
-                    xpos 30
-                    xsize 390
-                    background None
-                    xpadding 0
-                    ypadding 0
-                    xmargin 0
-                    ymargin 0
-                    textbutton "[character_dict[ch_id].character]":
-                        action [
-                            SetVariable('ds_cur_character_id', "ch_id"),
-                        ]
-                        selected ds_cur_character_id == "ch_id"
+                if character_dict[ch_id].info_screen:
+                    button:
+                        xpos 30
+                        xsize 390
+                        background None
+                        xpadding 0
+                        ypadding 0
+                        xmargin 0
+                        ymargin 0
+                        textbutton "[character_dict[ch_id].character]":
+                            action [
+                                SetVariable('ds_cur_character_id', ch_id),
+                                SetVariable('ds_cur_character_screen', character_dict[ch_id].info_screen),
+                            ]
+                            selected ds_cur_character_id == ch_id
 
         # scroll bar
         vbar value YScrollValue('menu_userinfo_task_title_list') style 'dr_menu_vscroll'
     
     # character info
     if ds_cur_character_screen:
-        ds_cur_character_screen
+        use expression ds_cur_character_screen
 
     key 'K_ESCAPE' action Hide('menu_userinfo')
     key 'mouseup_3' action Hide('menu_userinfo')
