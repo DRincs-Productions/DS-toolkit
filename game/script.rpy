@@ -73,7 +73,7 @@ label start:
 label loop:
     menu:
         "Screens":
-            call screen menu_userinfo()
+            call screen menu_userinfo(character_dict)
         "Notifications Test":
             $ notify_add(message="Hello")
         "Character":
