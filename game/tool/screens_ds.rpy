@@ -29,17 +29,7 @@ screen menu_userinfo():
         text _("{b}Characters{/b}") color gui.accent_color size gui.name_text_size
 
     # button for closure
-    imagebutton:
-        align (0.95, 0.05)
-        idle '/interface/button/close_idle.webp'
-        action [
-            Hide('menu_userinfo'),
-        ]
-        if renpy.variant("pc"):
-            focus_mask True
-            at close_zoom
-        else:
-            at close_zoom_mobile
+    use close_button('menu_userinfo')
 
     frame:
         ypos 170
