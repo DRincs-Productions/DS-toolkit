@@ -119,79 +119,13 @@ screen menu_userinfo():
 
                 vbox:
                     xpos 30
-                    hbox xfill True:
-                        frame xsize gui.userinfo_textdistance_xsize background None:
-                            text _("Name:") size gui.label_text_size color gui.accent_color
-                        frame xfill True background None:
-                            text "[cur_character_info.name] [cur_character_info.sname]" size gui.label_text_size
-
-                    if cur_character_info.age:
-                        hbox xfill True:
-                            frame xsize gui.userinfo_textdistance_xsize background None:
-                                text _("Age:") size gui.label_text_size color gui.accent_color
-                            frame xfill True background None:
-                                text "[cur_character_info.age]" size gui.label_text_size
-
-                    if cur_character_info.attraction_genders:
-                        hbox xfill True:
-                            frame xsize gui.userinfo_textdistance_xsize background None:
-                                text _("Sexuality:") size gui.label_text_size color gui.accent_color
-                            frame xfill True background None:
-                                if cur_character_info.is_heterosexual:
-                                    text _("Straight") size gui.label_text_size
-                                else:
-                                    if cur_character_info.gender == GenderEnum.MALE:
-                                        text _("Gay") size gui.label_text_size
-                                    elif cur_character_info.gender == GenderEnum.FEMALE:
-                                        text _("Lesbo") size gui.label_text_size
-
-                    if cur_character_info.relationships and len(cur_character_info.relationships) > 0:
-                        frame area (0, 0, 350, 25):
-                            background None
-                        frame xsize 300 background None:
-                            text _("Relationships:") size gui.name_text_size
-                        for ch in cur_character_info.relationships.keys():
-                            $ relationship_name = cur_character_info.getRelationNameByCharacter(character = ch, relaction_types = relactions)
-                            hbox xfill True:
-                                frame xsize gui.userinfo_textdistance_xsize background None:
-                                    text "[ch]:" size gui.label_text_size color gui.accent_color
-                                frame xfill True background None:
-                                    text "[relationship_name]" size gui.label_text_size
-
+                    use menu_userinfo_character_info(cur_character_info)
+                    
                     if cur_character_statistic:
-                        $ statistic_memory = cur_character_statistic.getAll()
-                        $ max_value = cur_character_statistic.getDefaultMaxValue()
-                        if len(statistic_memory) > 0:
-                            frame area (0, 0, 350, 25):
-                                background None
-                            frame xsize 300 background None:
-                                text _("Statistic:") size gui.name_text_size
-                            for stat in statistic_memory.keys():
-                                $ value = statistic_memory[stat]
-                                if stat in ds_translations:
-                                    $ stat = ds_translations[stat]
-                                hbox xfill True:
-                                    frame xsize gui.userinfo_textdistance_xsize background None:
-                                        text _("[stat]:") size gui.label_text_size color gui.accent_color
-                                    frame xfill True background None:
-                                        text "[value]" size gui.label_text_size
+                        use menu_userinfo_character_statistic(_("Statistic:"), cur_character_statistic)
 
                     if cur_character_sentimental:
-                        $ sentimental_memory = cur_character_sentimental.getAll()
-                        if len(sentimental_memory) > 0:
-                            frame area (0, 0, 350, 25):
-                                background None
-                            frame xsize 300 background None:
-                                text _("Sentimental:") size gui.name_text_size
-                            for sent in sentimental_memory.keys():
-                                $ value = sentimental_memory[sent]
-                                if sent in ds_translations:
-                                    $ sent = ds_translations[sent]
-                                hbox xfill True:
-                                    frame xsize gui.userinfo_textdistance_xsize background None:
-                                        text _("[sent]:") size gui.label_text_size color gui.accent_color
-                                    frame xfill True background None:
-                                        text "[value]" size gui.label_text_size
+                        use menu_userinfo_character_statistic(_("Sentimental:"), cur_character_sentimental)
 
                 # End Space
                 frame area (0, 0, 350, 20):
