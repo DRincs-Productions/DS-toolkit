@@ -1,20 +1,20 @@
 screen menu_userinfo_character_info(character_info):
     hbox xfill True:
-        frame xsize gui.userinfo_textdistance_xsize background None:
+        frame xsize gui.ds_userinfo_textdistance_xsize background None:
             text _("Name:") size gui.label_text_size color gui.accent_color
         frame xfill True background None:
             text "[character_info.name] [character_info.sname]" size gui.label_text_size
 
     if character_info.age:
         hbox xfill True:
-            frame xsize gui.userinfo_textdistance_xsize background None:
+            frame xsize gui.ds_userinfo_textdistance_xsize background None:
                 text _("Age:") size gui.label_text_size color gui.accent_color
             frame xfill True background None:
                 text "[character_info.age]" size gui.label_text_size
 
     if character_info.attraction_genders:
         hbox xfill True:
-            frame xsize gui.userinfo_textdistance_xsize background None:
+            frame xsize gui.ds_userinfo_textdistance_xsize background None:
                 text _("Sexuality:") size gui.label_text_size color gui.accent_color
             frame xfill True background None:
                 if character_info.is_heterosexual:
@@ -33,7 +33,7 @@ screen menu_userinfo_character_info(character_info):
         for ch in character_info.relationships.keys():
             $ relationship_name = character_info.getRelationNameByCharacter(character = ch, relaction_types = relactions)
             hbox xfill True:
-                frame xsize gui.userinfo_textdistance_xsize background None:
+                frame xsize gui.ds_userinfo_textdistance_xsize background None:
                     text "[ch]:" size gui.label_text_size color gui.accent_color
                 frame xfill True background None:
                     text "[relationship_name]" size gui.label_text_size
@@ -51,7 +51,7 @@ screen menu_userinfo_character_statistic(name, character_statistic):
             if stat in ds_translations:
                 $ stat = ds_translations[stat]
             hbox xfill True:
-                frame xsize gui.userinfo_textdistance_xsize background None:
+                frame xsize gui.ds_userinfo_textdistance_xsize background None:
                     text _("[stat]:") size gui.label_text_size color gui.accent_color
                 frame xfill True background None:
                     text "[value]" size gui.label_text_size

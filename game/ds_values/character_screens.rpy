@@ -1,25 +1,21 @@
-define gui.userinfo_textdistance_xsize = 250
-define gui.userinfo_lateralframe_ypos = 100
-define gui.userinfo_lateralframe_xpos = 700
-define gui.userinfo_lateralframe_ysize = 600
-define gui.userinfo_lateralframe_xsize = 200 + gui.userinfo_textdistance_xsize
+define gui.userinfo_lateralframe_ysize = 900 * gui.dr_multiplicateur
 
 screen base_character_info(cur_character_info, cur_character_statistic = None, cur_character_sentimental = None):
     frame:
-        ypos 100
-        xpos gui.userinfo_lateralframe_xpos
-        xsize gui.userinfo_lateralframe_xsize
+        ypos 150 * gui.dr_multiplicateur
+        xpos 1050 * gui.dr_multiplicateur
+        xsize (300 + gui.ds_userinfo_textdistance_xsize) * gui.dr_multiplicateur
         ysize gui.userinfo_lateralframe_ysize
         background None
         viewport mousewheel True draggable True id 'vp3':
             has vbox spacing 5
             if cur_character_info:
                 # Start Space
-                frame area (0, 0, 350, 20):
+                frame area (0, 0, 525 * gui.dr_multiplicateur, 30 * gui.dr_multiplicateur):
                     background None
 
                 vbox:
-                    xpos 30
+                    xpos 45 * gui.dr_multiplicateur
                     use menu_userinfo_character_info(cur_character_info)
                     
                     if cur_character_statistic:
@@ -29,7 +25,7 @@ screen base_character_info(cur_character_info, cur_character_statistic = None, c
                         use menu_userinfo_character_statistic(_("Sentimental:"), cur_character_sentimental)
 
                 # End Space
-                frame area (0, 0, 350, 20):
+                frame area (0, 0, 525 * gui.dr_multiplicateur, 30 * gui.dr_multiplicateur):
                     background None
 
         vbar value YScrollValue('vp3') style 'dr_menu_vscroll'
