@@ -60,7 +60,7 @@ image girl normal = "check:girl[girl_dress].webp"
 # The game starts here.
 label start:
     "Welcome to [config.name]"
-    call renaming_mc
+    call renaming_mc(mcI)
     mc "I am ... years old"
     $ mcI.changeAge()
     "Hi [mc] ([mcI.age])"
