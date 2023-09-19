@@ -4,7 +4,7 @@ screen base_character_info(cur_character_info, cur_character_statistic = None, c
     frame:
         ypos 150 * gui.dr_multiplicateur
         xpos 1050 * gui.dr_multiplicateur
-        xsize (300 + gui.ds_userinfo_textdistance_xsize) * gui.dr_multiplicateur
+        xsize (300 * gui.dr_multiplicateur) + gui.ds_userinfo_textdistance_xsize
         ysize gui.userinfo_lateralframe_ysize
         background None
         viewport mousewheel True draggable True id 'vp3':
