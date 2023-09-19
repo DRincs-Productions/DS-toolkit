@@ -74,13 +74,11 @@ label loop:
     menu:
         "Screens":
             call screen menu_userinfo(character_dict)
-        "Notifications Test":
-            $ notify_add(message="Hello")
         "Character":
             call character
-        "Clothes":
+        "Clothes (To move)":
             call clothes
-        "Timed menu":
+        "Timed menu (To move)":
             "Train boxing."
             show screen countdown(timer_range=5, timer_call='menu_slow')
             menu:
