@@ -78,19 +78,6 @@ label loop:
             call character
         "Clothes (To move)":
             call clothes
-        "Timed menu (To move)":
-            "Train boxing."
-            show screen countdown(timer_range=5, timer_call='menu_slow')
-            menu:
-                "Attacks":
-                    hide screen countdown
-                    "You punched."
-                "Defend":
-                    hide screen countdown
-                    "You defended yourself."
-                "Do nothing":
-                    hide screen countdown
-                    "You didn't do anything."
         "Ability":
             call ability
         "End":  # This ends the game.
