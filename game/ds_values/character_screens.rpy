@@ -1,8 +1,9 @@
-define gui.userinfo_lateralframe_ypos = 150 * gui.dr_multiplicateur
-define gui.userinfo_lateralframe_xpos = 1050 * gui.dr_multiplicateur
-define gui.userinfo_lateralframe_xsize = (300 * gui.dr_multiplicateur) + gui.ds_userinfo_textdistance_xsize
-define gui.userinfo_lateralframe_ysize = 900 * gui.dr_multiplicateur
-define gui.userinfo_area = (0, 0, 525 * gui.dr_multiplicateur, 30 * gui.dr_multiplicateur)
+define gui.userinfo_lateralframe_ypos = convert_to_int(150 * gui.dr_multiplicateur)
+define gui.userinfo_lateralframe_xpos = convert_to_int(1050 * gui.dr_multiplicateur)
+define gui.userinfo_lateralframe_xsize = convert_to_int(300 * gui.dr_multiplicateur) + gui.ds_userinfo_textdistance_xsize
+define gui.userinfo_lateralframe_ysize = convert_to_int(900 * gui.dr_multiplicateur)
+define gui.userinfo_vbox_xpos = convert_to_int(45 * gui.dr_multiplicateur)
+define gui.userinfo_area = (0, 0, convert_to_int(525 * gui.dr_multiplicateur), convert_to_int(30 * gui.dr_multiplicateur))
 
 screen base_character_info(cur_character_info, cur_character_statistic = None, cur_character_sentimental = None):
     frame:
@@ -19,7 +20,7 @@ screen base_character_info(cur_character_info, cur_character_statistic = None, c
                     background None
 
                 vbox:
-                    xpos 45 * gui.dr_multiplicateur
+                    xpos gui.userinfo_vbox_xpos
                     use menu_userinfo_character_info(cur_character_info)
                     
                     if cur_character_statistic:
