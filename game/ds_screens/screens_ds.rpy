@@ -32,8 +32,8 @@ screen menu_userinfo(character_dict):
             has vbox
             spacing 5
             # for into dictioanry to get key and value
-            for ch_id in character_dict.keys():
-                if character_dict[ch_id].info_screen:
+            for ch_id, value in character_dict.items():
+                if value.info_screen:
                     button:
                         xpos 30
                         xsize 390
@@ -42,10 +42,10 @@ screen menu_userinfo(character_dict):
                         ypadding 0
                         xmargin 0
                         ymargin 0
-                        textbutton "[character_dict[ch_id].character]":
+                        textbutton "[value.character]":
                             action [
                                 SetVariable('ds_cur_character_id', ch_id),
-                                SetVariable('ds_cur_character_screen', character_dict[ch_id].info_screen),
+                                SetVariable('ds_cur_character_screen', value.info_screen),
                             ]
                             selected ds_cur_character_id == ch_id
 
