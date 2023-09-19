@@ -22,10 +22,10 @@ screen menu_userinfo(character_dict):
     use close_button('menu_userinfo')
 
     frame:
-        ypos gui.nqtr_menu_memo_ypos
-        xpos gui.nqtr_menu_memo_xpos
-        ysize gui.nqtr_menu_memo_ysize
-        xsize gui.nqtr_menu_memo_xsize
+        ypos gui.dr_drawer_ypos
+        xpos gui.dr_drawer_xpos
+        ysize gui.dr_drawer_ysize
+        xsize gui.dr_drawer_xsize
         background None
         # task title list
         viewport mousewheel True draggable True id 'menu_userinfo_task_title_list':
