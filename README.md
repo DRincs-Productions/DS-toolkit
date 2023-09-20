@@ -17,7 +17,7 @@ Feel free to contribute, fork this and send a pull request. 😄
 # Basic command to download projects from git
 git clone https://github.com/DRincs-Productions/DS-toolkit
 # IMPORTANT -> Will add the libraries needed to run the program
-cd Renpygame
+cd DS-toolkit
 git submodule update --init --recursive
 
 ```
