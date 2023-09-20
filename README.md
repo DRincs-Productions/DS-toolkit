@@ -10,6 +10,19 @@ This repo is a set of basic tools for Visual Novel / Game developers who are pla
 
 Feel free to contribute, fork this and send a pull request. 😄
 
+----
+
+## TO DOWNLOAD THIS TEST PROJECT
+```shell
+# Basic command to download projects from git
+git clone https://github.com/DRincs-Productions/DS-toolkit
+# IMPORTANT -> Will add the libraries needed to run the program
+cd Renpygame
+git submodule update --init --recursive
+
+```
+----
+
 ## Documentation
 
 **[Wiki](https://github.com/DRincs-Productions/DS-toolkit/wiki)**
