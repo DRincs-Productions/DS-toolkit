@@ -1,5 +1,5 @@
 # character selected in the menu
-default ds_cur_character_id = None
+default ds_cur_character = None
 default ds_cur_character_screen = None
 
 init -10 python:
@@ -44,10 +44,10 @@ screen menu_userinfo(character_dict):
                         ymargin 0
                         textbutton "[value.character]":
                             action [
-                                SetVariable('ds_cur_character_id', ch_id),
+                                SetVariable('ds_cur_character', ch_id),
                                 SetVariable('ds_cur_character_screen', value.info_screen),
                             ]
-                            selected ds_cur_character_id == ch_id
+                            selected ds_cur_character == ch_id
 
         # scroll bar
         vbar value YScrollValue('menu_userinfo_task_title_list') style 'dr_menu_vscroll'
