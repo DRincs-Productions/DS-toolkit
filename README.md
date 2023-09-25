@@ -13,6 +13,7 @@ Feel free to contribute, fork this and send a pull request. 😄
 ----
 
 ## TO DOWNLOAD THIS TEST PROJECT
+
 ```shell
 # Basic command to download projects from git
 git clone https://github.com/DRincs-Productions/DS-toolkit
@@ -21,6 +22,7 @@ cd DS-toolkit
 git submodule update --init --recursive
 
 ```
+
 ----
 
 ## Documentation
@@ -37,7 +39,8 @@ Download the: [link]()
 
 ## Install LTS Version
 
-You can install this library manually: download the zip and extract it in your project folder.
+To install a precise version install it manually: [Releases](https://github.com/DRincs-Productions/DS-toolkit/releases).
+
 But I recommend you to use git submodule:
 
 ```bash
@@ -68,5 +71,3 @@ git submodule update --init --recursive
 ![Characters statistics and ability](https://user-images.githubusercontent.com/67595890/181107510-c6affb34-1310-4100-8975-a16cc3645c76.png)
 
 ![Clothes management](https://user-images.githubusercontent.com/67595890/181107522-d255666e-9b96-4aa8-93a9-a09d3320b47e.png)
-
-![Timed menu](https://user-images.githubusercontent.com/67595890/181107533-777b0a13-7ac9-49d7-be8f-86d81164f564.png)

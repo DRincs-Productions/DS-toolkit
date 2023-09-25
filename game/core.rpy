@@ -1,5 +1,6 @@
 define config.log = "log.txt"
 
 label after_load:
-    $ update_flags()
+    # renpy-utility-lib
+    call update_current_flags(update_dictionary = True)
     return
