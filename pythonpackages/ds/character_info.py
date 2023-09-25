@@ -30,6 +30,8 @@ class CharacterInfo:
         self.memory = other_values
         self.name = name
         self.default_name = name
+        if surname == None:
+            surname = ""
         self.surname = surname
         if surname != None:
             self.default_surname = surname

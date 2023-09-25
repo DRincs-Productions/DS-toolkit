@@ -9,29 +9,29 @@ init -10 python:
     from pythonpackages.ds.character_info import CharacterInfo
     from pythonpackages.ds.character_type import GenderEnum
 
+init -1:
+    default mcI = CharacterInfo(name = "Liam", surname = "Johnson", age = 20, gender = GenderEnum.MALE,
+    relationships = {
+        girl : "girlfriend",
+        friend : "friend",
+    })
+    define mc = Character("{b}[mcI.name]{/b}", color="#37b3f3", who_outlines=[(2,"#000000")], what_prefix="\"", what_suffix="\"", what_outlines=[(2,"#000000")])
 
-default mcI = CharacterInfo(name = "Liam", surname = "Johnson", age = 20, gender = GenderEnum.MALE,
-relationships = {
-    girl : "girlfriend",
-    friend : "friend",
-})
-define mc = Character("{b}[mcI.name]{/b}", color="#37b3f3", who_outlines=[(2,"#000000")], what_prefix="\"", what_suffix="\"", what_outlines=[(2,"#000000")])
+    default friendI = CharacterInfo(name = "Nick", surname = "Valentine", age = 26, gender = GenderEnum.MALE,
+    relationships = {
+        mc : relactions["friend"],
+    })
+    define friend = Character("{b}[friendI.name] C.J.{/b}", color="#37c68f", who_outlines=[(2,"#000000")], what_prefix="\"", what_suffix="\"", what_outlines=[(2,"#000000")])
+    image friend normal = "/friend.webp"
 
-default friendI = CharacterInfo(name = "Nick", surname = "Valentine", age = 26, gender = GenderEnum.MALE,
-relationships = {
-    mc : relactions["friend"],
-})
-define friend = Character("{b}[friendI.name] C.J.{/b}", color="#37c68f", who_outlines=[(2,"#000000")], what_prefix="\"", what_suffix="\"", what_outlines=[(2,"#000000")])
-image friend normal = "/friend.webp"
-
-default girlI = CharacterInfo(name = "Eileen", surname = "Fisher", age = 18, gender = GenderEnum.FEMALE,
-other_values ={
-    "story": __("She has always been before class.")
-},
-relationships = {
-    mc : "boyfriend",
-})
-define girl = Character("{b}[girlI.name]{/b}", color="#f337ba", who_outlines=[(2,"#000000")], what_prefix="\"", what_suffix="\"", what_outlines=[(2,"#000000")])
+    default girlI = CharacterInfo(name = "Eileen", surname = "Fisher", age = 18, gender = GenderEnum.FEMALE,
+    other_values ={
+        "story": __("She has always been before class.")
+    },
+    relationships = {
+        mc : "boyfriend",
+    })
+    define girl = Character("{b}[girlI.name]{/b}", color="#f337ba", who_outlines=[(2,"#000000")], what_prefix="\"", what_suffix="\"", what_outlines=[(2,"#000000")])
 
 # Statistic
 default mcStatistic = Statistic()
@@ -73,7 +73,7 @@ label start:
 label loop:
     menu:
         "Screens":
-            call screen menu_userinfo(character_dict)
+            call screen menu_userinfo
         "Character":
             call character
         "Clothes (To move)":

@@ -4,8 +4,12 @@ default ds_cur_character_screen = None
 
 init -10 python:
     from pythonpackages.ds.character_type import GenderEnum
+    import pythonpackages.ds.character_screens as character_screens
 
-screen menu_userinfo(character_dict):
+    def all_characters_with_screen():
+        return character_screens.all_characters_with_screen(store)
+
+screen menu_userinfo:
 
     tag menu
 
@@ -32,8 +36,8 @@ screen menu_userinfo(character_dict):
             has vbox
             spacing 5
             # for into dictioanry to get key and value
-            for character in all_characters():
-                if value.info_screen:
+            for character in all_characters_with_screen():
+                if character.info_screen:
                     button:
                         xpos 30
                         xsize 390
@@ -42,12 +46,12 @@ screen menu_userinfo(character_dict):
                         ypadding 0
                         xmargin 0
                         ymargin 0
-                        textbutton "[value.character]":
+                        textbutton "[character]":
                             action [
-                                SetVariable('ds_cur_character', ch_id),
-                                SetVariable('ds_cur_character_screen', value.info_screen),
+                                SetVariable('ds_cur_character', character),
+                                SetVariable('ds_cur_character_screen', character.info_screen),
                             ]
-                            selected ds_cur_character == ch_id
+                            selected ds_cur_character == character
 
         # scroll bar
         vbar value YScrollValue('menu_userinfo_task_title_list') style 'dr_menu_vscroll'
