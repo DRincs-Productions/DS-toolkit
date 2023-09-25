@@ -10,12 +10,18 @@ init -10 python:
     from pythonpackages.ds.character_type import GenderEnum
 
 init -1:
-    default mcI = CharacterInfo(name = "Liam", surname = "Johnson", age = 20, gender = GenderEnum.MALE,
-    relationships = {
-        girl : "girlfriend",
-        friend : "friend",
-    })
-    define mc = Character("{b}[mcI.name]{/b}", color="#37b3f3", who_outlines=[(2,"#000000")], what_prefix="\"", what_suffix="\"", what_outlines=[(2,"#000000")])
+    default mcI = CharacterInfo(
+        name = "Liam", surname = "Johnson", age = 20, gender = GenderEnum.MALE,
+        other_values = {},
+        relationships = {
+            girl : "girlfriend",
+            friend : "friend",
+        }
+    )
+    define mc = Character("{b}[mcI.name]{/b}",
+        info_screen = "mc_character_info",
+        color = "#37b3f3", who_outlines = [(2,"#000000")], what_prefix = "\"", what_suffix = "\"", what_outlines = [(2,"#000000")]
+    )
 
     default friendI = CharacterInfo(name = "Nick", surname = "Valentine", age = 26, gender = GenderEnum.MALE,
     relationships = {

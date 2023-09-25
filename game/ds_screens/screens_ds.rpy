@@ -36,8 +36,8 @@ screen menu_userinfo:
             has vbox
             spacing 5
             # for into dictioanry to get key and value
-            for character in all_characters_with_screen():
-                if character.info_screen:
+            for info_screen, character in all_characters_with_screen().items():
+                if info_screen:
                     button:
                         xpos 30
                         xsize 390
@@ -49,7 +49,7 @@ screen menu_userinfo:
                         textbutton "[character]":
                             action [
                                 SetVariable('ds_cur_character', character),
-                                SetVariable('ds_cur_character_screen', character.info_screen),
+                                SetVariable('ds_cur_character_screen', info_screen),
                             ]
                             selected ds_cur_character == character
 
