@@ -28,6 +28,7 @@
             "    relationships = {}",
             ")",
             "define ${1} = Character(\"{b}[${1}I.name]{/b}\",",
+            "    icon = None,",
             "    info_screen = None,",
             "    color = \"#0702ff\", who_outlines = [(2,\"#000000\")], what_prefix = \"\\\"\", what_suffix = \"\\\"\", what_outlines = [(2,\"#000000\")]",
             ")",

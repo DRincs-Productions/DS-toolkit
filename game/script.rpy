@@ -19,25 +19,38 @@ init -1:
         }
     )
     define mc = Character("{b}[mcI.name]{/b}",
+        icon = None,
         info_screen = "mc_character_info",
         color = "#37b3f3", who_outlines = [(2,"#000000")], what_prefix = "\"", what_suffix = "\"", what_outlines = [(2,"#000000")]
     )
 
-    default friendI = CharacterInfo(name = "Nick", surname = "Valentine", age = 26, gender = GenderEnum.MALE,
-    relationships = {
-        mc : relactions["friend"],
-    })
-    define friend = Character("{b}[friendI.name] C.J.{/b}", color="#37c68f", who_outlines=[(2,"#000000")], what_prefix="\"", what_suffix="\"", what_outlines=[(2,"#000000")])
-    image friend normal = "/friend.webp"
+    default friendI = CharacterInfo(
+        name = "Nick", surname = "Valentine", age = 26, gender = GenderEnum.MALE,
+        other_values = {},
+        relationships = {
+            mc : relactions["friend"],
+        }
+    )
+    define friend = Character("{b}[friendI.name] C.J.{/b}",
+        icon = None,
+        info_screen = "friend_character_info",
+        color = "#37c68f", who_outlines = [(2,"#000000")], what_prefix = "\"", what_suffix = "\"", what_outlines = [(2,"#000000")]
+    )
 
-    default girlI = CharacterInfo(name = "Eileen", surname = "Fisher", age = 18, gender = GenderEnum.FEMALE,
-    other_values ={
-        "story": __("She has always been before class.")
-    },
-    relationships = {
-        mc : "boyfriend",
-    })
-    define girl = Character("{b}[girlI.name]{/b}", color="#f337ba", who_outlines=[(2,"#000000")], what_prefix="\"", what_suffix="\"", what_outlines=[(2,"#000000")])
+    default girlI = CharacterInfo(
+        name = "Eileen", surname = "Fisher", age = 18, gender = GenderEnum.FEMALE,
+        other_values ={
+            "story": __("She has always been before class.")
+        },
+        relationships = {
+            mc : "boyfriend",
+        }
+    )
+    define girl = Character("{b}[girlI.name]{/b}",
+        icon = None,
+        info_screen = "girl_character_info",
+        color = "#f337ba", who_outlines = [(2,"#000000")], what_prefix = "\"", what_suffix = "\"", what_outlines = [(2,"#000000")]
+    )
 
 # Statistic
 default mcStatistic = Statistic()
@@ -62,6 +75,7 @@ label set_girl_null:
     $ girl_dress = ""
     return
 image girl normal = "check:girl[girl_dress].webp"
+image friend normal = "/friend.webp"
 
 # The game starts here.
 label start:
