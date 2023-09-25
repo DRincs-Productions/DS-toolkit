@@ -32,7 +32,7 @@ screen menu_userinfo(character_dict):
             has vbox
             spacing 5
             # for into dictioanry to get key and value
-            for ch_id, value in character_dict.items():
+            for character in all_characters():
                 if value.info_screen:
                     button:
                         xpos 30
