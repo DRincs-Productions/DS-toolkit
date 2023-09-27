@@ -210,11 +210,11 @@ class CharacterInfo:
     def setRelationNameByCharacter(
         self,
         character: ADVCharacter,
-        default_relation_key: str,
+        relation_key: str,
         relaction_types: dict[str, tuple[str]] = {},
     ) -> None:
         """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Relaction#set-relation-name-by-character"""
-        default_value = default_relation_key
+        default_value = relation_key
         if default_value in relaction_types:
             default_value = relaction_types[default_value]
 
@@ -223,7 +223,7 @@ class CharacterInfo:
 
         value = renpy.input("{i}(Default: " + str(default_value) + "){/i}")
         if IsNullOrWhiteSpace(value):
-            self._relationships[character] = default_relation_key
+            self._relationships[character] = relation_key
         else:
             value = str.lower(value)
             for key, rel in relaction_types.items():

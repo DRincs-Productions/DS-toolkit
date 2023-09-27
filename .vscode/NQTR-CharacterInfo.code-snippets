@@ -13,7 +13,7 @@
         "scope": "renpy",
         "prefix": "DR_RelationSetOrAdd",
         "body": [
-            "$ ${1:mc}I.setRelationNameByCharacter(character = ${2:character}, default_relation_key = \"${3:friend}\", relaction_types = relactions)",
+            "$ ${1:mc}I.setRelationNameByCharacter(character = ${2:character}, relation_key = \"${3:friend}\", relaction_types = relactions)",
             "",
         ],
         "description": "Set Relation Name By Character"
