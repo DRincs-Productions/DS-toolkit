@@ -1,25 +1,4 @@
 {
-    // format
-    "[renpy]": {
-        "editor.defaultFormatter": "ms-python.python",
-    },
-    "editor.formatOnSave": true,
-    // reorganise imports
-    "editor.codeActionsOnSave": {
-        "source.organizeImports": true
-    },
-    // hide
-    "files.exclude": {
-        "**/*.rpyc": true,
-        "**/*.rpa": true,
-        "**/*.rpymc": true,
-        "**/cache/": true
-    },
-    // olther
-    "extensions.ignoreRecommendations": false,
-    "diffEditor.ignoreTrimWhitespace": false,
-    "python.analysis.typeCheckingMode": "basic",
-    // color
     "editor.tokenColorCustomizations": {
         "[*Light*]": {
             "textMateRules": [
@@ -277,6 +256,18 @@
                 "scope": "renpy.meta.color./color}",
                 "settings": {
                     "foreground": "/color}"
+                }
+            },
+            {
+                "scope": "ref.license",
+                "settings": {
+                    "foreground": "#cccccc"
+                }
+            },
+            {
+                "scope": "ref.snippet",
+                "settings": {
+                    "foreground": "#606060"
                 }
             }
         ]

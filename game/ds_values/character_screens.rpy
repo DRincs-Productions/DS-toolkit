@@ -34,20 +34,3 @@ screen base_character_info(cur_character_info, cur_character_statistic = None, c
                     background None
 
         vbar value YScrollValue('vp3') style 'dr_menu_vscroll'
-
-screen mc_character_info():
-    use base_character_info(mcI, mcStatistic)
-
-screen girl_character_info():
-    imagebutton:
-        align (0.33, 1)
-        idle 'girl normal'
-
-    use base_character_info(girlI, None, girlSentimental)
-
-screen friend_character_info():
-    imagebutton:
-        align (0.33, 1)
-        idle 'friend normal'
-
-    use base_character_info(friendI, friendStatistic, friendSentimental)
