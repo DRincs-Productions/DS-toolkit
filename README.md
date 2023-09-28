@@ -33,7 +33,7 @@ git submodule update --init --recursive
 
 (all begin with `DR_`)
 
-Download the: [link]()
+Download the: [link](https://github.com/DRincs-Productions/DS-toolkit/releases/tag/code-snippets%2Fv2.0.0)
 
 ![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/67595890/179365279-0d0b6d45-0048-4a0d-8c6d-9571b9c328f4.gif)
 
