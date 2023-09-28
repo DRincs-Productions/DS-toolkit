@@ -50,6 +50,9 @@ git submodule add -b renpy-lib -- https://github.com/DRincs-Productions/renpy-ut
 # renpy-utility-lib
 git submodule add -b main -- https://github.com/DRincs-Productions/renpy-screens-style 'game/screens_style'
 # Dating sim toolkit
+git submodule add -b python-lib -- https://github.com/DRincs-Productions/DS-toolkit 'pythonpackages/ds'
+git submodule add -b renpy-lib -- https://github.com/DRincs-Productions/DS-toolkit 'game/ds_tool'
+git submodule add -b screens -- https://github.com/DRincs-Productions/DS-toolkit 'game/ds_screens'
 
 ```
 
