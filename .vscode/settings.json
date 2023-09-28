@@ -21,6 +21,26 @@
     "python.analysis.typeCheckingMode": "basic",
     // color
     "editor.tokenColorCustomizations": {
+        "[*Light*]": {
+            "textMateRules": [
+                {
+                    "scope": "ref.matchtext",
+                    "settings": {
+                        "foreground": "#000"
+                    }
+                }
+            ]
+        },
+        "[*Dark*]": {
+            "textMateRules": [
+                {
+                    "scope": "ref.matchtext",
+                    "settings": {
+                        "foreground": "#fff"
+                    }
+                }
+            ]
+        },
         "textMateRules": [
             {
                 "scope": "renpy.meta.plain",
@@ -128,6 +148,30 @@
                 }
             },
             {
+                "scope": "renpy.meta.color.__(\"{co",
+                "settings": {
+                    "foreground": "__(\"{co"
+                }
+            },
+            {
+                "scope": "renpy.meta.color.__(\"",
+                "settings": {
+                    "foreground": "__(\""
+                }
+            },
+            {
+                "scope": "renpy.meta.color.#00ff00",
+                "settings": {
+                    "foreground": "#00ff00"
+                }
+            },
+            {
+                "scope": "renpy.meta.color.#f00",
+                "settings": {
+                    "foreground": "#f00"
+                }
+            },
+            {
                 "scope": "renpy.meta.color.#cfc",
                 "settings": {
                     "foreground": "#cfc"
@@ -161,18 +205,6 @@
                 "scope": "renpy.meta.color.#ff0000",
                 "settings": {
                     "foreground": "#ff0000"
-                }
-            },
-            {
-                "scope": "renpy.meta.color.#f00",
-                "settings": {
-                    "foreground": "#f00"
-                }
-            },
-            {
-                "scope": "renpy.meta.color.#00ff00",
-                "settings": {
-                    "foreground": "#00ff00"
                 }
             },
             {

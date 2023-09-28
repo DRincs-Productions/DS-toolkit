@@ -13,7 +13,7 @@
         "scope": "renpy",
         "prefix": "DR_RelationSetOrAdd",
         "body": [
-            "$ ${1:mc}I.setRelationNameByCharacter(character = ${2:character}, default_relation_key = \"${3:friend}\", relaction_types = relactions)",
+            "$ ${1:mc}I.setRelationNameByCharacter(character = ${2:character}, relation_key = \"${3:friend}\", relaction_types = relactions)",
             "",
         ],
         "description": "Set Relation Name By Character"
@@ -22,14 +22,16 @@
         "scope": "renpy",
         "prefix": "DR_CharacterAdd",
         "body": [
-            "default ${1:mc}I = CharacterInfo(name = \"${2:Name}\", sname = \"${3:Surname}\", age = ${4:18}, ",
-            "other_values ={",
-            "    ${5:story: __(\"Story.\")}",
-            "}, ",
-            "relationships = {",
-            "    ${6:girl : relactions[\"girlfriend\"],}",
-            "})",
-            "define ${1} = Character(\"{b}[${1}I.name]{/b}\", color=\"#0702ff\", who_outlines=[(2,\"#000000\")], what_prefix=\"\\\"\", what_suffix=\"\\\"\", what_outlines=[(2,\"#000000\")])",
+            "default ${1:mc}I = CharacterInfo(",
+            "    name = \"${2:Name}\", surname = \"${3:Surname}\", age = ${4:18}, gender = GenderEnum.FEMALE,",
+            "    other_values = {},",
+            "    relationships = {}",
+            ")",
+            "define ${1} = Character(\"{b}[${1}I.name]{/b}\",",
+            "    icon = None,",
+            "    info_screen = None,",
+            "    color = \"#0702ff\", who_outlines = [(2,\"#000000\")], what_prefix = \"\\\"\", what_suffix = \"\\\"\", what_outlines = [(2,\"#000000\")]",
+            ")",
             "",
         ],
         "description": "Add Character"

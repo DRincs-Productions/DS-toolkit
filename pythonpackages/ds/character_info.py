@@ -1,11 +1,10 @@
-
 from typing import Optional, Union
 
 import renpy.exports as renpy
-from renpy.character import Character
+from renpy.character import ADVCharacter
 
 from pythonpackages.ds.character_type import GenderEnum
-from pythonpackages.utility import IsNullOrWhiteSpace
+from pythonpackages.renpy_utility.utility import IsNullOrWhiteSpace
 
 UNKNOWN_STRING = "Unknown"
 DEFAULT_SURNAME_KEY = "default_surname"
@@ -13,8 +12,8 @@ DEFAULT_NAME_KEY = "default_name"
 DEFAULT_AGE_KEY = "default_age"
 
 
-class CharacterInfo():
-    """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Information """
+class CharacterInfo:
+    """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Information"""
 
     def __init__(
         self,
@@ -22,21 +21,22 @@ class CharacterInfo():
         gender: GenderEnum,
         surname: Optional[str] = None,
         age: Optional[int] = None,
-        relationships: Optional[dict[Character, str]] = None,
-        other_values: Optional[dict[Character, str]] = None,
-        attraction_genders: Optional[Union[list[GenderEnum],
-                                           GenderEnum]] = None,
+        relationships: Optional[dict[ADVCharacter, str]] = None,
+        other_values: Optional[dict[ADVCharacter, str]] = None,
+        attraction_genders: Optional[Union[list[GenderEnum], GenderEnum]] = None,
     ):
         self._memory = {}
         self._relationships = {}
         self.memory = other_values
         self.name = name
         self.default_name = name
+        if surname == None:
+            surname = ""
         self.surname = surname
-        if (surname != None):
+        if surname != None:
             self.default_surname = surname
         self.age = age
-        if (age != None):
+        if age != None:
             self.default_age = age
         self.gender = gender
         self.relationships = relationships
@@ -45,12 +45,12 @@ class CharacterInfo():
     # Memory
 
     @property
-    def memory(self) -> dict[str, str]:
+    def memory(self) -> dict[ADVCharacter, str]:
         """I use a dictionary because it is the best solution for compatibility and not to create variables that may not be used."""
         return self._memory if self._memory else {}
 
     @memory.setter
-    def memory(self, value: Optional[dict[str, str]]) -> None:
+    def memory(self, value: Optional[dict[ADVCharacter, str]]) -> None:
         self._memory.update(value if value else {})
 
     def get(self, name: str) -> str:
@@ -99,9 +99,8 @@ class CharacterInfo():
         self.set(DEFAULT_NAME_KEY, value)
 
     def changeName(self) -> None:
-        """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Information#change-name """
-        self.name = renpy.input(
-            "{i}(Default: " + self.default_name + "){/i}")
+        """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Information#change-name"""
+        self.name = renpy.input("{i}(Default: " + self.default_name + "){/i}")
         if self.default_name == UNKNOWN_STRING:
             self.default_name = self.name
         return
@@ -141,9 +140,8 @@ class CharacterInfo():
         self.set(DEFAULT_SURNAME_KEY, value)
 
     def changeSurname(self) -> None:
-        """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Information#change-surname """
-        self.surname = renpy.input(
-            "{i}(Default: " + self.default_surname + "){/i}")
+        """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Information#change-surname"""
+        self.surname = renpy.input("{i}(Default: " + self.default_surname + "){/i}")
         if self.default_surname == UNKNOWN_STRING:
             self.default_surname = self.surname
         return
@@ -153,13 +151,13 @@ class CharacterInfo():
     @property
     def age(self) -> Union[int, str]:
         """Age of the character"""
-        if (self._age == None):
+        if self._age == None:
             return self.default_age
         return self._age
 
     @age.setter
     def age(self, value: Optional[Union[int, str]]) -> None:
-        if (isinstance(value, int)):
+        if isinstance(value, int):
             self._age = value
             return
         if IsNullOrWhiteSpace(value):
@@ -177,26 +175,27 @@ class CharacterInfo():
         self.set(DEFAULT_AGE_KEY, value)
 
     def changeAge(self) -> None:
-        """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Information#change-age """
-        self.age = renpy.input(
-            "{i}(Default: " + str(self.default_age) + "){/i}")
-        if (self.default_age == UNKNOWN_STRING):
+        """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Information#change-age"""
+        self.age = renpy.input("{i}(Default: " + str(self.default_age) + "){/i}")
+        if self.default_age == UNKNOWN_STRING:
             self.default_age = self.age
         return
 
     # Relationships
 
     @property
-    def relationships(self) -> dict[Character, str]:
+    def relationships(self) -> dict[ADVCharacter, str]:
         """Relationships of the character"""
         return self._relationships if self._relationships else {}
 
     @relationships.setter
-    def relationships(self, value: Optional[dict[Character, str]]) -> None:
+    def relationships(self, value: Optional[dict[ADVCharacter, str]]) -> None:
         self._relationships.update(value if value else {})
 
-    def getRelationNameByCharacter(self, character: Character, relaction_types: dict[str, tuple[str]] = {}) -> Optional[str]:
-        """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Relaction#get-relation-name-by-character """
+    def getRelationNameByCharacter(
+        self, character: ADVCharacter, relaction_types: dict[str, tuple[str]] = {}
+    ) -> Optional[str]:
+        """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Relaction#get-relation-name-by-character"""
         if character in self.relationships:
             key = self._relationships[character]
             if key in relaction_types:
@@ -208,9 +207,14 @@ class CharacterInfo():
         else:
             return None
 
-    def setRelationNameByCharacter(self, character: Character, default_relation_key: str, relaction_types: dict[str, tuple[str]] = {}) -> None:
-        """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Relaction#set-relation-name-by-character """
-        default_value = default_relation_key
+    def setRelationNameByCharacter(
+        self,
+        character: ADVCharacter,
+        relation_key: str,
+        relaction_types: dict[str, tuple[str]] = {},
+    ) -> None:
+        """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Relaction#set-relation-name-by-character"""
+        default_value = relation_key
         if default_value in relaction_types:
             default_value = relaction_types[default_value]
 
@@ -219,7 +223,7 @@ class CharacterInfo():
 
         value = renpy.input("{i}(Default: " + str(default_value) + "){/i}")
         if IsNullOrWhiteSpace(value):
-            self._relationships[character] = default_relation_key
+            self._relationships[character] = relation_key
         else:
             value = str.lower(value)
             for key, rel in relaction_types.items():
@@ -235,7 +239,7 @@ class CharacterInfo():
             self._relationships[character] = value
         return
 
-    def delete_relation(self, character: Character) -> None:
+    def delete_relation(self, character: ADVCharacter) -> None:
         """Delete relation with character"""
         if character in self.relationships:
             del self._relationships[character]
@@ -255,8 +259,8 @@ class CharacterInfo():
     @property
     def attraction_genders(self) -> list[GenderEnum]:
         """Gender attracted to the character"""
-        if (self._attraction_genders == None):
-            if (GenderEnum.MALE == self.gender):
+        if self._attraction_genders == None:
+            if GenderEnum.MALE == self.gender:
                 return [GenderEnum.FEMALE]
             else:
                 return [GenderEnum.MALE]
@@ -265,7 +269,7 @@ class CharacterInfo():
 
     @attraction_genders.setter
     def attraction_genders(self, value: Optional[Union[list[GenderEnum], GenderEnum]]):
-        if (isinstance(value, GenderEnum)):
+        if isinstance(value, GenderEnum):
             value = [value]
         self._attraction_genders = value
 

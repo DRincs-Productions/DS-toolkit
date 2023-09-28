@@ -5,7 +5,7 @@ init python:
     mp_ndata = MultiPersistent("namedata.f95zone.to")
 
 # https://github.com/DRincs-Productions/DS-toolkit/wiki/Information#renaming_mc
-label renaming_mc:
+label renaming_mc(mcI):
     # allow default name(s) to be saved across multiple games
     if renpy.variant("pc"):
         if not IsNullOrWhiteSpace(mp_ndata.male_fname):

@@ -9,29 +9,48 @@ init -10 python:
     from pythonpackages.ds.character_info import CharacterInfo
     from pythonpackages.ds.character_type import GenderEnum
 
+init -1:
+    default mcI = CharacterInfo(
+        name = "Liam", surname = "Johnson", age = 20, gender = GenderEnum.MALE,
+        other_values = {},
+        relationships = {
+            girl : "girlfriend",
+            friend : "friend",
+        }
+    )
+    define mc = Character("{b}[mcI.name]{/b}",
+        icon = None,
+        info_screen = "mc_character_info",
+        color = "#37b3f3", who_outlines = [(2,"#000000")], what_prefix = "\"", what_suffix = "\"", what_outlines = [(2,"#000000")]
+    )
 
-default mcI = CharacterInfo(name = "Liam", surname = "Johnson", age = 20, gender = GenderEnum.MALE,
-relationships = {
-    girl : "girlfriend",
-    friend : "friend",
-})
-define mc = Character("{b}[mcI.name]{/b}", color="#37b3f3", who_outlines=[(2,"#000000")], what_prefix="\"", what_suffix="\"", what_outlines=[(2,"#000000")])
+    default friendI = CharacterInfo(
+        name = "Nick", surname = "Valentine", age = 26, gender = GenderEnum.MALE,
+        other_values = {},
+        relationships = {
+            mc : relactions["friend"],
+        }
+    )
+    define friend = Character("{b}[friendI.name] C.J.{/b}",
+        icon = None,
+        info_screen = "friend_character_info",
+        color = "#37c68f", who_outlines = [(2,"#000000")], what_prefix = "\"", what_suffix = "\"", what_outlines = [(2,"#000000")]
+    )
 
-default friendI = CharacterInfo(name = "Nick", surname = "Valentine", age = 26, gender = GenderEnum.MALE,
-relationships = {
-    mc : relactions["friend"],
-})
-define friend = Character("{b}[friendI.name] C.J.{/b}", color="#37c68f", who_outlines=[(2,"#000000")], what_prefix="\"", what_suffix="\"", what_outlines=[(2,"#000000")])
-image friend normal = "/friend.webp"
-
-default girlI = CharacterInfo(name = "Eileen", surname = "Fisher", age = 18, gender = GenderEnum.FEMALE,
-other_values ={
-    "story": __("She has always been before class.")
-},
-relationships = {
-    mc : "boyfriend",
-})
-define girl = Character("{b}[girlI.name]{/b}", color="#f337ba", who_outlines=[(2,"#000000")], what_prefix="\"", what_suffix="\"", what_outlines=[(2,"#000000")])
+    default girlI = CharacterInfo(
+        name = "Eileen", surname = "Fisher", age = 18, gender = GenderEnum.FEMALE,
+        other_values ={
+            "story": __("She has always been before class.")
+        },
+        relationships = {
+            mc : "boyfriend",
+        }
+    )
+    define girl = Character("{b}[girlI.name]{/b}",
+        icon = None,
+        info_screen = "girl_character_info",
+        color = "#f337ba", who_outlines = [(2,"#000000")], what_prefix = "\"", what_suffix = "\"", what_outlines = [(2,"#000000")]
+    )
 
 # Statistic
 default mcStatistic = Statistic()
@@ -56,11 +75,12 @@ label set_girl_null:
     $ girl_dress = ""
     return
 image girl normal = "check:girl[girl_dress].webp"
+image friend normal = "/friend.webp"
 
 # The game starts here.
 label start:
     "Welcome to [config.name]"
-    call renaming_mc
+    call renaming_mc(mcI)
     mc "I am ... years old"
     $ mcI.changeAge()
     "Hi [mc] ([mcI.age])"
@@ -73,26 +93,11 @@ label start:
 label loop:
     menu:
         "Screens":
-            call screen menu_userinfo()
-        "Notifications Test":
-            $ notify_add(message="Hello")
+            call screen menu_userinfo
         "Character":
             call character
-        "Clothes":
+        "Clothes (To move)":
             call clothes
-        "Timed menu":
-            "Train boxing."
-            show screen countdown(timer_range=5, timer_call='menu_slow')
-            menu:
-                "Attacks":
-                    hide screen countdown
-                    "You punched."
-                "Defend":
-                    hide screen countdown
-                    "You defended yourself."
-                "Do nothing":
-                    hide screen countdown
-                    "You didn't do anything."
         "Ability":
             call ability
         "End":  # This ends the game.
@@ -105,9 +110,9 @@ label character:
             "Her name is:"
             $ girlI.changeName()
             "I am for [girl], his..."
-            $ girlI.setRelationNameByCharacter(character = mc, default_relation_key = "boyfriend", relaction_types = relactions)
+            $ girlI.setRelationNameByCharacter(character = mc, relation_key = "boyfriend", relaction_types = relactions)
             "She is my..."
-            $ mcI.setRelationNameByCharacter(character = girl, default_relation_key = "girlfriend", relaction_types = relactions)
+            $ mcI.setRelationNameByCharacter(character = girl, relation_key = "girlfriend", relaction_types = relactions)
             $ relaction = girlI.getRelationNameByCharacter(character = mc, relaction_types = relactions)
             girl "Hi my [relaction]"
             $ relaction = mcI.getRelationNameByCharacter(character = girl, relaction_types = relactions)
@@ -121,9 +126,9 @@ label character:
             "His name is:"
             $ friendI.changeName()
             "I am for [friend], his..."
-            $ friendI.setRelationNameByCharacter(character = mc, default_relation_key = "friend", relaction_types = relactions)
+            $ friendI.setRelationNameByCharacter(character = mc, relation_key = "friend", relaction_types = relactions)
             "He is my..."
-            $ mcI.setRelationNameByCharacter(character= friend, default_relation_key = "friend", relaction_types = relactions)
+            $ mcI.setRelationNameByCharacter(character= friend, relation_key = "friend", relaction_types = relactions)
             $ relaction = mcI.getRelationNameByCharacter(character = friend, relaction_types = relactions)
             friend "Hi my [relaction]"
             $ relaction = friendI.getRelationNameByCharacter(character = mc, relaction_types = relactions)

@@ -2,7 +2,7 @@ init python:
     from typing import Union
 
     from pythonpackages.ds.character_statistics import Statistic
-    from pythonpackages.renpy_custom_notify import NotifyEx, notify
+    from pythonpackages.renpy_utility.renpy_custom_notify import NotifyEx, notify
 
     against_notify = NotifyEx(
         message=__("Is against a love affair with you"),

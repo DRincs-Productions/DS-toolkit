@@ -1,10 +1,10 @@
 from typing import Optional
 
-from pythonpackages.renpy_custom_notify import NotifyEx, notify
+from pythonpackages.renpy_utility.renpy_custom_notify import NotifyEx, notify
 
 
 class Statistic(object):
-    """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Statistic """
+    """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Statistic"""
 
     def __init__(
         self,
@@ -35,8 +35,8 @@ class Statistic(object):
         self._memory.update(value if value else {})
 
     def set(self, name: str, value: int) -> None:
-        """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Statistic#set """
-        if (value != 0):
+        """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Statistic#set"""
+        if value != 0:
             self._memory[name] = value
         else:
             self.remove(name)
@@ -48,8 +48,15 @@ class Statistic(object):
             del self._memory[key]
         return
 
-    def improve(self, name: str, amt: int = 1, max: Optional[int] = None, min: int = 0, show_notify: Optional[int] = None) -> None:
-        """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Statistic#improvment """
+    def improve(
+        self,
+        name: str,
+        amt: int = 1,
+        max: Optional[int] = None,
+        min: int = 0,
+        show_notify: Optional[int] = None,
+    ) -> None:
+        """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Statistic#improvment"""
         if show_notify == None:
             show_notify = self._default_show_notify
         if amt == 0:
@@ -68,9 +75,9 @@ class Statistic(object):
         else:
             value = amt
 
-        if (value >= max):
+        if value >= max:
             self.set(name, max)
-        elif (value <= min):
+        elif value <= min:
             self.set(name, min)
         else:
             self.set(name, value)
@@ -80,7 +87,7 @@ class Statistic(object):
         return
 
     def get(self, name: str, default_return: int = 0) -> int:
-        """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Statistic#get """
+        """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Statistic#get"""
         if name in self._memory:
             return self._memory[name]
         else:
@@ -132,9 +139,9 @@ class Statistic(object):
         return
 
     def getAll(self):
-        """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Statistic#getAll """
+        """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Statistic#getAll"""
         return self.memory
 
     def getDefaultMaxValue(self):
-        """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Statistic#getDefaultMaxValue """
+        """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Statistic#getDefaultMaxValue"""
         return self.max_values
