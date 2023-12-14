@@ -10,6 +10,8 @@ This repo is a set of basic tools for Visual Novel / Game developers who are pla
 
 Feel free to contribute, fork this and send a pull request. 😄
 
+Itch.io Page: https://drincs-productions.itch.io/ds-toolkit
+
 ----
 
 ## TO DOWNLOAD THIS TEST PROJECT
