@@ -23,7 +23,7 @@ screen menu_userinfo:
     use menu_tile(_("Characters"))
 
     # button for closure
-    use close_button('menu_userinfo')
+    use close_button()
 
     frame:
         ypos gui.dr_drawer_ypos
@@ -59,6 +59,3 @@ screen menu_userinfo:
     # character info
     if ds_cur_character_screen:
         use expression ds_cur_character_screen
-
-    key 'K_ESCAPE' action Hide('menu_userinfo')
-    key 'mouseup_3' action Hide('menu_userinfo')
