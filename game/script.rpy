@@ -93,7 +93,7 @@ label start:
 label loop:
     menu:
         "Screens":
-            call screen menu_userinfo
+            call screen menu_userinfo([ Return() ])
         "Character":
             call character
         "Clothes (To move)":
