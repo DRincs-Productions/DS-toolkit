@@ -9,7 +9,7 @@ init -10 python:
     def all_characters_with_screen():
         return character_screens.all_characters_with_screen(store)
 
-screen menu_userinfo:
+screen menu_userinfo(close_actions = [ Hide("menu_userinfo") ]):
 
     tag menu
 
@@ -23,7 +23,7 @@ screen menu_userinfo:
     use menu_tile(_("Characters"))
 
     # button for closure
-    use close_button()
+    use close_button(close_actions)
 
     frame:
         ypos gui.dr_drawer_ypos
