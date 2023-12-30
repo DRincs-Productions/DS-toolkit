@@ -25,3 +25,9 @@ label renaming_mc(mcI):
             $ mp_ndata.male_sname = mcI.surname
         $ mp_ndata.save()
     return
+
+label set_valid_age(chI):
+    $ chI.changeAge()
+    if not mcI.is_valide_age:
+        "The age you entered is not valid. Please enter a valid age."
+        call set_valid_age(chI)
