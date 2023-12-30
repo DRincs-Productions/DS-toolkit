@@ -160,10 +160,15 @@ class CharacterInfo:
         if isinstance(value, int):
             self._age = value
             return
-        if IsNullOrWhiteSpace(value):
-            self._age = self.get(DEFAULT_AGE_KEY)
-        else:
-            self._age = value
+        try:
+            if isinstance(value, str):
+                self._age = int(value)
+                return
+        except:
+            if IsNullOrWhiteSpace(value):
+                self._age = self.get(DEFAULT_AGE_KEY)
+            else:
+                self._age = value
 
     @property
     def default_age(self) -> Union[int, str]:
@@ -180,6 +185,24 @@ class CharacterInfo:
         if self.default_age == UNKNOWN_STRING:
             self.default_age = self.age
         return
+
+    @property
+    def is_valide_age(self) -> bool:
+        """Returns True if the age is an integer or if it a string that can be converted to an integer"""
+        if isinstance(self.age, int):
+            return True
+        try:
+            int(self.age)
+            return True
+        except:
+            return False
+
+    @property
+    def is_adult(self) -> bool:
+        """Returns True if the age is greater than or equal to 18"""
+        if not self.is_valide_age or isinstance(self.age, str):
+            return False
+        return self.age >= 18
 
     # Relationships
 
