@@ -6,7 +6,7 @@
     "editor.formatOnSave": true,
     // reorganise imports
     "editor.codeActionsOnSave": {
-        "source.organizeImports": true
+        "source.organizeImports": "explicit"
     },
     // hide
     "files.exclude": {

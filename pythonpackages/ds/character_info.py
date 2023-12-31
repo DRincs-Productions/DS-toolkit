@@ -215,12 +215,18 @@ class CharacterInfo:
     def relationships(self, value: Optional[dict[ADVCharacter, str]]) -> None:
         self._relationships.update(value if value else {})
 
+    def getRelationKeyByCharacter(self, character: ADVCharacter) -> Optional[str]:
+        if character in self.relationships:
+            return self._relationships[character]
+        else:
+            return None
+
     def getRelationNameByCharacter(
         self, character: ADVCharacter, relaction_types: dict[str, tuple[str]] = {}
     ) -> Optional[str]:
         """Wiki: https://github.com/DRincs-Productions/DS-toolkit/wiki/Relaction#get-relation-name-by-character"""
         if character in self.relationships:
-            key = self._relationships[character]
+            key = self.getRelationKeyByCharacter(character)
             if key in relaction_types:
                 value = relaction_types[key]
                 if isinstance(value, tuple):
