@@ -21,7 +21,7 @@ init -1:
     define mc = Character("{b}[mcI.name]{/b}",
         icon = None,
         info_screen = "mc_character_info",
-        color = "#37b3f3", who_outlines = [(2,"#000000")], what_prefix = "\"", what_suffix = "\"", what_outlines = [(2,"#000000")]
+        color = "#37b3f3", who_outlines = [(2,"#000000")], what_prefix = "", what_suffix = "", what_outlines = [(2,"#000000")]
     )
 
     default friendI = CharacterInfo(
@@ -34,7 +34,7 @@ init -1:
     define friend = Character("{b}[friendI.name] C.J.{/b}",
         icon = None,
         info_screen = "friend_character_info",
-        color = "#37c68f", who_outlines = [(2,"#000000")], what_prefix = "\"", what_suffix = "\"", what_outlines = [(2,"#000000")]
+        color = "#37c68f", who_outlines = [(2,"#000000")], what_prefix = "", what_suffix = "", what_outlines = [(2,"#000000")]
     )
 
     default girlI = CharacterInfo(
@@ -49,7 +49,7 @@ init -1:
     define girl = Character("{b}[girlI.name]{/b}",
         icon = None,
         info_screen = "girl_character_info",
-        color = "#f337ba", who_outlines = [(2,"#000000")], what_prefix = "\"", what_suffix = "\"", what_outlines = [(2,"#000000")]
+        color = "#f337ba", who_outlines = [(2,"#000000")], what_prefix = "", what_suffix = "", what_outlines = [(2,"#000000")]
     )
 
 # Statistic
