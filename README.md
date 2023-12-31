@@ -1,4 +1,4 @@
-# Dating sim toolkit (character info) for Ren'Py
+# Dating Sim Framework (character info) for Ren'Py
 
 ![Last commit](https://img.shields.io/github/last-commit/DRincs-Productions/DS-toolkit)
 ![License](https://img.shields.io/github/license/DRincs-Productions/DS-toolkit)
