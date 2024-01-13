@@ -13,30 +13,6 @@ init python:
         image="/images_tool/icon/notification/relations-fear.webp",
     )
     # Characteristics
-    increase_energy_notify = NotifyEx(
-        message=__("{color=#00ff00}{b}+{/b} Energy{/color}"),
-        image="/images_tool/icon/notification/characteristics-energy.webp",
-    )
-    decrease_energy_notify = NotifyEx(
-        message=__("{color=#f00} {b}-{/b} Energy{/color}"),
-        image="/images_tool/icon/notification/characteristics-energy.webp",
-    )
-    increase_willpower_notify = NotifyEx(
-        message=__("{color=#00ff00}{b}+{/b} Willpower{/color}"),
-        image="/images_tool/icon/notification/characteristics-willpower.webp",
-    )
-    decrease_willpower_notify = NotifyEx(
-        message=__("{color=#f00} {b}-{/b} Willpower{/color}"),
-        image="/images_tool/icon/notification/characteristics-willpower.webp",
-    )
-    increase_inhibition_notify = NotifyEx(
-        message=__("{color=#f00}{b}+{/b} Inhibition{/color}"),
-        image="/images_tool/icon/notification/characteristics-inhibition.webp",
-    )
-    decrease_inhibition_notify = NotifyEx(
-        message=__("{color=#00ff00} {b}-{/b} Inhibition{/color}"),
-        image="/images_tool/icon/notification/characteristics-inhibition.webp",
-    )
     increase_addiction_notify = NotifyEx(
         message=__("{color=#00ff00}{b}+{/b} Addictions{/color}"),
         image="/images_tool/icon/notification/characteristics-addiction.webp",
@@ -113,7 +89,6 @@ init python:
             love: int = 0,
             corruption: int = 0,
             virgin: bool = True,
-            bisexual: bool = False,
             against=0,
             addiction=0,
             max_values: int = 100,
@@ -122,9 +97,6 @@ init python:
             # Statistic init
             super().__init__(
                 notify_increase_dict={
-                    "energy": increase_energy_notify,
-                    "willpower": increase_willpower_notify,
-                    "inhibition": increase_inhibition_notify,
                     "addiction": increase_addiction_notify,
                     "lust": increase_lust_notify,
                     "friendship": increase_friendship_notify,
@@ -135,9 +107,6 @@ init python:
                     "fear": increase_fear_notify,
                 },
                 notify_decrease_dict={
-                    "energy": decrease_energy_notify,
-                    "willpower": decrease_willpower_notify,
-                    "inhibition": decrease_inhibition_notify,
                     "addiction": decrease_addiction_notify,
                     "lust": decrease_lust_notify,
                     "friendship": decrease_friendship_notify,
@@ -164,7 +133,6 @@ init python:
             self.corruption = corruption
             # Emblems
             self.is_virgin = virgin
-            self.bisexual = bisexual
 
             self._default_show_notify = True
 
@@ -215,14 +183,14 @@ init python:
         def love(self, value: int) -> None:
             cur_value = self.get("love")
             amt = value - cur_value
-            if (self.anger is int and self.anger > 0 and amt > 0):
+            if (self.anger > 0 and amt > 0):
                 self.anger = self.anger - 5
                 return
-            if (self.is_against and (cur_value + amt) > 20):
-                self.set("love", 20)
+            if (self.is_against) and amt > 0:
+                self.set("love", 0)
                 notify(against_notify)
                 return
-            if (self.fear + amt) > 40 and amt > 0:
+            if self.fear > 20 and amt > 0:
                 self.improve("love", -amt, max=100, min=0)
                 notify(fear_against_notify)
                 return
@@ -240,8 +208,6 @@ init python:
         def corruption(self, value: int) -> None:
             cur_value = self.get("corruption")
             amt = value - cur_value
-            if (cur_value + amt) >= 105:
-                self.willpower = self.willpower - 5
             self.improve("corruption", amt, max=100, min=0)
             return
 
@@ -269,55 +235,15 @@ init python:
             self.improve("anger", amt, max=100, min=0)
             return
 
-        # Energy
-        @property
-        def energy(self) -> int:
-            return self.get("energy")
-
-        @energy.setter
-        def energy(self, value: int) -> None:
-            cur_value = self.get("energy")
-            amt = value - cur_value
-            self.improve("energy", amt, max=100, min=0)
-            return
-
-        # Willpower
-        @property
-        def willpower(self) -> int:
-            return self.get("willpower")
-
-        @willpower.setter
-        def willpower(self, value: int) -> None:
-            cur_value = self.get("willpower")
-            amt = value - cur_value
-            if (cur_value + amt) < 0:
-                self.energy = self.energy - 15
-            self.improve("willpower", amt, max=100, min=0)
-            return
-
-        # Inhibition
-        @property
-        def inhibition(self) -> int:
-            return self.get("inhibition")
-
-        @inhibition.setter
-        def inhibition(self, value: int) -> None:
-            cur_value = self.get("inhibition")
-            amt = value - cur_value
-            self.improve("inhibition", amt, max=100, min=0)
-            return
-
         # Addiction
         @property
         def addiction(self) -> int:
             return self.get("addiction")
 
         @addiction.setter
-        def addiction(self, value: int) -> None:
+        def addiction(self, value: int) -> int:
             cur_value = self.get("addiction")
             amt = value - cur_value
-            if (cur_value + amt) >= 105:
-                self.inhibition = self.inhibition - 3
             self.improve("addiction", amt, max=100, min=0)
             return
 
@@ -330,8 +256,6 @@ init python:
         def lust(self, value: int) -> None:
             cur_value = self.get("lust")
             amt = value - cur_value
-            if (cur_value + amt) >= 120:
-                self.inhibition = self.inhibition - 5
             self.improve("lust", amt, max=100, min=0)
             return
 
@@ -350,9 +274,10 @@ init python:
         @property
         def is_against(self) -> bool:
             val = self.get("against")
+            log_info(str(val))
             if val == None:
                 return False
-            return val <= 0
+            return val > 0
 
         @is_against.setter
         def is_against(self, value: bool):
@@ -365,9 +290,35 @@ init python:
         # Other
 
         @property
+        def sex_actions_with_you(self) -> int:
+            return self.get("sex_actions_with_you")
+
+        @sex_actions_with_you.setter
+        def sex_actions_with_you(self, value: Union[int]):
+            cur_value = self.get("sex_actions_with_you")
+            amt = value - cur_value
+            self.improve("sex_actions_with_you", amt, max=9999, min=0)
+            return
+
+        @property
+        def sex_actions_with_olther(self) -> int:
+            return self.get("sex_actions_with_olther")
+
+        @sex_actions_with_olther.setter
+        def sex_actions_with_olther(self, value: Union[int]):
+            cur_value = self.get("sex_actions_with_olther")
+            amt = value - cur_value
+            self.improve("sex_actions_with_olther", amt, max=9999, min=0)
+            return
+
+        @property
+        def sex_actions(self) -> int:
+            return (self.sex_actions + self.sex_actions_with_olther)
+
+        @property
         def is_virgin(self) -> bool:
             """Return True if the character is a virgin, False otherwise."""
-            val = self.get("sex_actions")
+            val = self.sex_actions
             return val <= 0
 
         @is_virgin.setter
@@ -375,32 +326,10 @@ init python:
             """Set the virginity of the character."""
             if isinstance(value, bool):
                 if value:
-                    self.set("sex_actions", 0)
+                    self.set("sex_actions_with_you", 0)
+                    self.set("sex_actions_with_olther", 0)
                 else:
-                    self.improve("sex_actions", 1)
+                    self.improve("sex_actions_with_you", 1)
             else:
-                self.set("sex_actions", value)
+                self.set("sex_actions_with_you", value)
 
-        @property
-        def is_healthy(self) -> bool:
-            if (not self.is_against):
-                return False
-            return (self.energy == 100 and self.willpower == 100 and self.inhibition == 100 and self.corruption == 0 and self.addiction == 0)
-
-        @is_healthy.setter
-        def is_healthy(self, value: bool):
-            if value:
-                self.energy += 100
-                self.willpower += 100
-                self.inhibition += 100
-                self.corruption -= 100
-                self.addiction -= 100
-                self.fear -= 50
-                self.lust -= 50
-                self.is_against = False
-            else:
-                self.energy -= 100
-                self.willpower -= 100
-                self.inhibition -= 100
-                self.corruption += 100
-                self.addiction += 100

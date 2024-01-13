@@ -30,18 +30,26 @@ label start:
 label loop:
     menu:
         "Screens":
+            "This is only a example of the screens. You can customize it."
             call screen menu_userinfo([ Return() ])
-        "Character":
+        "Character settings":
             call character
-        "Clothes (To move)":
-            call clothes
-        "Ability":
+        "Skills training":
             call ability
+        "Clothes (exemple)":
+            call clothes
+        "Try it with [girl]":
+            call try_girl
+        "Try it with [friend]":
+            call try_friend
+        "Force statistic":
+            call relaction1
         "End":  # This ends the game.
             return
     jump loop
 
 label character:
+    "This is the CharacterInfo() test. Try to change the relations in \"Mommy\", \"Mummy\", \"Mum\", \"Mother\"; it gives you a \"Mom\" result."
     menu:
         "Change labels [girl]":
             "Her name is:"
@@ -79,14 +87,8 @@ label character:
                 friend "We are friends"
             else:
                 friend "We are not friends"
-        "Relaction":
-            call relaction1
-        "Characteristics":
-            call character1
-        "Emblem":
-            call emblem1
         "Back":
-            jump loop
+            return
     jump character
 
 label clothes:
@@ -147,33 +149,15 @@ label relaction3:
             $ girlSentimental.anger += 10
         "- Anger [girl]. Anger: [girlSentimental.anger]":
             $ girlSentimental.anger -= 10
+        "Pag4":
+            jump relaction4
         "Back":
             return
     jump relaction3
-
-label character1:
+label relaction4:
     menu:
-        "+ Energy [girl]. Energy: [girlSentimental.energy]":
-            $ girlSentimental.energy += 10
-        "- Energy [girl]. Energy: [girlSentimental.energy]":
-            $ girlSentimental.energy -= 10
-        "+ Willpower [girl]. Willpower: [girlSentimental.willpower]":
-            $ girlSentimental.willpower += 10
-        "- Willpower [girl]. Willpower: [girlSentimental.willpower]":
-            $ girlSentimental.willpower -= 10
-        "+ Inhibition [girl]. Inhibition: [girlSentimental.inhibition]":
-            $ girlSentimental.inhibition += 10
-        "- Inhibition [girl]. Inhibition: [girlSentimental.inhibition]":
-            $ girlSentimental.inhibition -= 10
-        "Pag2":
-            jump character2
-        "Back":
-            return
-    jump character1
-label character2:
-    menu:
-        "Pag1":
-            jump character1
+        "Pag3":
+            jump relaction3
         "+ Addiction [girl]. Addiction: [girlSentimental.addiction]":
             $ girlSentimental.addiction += 10
         "- Addiction [girl]. Addiction: [girlSentimental.addiction]":
@@ -184,27 +168,11 @@ label character2:
             $ girlSentimental.lust -= 10
         "Back":
             return
-    jump character2
-
-label emblem1:
-    menu:
-        "Set not Virgin [girl]. Virgin: True" if (girlSentimental.is_virgin):
-            $ girlSentimental.is_virgin = False
-        "Set Virgin [girl]. Virgin: False" if (not girlSentimental.is_virgin):
-            $ girlSentimental.is_virgin = True
-        "Set not Against false [girl]. Against: True" if (girlSentimental.is_against):
-            $ girlSentimental.is_against = False
-        "Set Against [girl]. Against: False" if (not girlSentimental.is_against):
-            $ girlSentimental.is_against = True
-        "Set not Healthy [girl]. Healthy: True" if (girlSentimental.is_healthy):
-            $ girlSentimental.is_healthy = False
-        "Set Healthy [girl]. Healthy: False" if (not girlSentimental.is_healthy):
-            $ girlSentimental.is_healthy = True
-        "Back":
-            return
-    jump emblem1
+    jump character1
 
 label ability:
+    "This is the Statistic() test. Is a example of a simple statistic."
+label ability_loop:
     $ MCint = mcStatistic.get("intelligence")
     $ MCstr = mcStatistic.get("strength")
     $ FRint = friendStatistic.get("intelligence")
@@ -226,4 +194,39 @@ label ability:
                 "You lost"
         "Back":
             return
-    jump ability
+    jump ability_loop
+
+label try_girl:
+    "This is the SentimentalStatistic(Statistic) test. Is a example of an extension of Statistic() thought only of games for adults."
+    "It is recommended to customize before using or create another one."
+label try_girl_loop:
+    menu:
+        "Give her a gift":
+            $ girlSentimental.favour += 10
+        "Try giving her a kiss":
+            if girlSentimental.favour > 80:
+                $ girlSentimental.love += 10
+            else:
+                $ girlSentimental.anger += 10
+        "Try going to bed with her":
+            if girlSentimental.love > 80:
+                $ girlSentimental.lust += 10
+                $ girlSentimental.sex_actions_with_you += 1
+            else:
+                $ girlSentimental.anger += 10
+        "Back":
+            return
+    jump try_girl_loop
+
+label try_friend:
+    "This is the SentimentalStatistic(Statistic) test. Is a example of an extension of Statistic() thought only of games for adults."
+    "It is recommended to customize before using or create another one."
+label try_friend_loop:
+    menu:
+        "Give him a gift":
+            $ friendSentimental.friendship += 10
+        "Try giving him a kiss":
+            $ friendSentimental.love += 10
+        "Back":
+            return
+    jump try_friend_loop
