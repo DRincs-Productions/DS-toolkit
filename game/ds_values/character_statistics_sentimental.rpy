@@ -385,8 +385,6 @@ init python:
         def is_healthy(self) -> bool:
             if (not self.is_against):
                 return False
-            if (self.is_slut or self.is_submissive or self.is_nymphomaniac or self.is_celebrolesis or self.is_free_use):
-                return False
             return (self.energy == 100 and self.willpower == 100 and self.inhibition == 100 and self.corruption == 0 and self.addiction == 0)
 
         @is_healthy.setter
@@ -406,97 +404,3 @@ init python:
                 self.inhibition -= 100
                 self.corruption += 100
                 self.addiction += 100
-
-        @property
-        def is_unfaithful(self) -> bool:
-            return (self.willpower > 45 and self.lust > 60 and self.anger > 50 and (self.lust + self.anger) > 130)
-
-        @is_unfaithful.setter
-        def is_unfaithful(self, value: bool):
-            if value:
-                self.willpower += 100
-                self.lust += 100
-                self.anger += 100
-            else:
-                self.willpower -= 100
-                self.lust -= 100
-                self.anger -= 100
-
-        @property
-        def is_slut(self) -> bool:
-            return (self.lust > 50 and (self.corruption > 80 or self.addiction > 60) and (self.lust + self.corruption + self.addiction) > 160)
-
-        @is_slut.setter
-        def is_slut(self, value: bool):
-            if value:
-                self.lust += 100
-                self.corruption += 100
-                self.addiction += 100
-            else:
-                self.lust -= 100
-                self.corruption -= 100
-                self.addiction -= 100
-
-        @property
-        def is_nymphomaniac(self) -> bool:
-            return (self.lust > 90 and self.corruption > 10 and self.inhibition < 40)
-
-        @is_nymphomaniac.setter
-        def is_nymphomaniac(self, value: bool):
-            if value:
-                self.corruption += 100
-                self.lust += 100
-                self.inhibition -= 100
-            else:
-                self.corruption -= 100
-                self.lust -= 100
-                self.inhibition += 100
-
-        @property
-        def is_submissive(self) -> bool:
-            return (self.willpower < 20 and self.fear > 80 and (self.fear - self.willpower) > 80)
-
-        @is_submissive.setter
-        def is_submissive(self, value: bool):
-            if value:
-                self.willpower -= 100
-                self.fear += 100
-            else:
-                self.willpower += 100
-                self.fear -= 100
-
-        @property
-        def is_celebrolesis(self) -> bool:
-            return (self.inhibition < 20 and (self.willpower < 80 or self.addiction > 20) and (self.addiction - self.inhibition - self.willpower > 40))
-
-        @is_celebrolesis.setter
-        def is_celebrolesis(self, value: bool):
-            if value:
-                self.willpower -= 100
-                self.inhibition -= 100
-                self.addiction += 100
-            else:
-                self.willpower += 100
-                self.inhibition += 100
-                self.addiction -= 100
-
-        @property
-        def is_free_use(self) -> bool:
-            return ((self.is_slut and self.is_submissive) or (self.is_slut and self.is_celebrolesis))
-
-        @is_free_use.setter
-        def is_free_use(self, value: bool):
-            if value:
-                self.willpower -= 100
-                self.inhibition -= 100
-                self.fear += 100
-                self.lust += 100
-                self.corruption += 100
-                self.addiction += 100
-            else:
-                self.willpower += 100
-                self.inhibition += 100
-                self.fear -= 100
-                self.lust -= 100
-                self.corruption -= 100
-                self.addiction -= 100
