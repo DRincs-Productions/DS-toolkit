@@ -31,11 +31,11 @@ label loop:
     menu:
         "Screens":
             call screen menu_userinfo([ Return() ])
-        "Character":
+        "Character settings":
             call character
-        "Clothes (To move)":
+        "Clothes (To remove and move into olther project)":
             call clothes
-        "Ability":
+        "Skills training":
             call ability
         "End":  # This ends the game.
             return
@@ -79,12 +79,10 @@ label character:
                 friend "We are friends"
             else:
                 friend "We are not friends"
-        "Relaction":
+        "Sentimental statistic":
             call relaction1
         "Characteristics":
             call character1
-        "Emblem":
-            call emblem1
         "Back":
             jump loop
     jump character
@@ -185,24 +183,6 @@ label character2:
         "Back":
             return
     jump character2
-
-label emblem1:
-    menu:
-        "Set not Virgin [girl]. Virgin: True" if (girlSentimental.is_virgin):
-            $ girlSentimental.is_virgin = False
-        "Set Virgin [girl]. Virgin: False" if (not girlSentimental.is_virgin):
-            $ girlSentimental.is_virgin = True
-        "Set not Against false [girl]. Against: True" if (girlSentimental.is_against):
-            $ girlSentimental.is_against = False
-        "Set Against [girl]. Against: False" if (not girlSentimental.is_against):
-            $ girlSentimental.is_against = True
-        "Set not Healthy [girl]. Healthy: True" if (girlSentimental.is_healthy):
-            $ girlSentimental.is_healthy = False
-        "Set Healthy [girl]. Healthy: False" if (not girlSentimental.is_healthy):
-            $ girlSentimental.is_healthy = True
-        "Back":
-            return
-    jump emblem1
 
 label ability:
     $ MCint = mcStatistic.get("intelligence")
