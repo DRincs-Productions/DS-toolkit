@@ -84,7 +84,7 @@ label character:
         "Characteristics":
             call character1
         "Back":
-            jump loop
+            return
     jump character
 
 label clothes:
