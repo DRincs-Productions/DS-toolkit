@@ -24,7 +24,7 @@ init -1:
         name = "Nick", surname = "Valentine", age = 26, gender = GenderEnum.MALE,
         other_values = {},
         relationships = {
-            mc : relactions["friend"],
+            mc : "friend",
         }
     )
     define friend = Character("{b}[friendI.name] C.J.{/b}",
