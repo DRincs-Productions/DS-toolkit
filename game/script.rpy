@@ -1,70 +1,6 @@
-# The script of the game goes in this file.
+﻿# The script of the game goes in this file.
 
 image bg blue = "#b1e3ff"
-
-# Declare characters used by this game. The color argument colorizes the
-# name of the character.
-
-init -10 python:
-    from pythonpackages.ds.character_info import CharacterInfo
-    from pythonpackages.ds.character_type import GenderEnum
-
-init -1:
-    default mcI = CharacterInfo(
-        name = "Liam", surname = "Johnson", age = 20, gender = GenderEnum.MALE,
-        other_values = {},
-        relationships = {
-            girl : "girlfriend",
-            friend : "friend",
-        }
-    )
-    define mc = Character("{b}[mcI.name]{/b}",
-        icon = None,
-        info_screen = "mc_character_info",
-        color = "#37b3f3", who_outlines = [(2,"#000000")], what_prefix = "", what_suffix = "", what_outlines = [(2,"#000000")]
-    )
-
-    default friendI = CharacterInfo(
-        name = "Nick", surname = "Valentine", age = 26, gender = GenderEnum.MALE,
-        other_values = {},
-        relationships = {
-            mc : relactions["friend"],
-        }
-    )
-    define friend = Character("{b}[friendI.name] C.J.{/b}",
-        icon = None,
-        info_screen = "friend_character_info",
-        color = "#37c68f", who_outlines = [(2,"#000000")], what_prefix = "", what_suffix = "", what_outlines = [(2,"#000000")]
-    )
-
-    default girlI = CharacterInfo(
-        name = "Eileen", surname = "Fisher", age = 18, gender = GenderEnum.FEMALE,
-        other_values ={
-            "story": __("She has always been before class.")
-        },
-        relationships = {
-            mc : "boyfriend",
-        }
-    )
-    define girl = Character("{b}[girlI.name]{/b}",
-        icon = None,
-        info_screen = "girl_character_info",
-        color = "#f337ba", who_outlines = [(2,"#000000")], what_prefix = "", what_suffix = "", what_outlines = [(2,"#000000")]
-    )
-
-# Statistic
-default mcStatistic = Statistic()
-default friendStatistic = Statistic(
-    values= {
-        "strength"      :   7,
-        "intelligence"  :   7,
-        "agility"       :   7,
-    }
-)
-
-# statsSentimental
-default girlSentimental = SentimentalStatistic(virgin = True, love = 10)
-default friendSentimental = SentimentalStatistic(virgin = False, against = 20)
 
 # Clothes
 default girl_dress = "-homesuit"
@@ -76,6 +12,7 @@ label set_girl_null:
     return
 image girl normal = "check:girl[girl_dress].webp"
 image friend normal = "/friend.webp"
+image mc normal = "/unknown.webp"
 
 # The game starts here.
 label start:
@@ -110,9 +47,9 @@ label character:
             "Her name is:"
             $ girlI.changeName()
             "I am for [girl], his..."
-            $ girlI.setRelationNameByCharacter(character = mc, relation_key = "boyfriend", relaction_types = relactions)
+            $ girlI.setRelationNameByCharacter(character = mc, default_relation_key = "boyfriend", relaction_types = relactions)
             "She is my..."
-            $ mcI.setRelationNameByCharacter(character = girl, relation_key = "girlfriend", relaction_types = relactions)
+            $ mcI.setRelationNameByCharacter(character = girl, default_relation_key = "girlfriend", relaction_types = relactions)
             $ relaction = girlI.getRelationNameByCharacter(character = mc, relaction_types = relactions)
             girl "Hi my [relaction]"
             $ relaction = mcI.getRelationNameByCharacter(character = girl, relaction_types = relactions)
@@ -126,9 +63,9 @@ label character:
             "His name is:"
             $ friendI.changeName()
             "I am for [friend], his..."
-            $ friendI.setRelationNameByCharacter(character = mc, relation_key = "friend", relaction_types = relactions)
+            $ friendI.setRelationNameByCharacter(character = mc, default_relation_key = "friend", relaction_types = relactions)
             "He is my..."
-            $ mcI.setRelationNameByCharacter(character= friend, relation_key = "friend", relaction_types = relactions)
+            $ mcI.setRelationNameByCharacter(character= friend, default_relation_key = "friend", relaction_types = relactions)
             $ relaction = mcI.getRelationNameByCharacter(character = friend, relaction_types = relactions)
             friend "Hi my [relaction]"
             $ relaction = friendI.getRelationNameByCharacter(character = mc, relaction_types = relactions)
