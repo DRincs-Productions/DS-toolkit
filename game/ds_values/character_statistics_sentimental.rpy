@@ -183,14 +183,14 @@ init python:
         def love(self, value: int) -> None:
             cur_value = self.get("love")
             amt = value - cur_value
-            if (self.anger is int and self.anger > 0 and amt > 0):
+            if (self.anger > 0 and amt > 0):
                 self.anger = self.anger - 5
                 return
-            if (self.is_against and (cur_value + amt) > 20):
-                self.set("love", 20)
+            if (self.is_against) and amt > 0:
+                self.set("love", 0)
                 notify(against_notify)
                 return
-            if (self.fear + amt) > 40 and amt > 0:
+            if self.fear > 20 and amt > 0:
                 self.improve("love", -amt, max=100, min=0)
                 notify(fear_against_notify)
                 return
@@ -274,9 +274,10 @@ init python:
         @property
         def is_against(self) -> bool:
             val = self.get("against")
+            log_info(str(val))
             if val == None:
                 return False
-            return val <= 0
+            return val > 0
 
         @is_against.setter
         def is_against(self, value: bool):
@@ -305,20 +306,3 @@ init python:
             else:
                 self.set("sex_actions", value)
 
-        @property
-        def is_healthy(self) -> bool:
-            if (not self.is_against):
-                return False
-            return (self.corruption == 0 and self.addiction == 0)
-
-        @is_healthy.setter
-        def is_healthy(self, value: bool):
-            if value:
-                self.corruption -= 100
-                self.addiction -= 100
-                self.fear -= 50
-                self.lust -= 50
-                self.is_against = False
-            else:
-                self.corruption += 100
-                self.addiction += 100
