@@ -12,6 +12,7 @@ label set_girl_null:
     return
 image girl normal = "check:girl[girl_dress].webp"
 image friend normal = "/friend.webp"
+image mc normal = "/unknown.webp"
 
 # The game starts here.
 label start:
