@@ -4,7 +4,12 @@ import renpy.exports as renpy
 from renpy.character import ADVCharacter
 
 from pythonpackages.ds.character_type import GenderEnum
-from pythonpackages.renpy_utility.utility import IsNullOrWhiteSpace
+from pythonpackages.renpy_utility.utility import (
+    IsNullOrWhiteSpace,
+    del_value_by_character_key,
+    get_value_by_character_key,
+    set_value_by_character_key,
+)
 
 UNKNOWN_STRING = "Unknown"
 DEFAULT_SURNAME_KEY = "default_surname"
@@ -216,10 +221,7 @@ class CharacterInfo:
         self._relationships.update(value if value else {})
 
     def getRelationKeyByCharacter(self, character: ADVCharacter) -> Optional[str]:
-        if character in self.relationships:
-            return self._relationships[character]
-        else:
-            return None
+        return get_value_by_character_key(character, self.relationships)
 
     def getRelationNameByCharacter(
         self, character: ADVCharacter, relaction_types: dict[str, tuple[str]] = {}
@@ -233,6 +235,7 @@ class CharacterInfo:
                     return value[0]
                 else:
                     return value
+            return key
         else:
             return None
 
@@ -252,26 +255,29 @@ class CharacterInfo:
 
         value = renpy.input("{i}(Default: " + str(default_value) + "){/i}")
         if IsNullOrWhiteSpace(value):
-            self._relationships[character] = default_relation_key
+            set_value_by_character_key(
+                character, self.relationships, default_relation_key
+            )
         else:
             value = str.lower(value)
             for key, rel in relaction_types.items():
                 if isinstance(rel, tuple):
                     for name in rel:
                         if str.lower(name) == value:
-                            self._relationships[character] = key
+                            set_value_by_character_key(
+                                character, self.relationships, key
+                            )
                             return
                 else:
                     if str.lower(rel) == value:
-                        self._relationships[character] = key
+                        set_value_by_character_key(character, self.relationships, key)
                         return
-            self._relationships[character] = value
+            set_value_by_character_key(character, self.relationships, value)
         return
 
     def delete_relation(self, character: ADVCharacter) -> None:
         """Delete relation with character"""
-        if character in self.relationships:
-            del self._relationships[character]
+        del_value_by_character_key(character, self.relationships)
         return
 
     # Gender
