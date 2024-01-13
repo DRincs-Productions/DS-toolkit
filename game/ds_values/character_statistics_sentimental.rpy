@@ -274,7 +274,6 @@ init python:
         @property
         def is_against(self) -> bool:
             val = self.get("against")
-            log_info(str(val))
             if val == None:
                 return False
             return val > 0
