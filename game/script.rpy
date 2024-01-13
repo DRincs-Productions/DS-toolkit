@@ -30,6 +30,7 @@ label start:
 label loop:
     menu:
         "Screens":
+            "This is only a example of the screens. You can customize it."
             call screen menu_userinfo([ Return() ])
         "Character settings":
             call character
@@ -210,6 +211,7 @@ label try_girl_loop:
         "Try going to bed with her":
             if girlSentimental.love > 80:
                 $ girlSentimental.lust += 10
+                $ girlSentimental.sex_actions_with_you += 1
             else:
                 $ girlSentimental.anger += 10
         "Back":

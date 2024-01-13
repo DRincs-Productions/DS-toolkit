@@ -26,4 +26,6 @@ define ds_translations = {
     "strength"              :   _("Strength"),
     "intelligence"          :   _("Intelligence"),
     "agility"               :   _("Agility"),
+    "sex_actions_with_you"  :   _("Sexual interactions with you"),
+    "sex_actions_with_olther"  :   _("Sexual interactions with olther"),
 }

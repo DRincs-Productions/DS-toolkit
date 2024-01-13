@@ -241,7 +241,7 @@ init python:
             return self.get("addiction")
 
         @addiction.setter
-        def addiction(self, value: int) -> None:
+        def addiction(self, value: int) -> int:
             cur_value = self.get("addiction")
             amt = value - cur_value
             self.improve("addiction", amt, max=100, min=0)
@@ -290,9 +290,35 @@ init python:
         # Other
 
         @property
+        def sex_actions_with_you(self) -> int:
+            return self.get("sex_actions_with_you")
+
+        @sex_actions_with_you.setter
+        def sex_actions_with_you(self, value: Union[int]):
+            cur_value = self.get("sex_actions_with_you")
+            amt = value - cur_value
+            self.improve("sex_actions_with_you", amt, max=9999, min=0)
+            return
+
+        @property
+        def sex_actions_with_olther(self) -> int:
+            return self.get("sex_actions_with_olther")
+
+        @sex_actions_with_olther.setter
+        def sex_actions_with_olther(self, value: Union[int]):
+            cur_value = self.get("sex_actions_with_olther")
+            amt = value - cur_value
+            self.improve("sex_actions_with_olther", amt, max=9999, min=0)
+            return
+
+        @property
+        def sex_actions(self) -> int:
+            return (self.sex_actions + self.sex_actions_with_olther)
+
+        @property
         def is_virgin(self) -> bool:
             """Return True if the character is a virgin, False otherwise."""
-            val = self.get("sex_actions")
+            val = self.sex_actions
             return val <= 0
 
         @is_virgin.setter
@@ -300,9 +326,10 @@ init python:
             """Set the virginity of the character."""
             if isinstance(value, bool):
                 if value:
-                    self.set("sex_actions", 0)
+                    self.set("sex_actions_with_you", 0)
+                    self.set("sex_actions_with_olther", 0)
                 else:
-                    self.improve("sex_actions", 1)
+                    self.improve("sex_actions_with_you", 1)
             else:
-                self.set("sex_actions", value)
+                self.set("sex_actions_with_you", value)
 

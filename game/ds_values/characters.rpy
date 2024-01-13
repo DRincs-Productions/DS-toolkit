@@ -60,4 +60,4 @@ default friendStatistic = Statistic(
 
 # statsSentimental
 default girlSentimental = SentimentalStatistic(virgin = True, love = 10)
-default friendSentimental = SentimentalStatistic(virgin = False, against = 20)
+default friendSentimental = SentimentalStatistic(virgin = True, against = 20)
