@@ -46,9 +46,9 @@ label character:
             "Her name is:"
             $ girlI.changeName()
             "I am for [girl], his..."
-            $ girlI.setRelationNameByCharacter(character = mc, relation_key = "boyfriend", relaction_types = relactions)
+            $ girlI.setRelationNameByCharacter(character = mc, default_relation_key = "boyfriend", relaction_types = relactions)
             "She is my..."
-            $ mcI.setRelationNameByCharacter(character = girl, relation_key = "girlfriend", relaction_types = relactions)
+            $ mcI.setRelationNameByCharacter(character = girl, default_relation_key = "girlfriend", relaction_types = relactions)
             $ relaction = girlI.getRelationNameByCharacter(character = mc, relaction_types = relactions)
             girl "Hi my [relaction]"
             $ relaction = mcI.getRelationNameByCharacter(character = girl, relaction_types = relactions)
@@ -62,9 +62,9 @@ label character:
             "His name is:"
             $ friendI.changeName()
             "I am for [friend], his..."
-            $ friendI.setRelationNameByCharacter(character = mc, relation_key = "friend", relaction_types = relactions)
+            $ friendI.setRelationNameByCharacter(character = mc, default_relation_key = "friend", relaction_types = relactions)
             "He is my..."
-            $ mcI.setRelationNameByCharacter(character= friend, relation_key = "friend", relaction_types = relactions)
+            $ mcI.setRelationNameByCharacter(character= friend, default_relation_key = "friend", relaction_types = relactions)
             $ relaction = mcI.getRelationNameByCharacter(character = friend, relaction_types = relactions)
             friend "Hi my [relaction]"
             $ relaction = friendI.getRelationNameByCharacter(character = mc, relaction_types = relactions)
