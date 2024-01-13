@@ -33,10 +33,10 @@ label loop:
             call screen menu_userinfo([ Return() ])
         "Character settings":
             call character
-        "Clothes (To remove and move into olther project)":
-            call clothes
         "Skills training":
             call ability
+        "Clothes (exemple)":
+            call clothes
         "End":  # This ends the game.
             return
     jump loop
@@ -151,27 +151,6 @@ label relaction3:
 
 label character1:
     menu:
-        "+ Energy [girl]. Energy: [girlSentimental.energy]":
-            $ girlSentimental.energy += 10
-        "- Energy [girl]. Energy: [girlSentimental.energy]":
-            $ girlSentimental.energy -= 10
-        "+ Willpower [girl]. Willpower: [girlSentimental.willpower]":
-            $ girlSentimental.willpower += 10
-        "- Willpower [girl]. Willpower: [girlSentimental.willpower]":
-            $ girlSentimental.willpower -= 10
-        "+ Inhibition [girl]. Inhibition: [girlSentimental.inhibition]":
-            $ girlSentimental.inhibition += 10
-        "- Inhibition [girl]. Inhibition: [girlSentimental.inhibition]":
-            $ girlSentimental.inhibition -= 10
-        "Pag2":
-            jump character2
-        "Back":
-            return
-    jump character1
-label character2:
-    menu:
-        "Pag1":
-            jump character1
         "+ Addiction [girl]. Addiction: [girlSentimental.addiction]":
             $ girlSentimental.addiction += 10
         "- Addiction [girl]. Addiction: [girlSentimental.addiction]":
@@ -182,7 +161,7 @@ label character2:
             $ girlSentimental.lust -= 10
         "Back":
             return
-    jump character2
+    jump character1
 
 label ability:
     $ MCint = mcStatistic.get("intelligence")

@@ -13,30 +13,6 @@ init python:
         image="/images_tool/icon/notification/relations-fear.webp",
     )
     # Characteristics
-    increase_energy_notify = NotifyEx(
-        message=__("{color=#00ff00}{b}+{/b} Energy{/color}"),
-        image="/images_tool/icon/notification/characteristics-energy.webp",
-    )
-    decrease_energy_notify = NotifyEx(
-        message=__("{color=#f00} {b}-{/b} Energy{/color}"),
-        image="/images_tool/icon/notification/characteristics-energy.webp",
-    )
-    increase_willpower_notify = NotifyEx(
-        message=__("{color=#00ff00}{b}+{/b} Willpower{/color}"),
-        image="/images_tool/icon/notification/characteristics-willpower.webp",
-    )
-    decrease_willpower_notify = NotifyEx(
-        message=__("{color=#f00} {b}-{/b} Willpower{/color}"),
-        image="/images_tool/icon/notification/characteristics-willpower.webp",
-    )
-    increase_inhibition_notify = NotifyEx(
-        message=__("{color=#f00}{b}+{/b} Inhibition{/color}"),
-        image="/images_tool/icon/notification/characteristics-inhibition.webp",
-    )
-    decrease_inhibition_notify = NotifyEx(
-        message=__("{color=#00ff00} {b}-{/b} Inhibition{/color}"),
-        image="/images_tool/icon/notification/characteristics-inhibition.webp",
-    )
     increase_addiction_notify = NotifyEx(
         message=__("{color=#00ff00}{b}+{/b} Addictions{/color}"),
         image="/images_tool/icon/notification/characteristics-addiction.webp",
@@ -113,7 +89,6 @@ init python:
             love: int = 0,
             corruption: int = 0,
             virgin: bool = True,
-            bisexual: bool = False,
             against=0,
             addiction=0,
             max_values: int = 100,
@@ -122,9 +97,6 @@ init python:
             # Statistic init
             super().__init__(
                 notify_increase_dict={
-                    "energy": increase_energy_notify,
-                    "willpower": increase_willpower_notify,
-                    "inhibition": increase_inhibition_notify,
                     "addiction": increase_addiction_notify,
                     "lust": increase_lust_notify,
                     "friendship": increase_friendship_notify,
@@ -135,9 +107,6 @@ init python:
                     "fear": increase_fear_notify,
                 },
                 notify_decrease_dict={
-                    "energy": decrease_energy_notify,
-                    "willpower": decrease_willpower_notify,
-                    "inhibition": decrease_inhibition_notify,
                     "addiction": decrease_addiction_notify,
                     "lust": decrease_lust_notify,
                     "friendship": decrease_friendship_notify,
@@ -164,7 +133,6 @@ init python:
             self.corruption = corruption
             # Emblems
             self.is_virgin = virgin
-            self.bisexual = bisexual
 
             self._default_show_notify = True
 
@@ -240,8 +208,6 @@ init python:
         def corruption(self, value: int) -> None:
             cur_value = self.get("corruption")
             amt = value - cur_value
-            if (cur_value + amt) >= 105:
-                self.willpower = self.willpower - 5
             self.improve("corruption", amt, max=100, min=0)
             return
 
@@ -269,44 +235,6 @@ init python:
             self.improve("anger", amt, max=100, min=0)
             return
 
-        # Energy
-        @property
-        def energy(self) -> int:
-            return self.get("energy")
-
-        @energy.setter
-        def energy(self, value: int) -> None:
-            cur_value = self.get("energy")
-            amt = value - cur_value
-            self.improve("energy", amt, max=100, min=0)
-            return
-
-        # Willpower
-        @property
-        def willpower(self) -> int:
-            return self.get("willpower")
-
-        @willpower.setter
-        def willpower(self, value: int) -> None:
-            cur_value = self.get("willpower")
-            amt = value - cur_value
-            if (cur_value + amt) < 0:
-                self.energy = self.energy - 15
-            self.improve("willpower", amt, max=100, min=0)
-            return
-
-        # Inhibition
-        @property
-        def inhibition(self) -> int:
-            return self.get("inhibition")
-
-        @inhibition.setter
-        def inhibition(self, value: int) -> None:
-            cur_value = self.get("inhibition")
-            amt = value - cur_value
-            self.improve("inhibition", amt, max=100, min=0)
-            return
-
         # Addiction
         @property
         def addiction(self) -> int:
@@ -316,8 +244,6 @@ init python:
         def addiction(self, value: int) -> None:
             cur_value = self.get("addiction")
             amt = value - cur_value
-            if (cur_value + amt) >= 105:
-                self.inhibition = self.inhibition - 3
             self.improve("addiction", amt, max=100, min=0)
             return
 
@@ -330,8 +256,6 @@ init python:
         def lust(self, value: int) -> None:
             cur_value = self.get("lust")
             amt = value - cur_value
-            if (cur_value + amt) >= 120:
-                self.inhibition = self.inhibition - 5
             self.improve("lust", amt, max=100, min=0)
             return
 
@@ -385,22 +309,16 @@ init python:
         def is_healthy(self) -> bool:
             if (not self.is_against):
                 return False
-            return (self.energy == 100 and self.willpower == 100 and self.inhibition == 100 and self.corruption == 0 and self.addiction == 0)
+            return (self.corruption == 0 and self.addiction == 0)
 
         @is_healthy.setter
         def is_healthy(self, value: bool):
             if value:
-                self.energy += 100
-                self.willpower += 100
-                self.inhibition += 100
                 self.corruption -= 100
                 self.addiction -= 100
                 self.fear -= 50
                 self.lust -= 50
                 self.is_against = False
             else:
-                self.energy -= 100
-                self.willpower -= 100
-                self.inhibition -= 100
                 self.corruption += 100
                 self.addiction += 100
